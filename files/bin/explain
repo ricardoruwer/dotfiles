@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#
+# Open the explainshell.com with the given command.
+#
+# USAGE:
+#
+#   $ explain ps aux | pgrep -if ruby
+#
+#   $ explain file=$(echo `basename "$file"`)
+#
+cmd=$@
+
+open "http://explainshell.com/explain?cmd=$cmd"

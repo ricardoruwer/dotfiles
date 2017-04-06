@@ -1,0 +1,83 @@
+{
+	"always_show_minimap_viewport": true,
+	"auto_complete": true,
+	"auto_complete_selector": "source - comment",
+	"auto_indent": true,
+	"bold_folder_labels": true,
+	"caret_extra_bottom": 1,
+	"caret_extra_top": 1,
+	"caret_extra_width": 1,
+	"caret_style": "blink",
+	"close_windows_when_empty": true,
+	"color_scheme": "Packages/User/Color Schemes/andrielfn.tmTheme",
+	"detect_indentation": true,
+	"draw_indent_guides": true,
+	"enable_tab_scrolling": false,
+	"ensure_newline_at_eof_on_save": true,
+	"file_exclude_patterns":
+	[
+		"*.o",
+		".DS_Store",
+		"*.psd",
+		"*.db",
+		"*.sqlite3",
+		"*.scssc",
+		".woff"
+	],
+	"folder_exclude_patterns":
+	[
+		".git",
+		"log",
+		".sass-cache",
+		"tmp/cache",
+		"tmp/capybara",
+		"tmp/session",
+		"public/assets",
+		"node_modules",
+		"vendor/bundle",
+		"Godeps",
+		"_build"
+	],
+	"font_face": "OperatorMono-XLight",
+	"font_size": 22,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"GoSublime",
+		"PHP",
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"overlay_scroll_bars": "enabled",
+	"rulers":
+	[
+		100,
+		120
+	],
+	"show_full_path": true,
+	"tab_size": 2,
+	"tabs_padding_small": true,
+	"tabs_small": true,
+	"theme": "ayu-mirage.sublime-theme",
+	"theme_accent_green": true,
+	"theme_button_rounded": true,
+	"theme_find_panel_close_hidden": true,
+	"theme_font_sm": true,
+	"theme_icon_button_highlighted": true,
+	"theme_scrollbar_colored": true,
+	"theme_scrollbar_line": true,
+	"theme_size_xs": true,
+	"theme_tab_line_size_sm": true,
+	"theme_tab_selected_underlined": true,
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true,
+	"ui_separator": true,
+	"ui_wide_scrollbars": true,
+	"word_separators": "./\\()\"'-:,.;<>~!@#%^&*|+=[]{}`~?",
+	"word_wrap": true
+}

@@ -1,0 +1,82 @@
+Pry.config.editor = 'subl -n -w'
+
+if defined?(PryByebug) || defined?(PryDebugger)
+  Pry.commands.alias_command 'c', 'continue'
+  Pry.commands.alias_command 's', 'step'
+  Pry.commands.alias_command 'n', 'next'
+  Pry.commands.alias_command 'f', 'finish'
+end
+
+# Hit Enter to repeat last command
+Pry::Commands.command /^$/, "repeat last command" do
+  _pry_.run_command Pry.history.to_a.last
+end
+
+# Custom prompt
+prompt = "ruby-#{RUBY_VERSION}"
+Pry.config.prompt = [
+  proc { |obj, nest_level, _| "#{prompt} (#{obj}):#{nest_level} > " },
+  proc { |obj, nest_level, _| "#{prompt} (#{obj}):#{nest_level} * " }
+]
+
+# Default Command Set, add custom methods here:
+def pbcopy(str)
+  IO.popen('pbcopy', 'r+') {|io| io.puts str }
+  output.puts "-- Copy to clipboard --\n#{str}"
+end
+
+Pry.config.commands.command "hiscopy", "History copy to clipboard" do |n|
+  pbcopy _pry_.input_array[n ? n.to_i : -1]
+end
+
+Pry.config.commands.command "copy", "Copy to clipboard" do |str|
+  unless str
+    str = "#{_pry_.input_array[-1]}#=> #{_pry_.last_result}\n"
+  end
+  pbcopy str
+end
+
+Pry.config.commands.command "lastcopy", "Last result copy to clipboard" do
+  pbcopy _pry_.last_result.chomp
+end
+
+# Use Array.toy to get an array to play with
+# class Array
+#   def self.toy(n = 10, &block)
+#     block_given? ? Array.new(n, &block) : Array.new(n) { |i| i+1 }
+#   end
+# end
+
+# Use Hash.toy to get an hash to play with
+# class Hash
+#   def self.toy(n = 10)
+#     Hash[Array.toy(n).zip(Array.toy(n){ |c| (96+(c+1)).chr })]
+#   end
+# end
+
+# Launch Pry with access to the entire Rails stack.
+# rails = File.join(Dir.getwd, 'config', 'environment.rb')
+# if File.exist?(rails) && ENV['SKIP_RAILS'].nil?
+#   require rails
+#   case Rails.version.to_i
+#   when 2
+#     require 'console_app'
+#     require 'console_with_helpers'
+#   when 3
+#     require 'rails/console/app'
+#     require 'rails/console/helpers'
+#     extend Rails::ConsoleMethods if Rails.version.to_f >= 3.2
+#   else
+#     warn '[WARN] cannot load Rails console commands'
+#   end
+# end
+
+# Pry.config.commands.import(default_command_set)
+
+# Pry::DEFAULT_HOOKS.add_hook(:before_session, :gem_auto_require) do |out, target, _pry_|
+#   system('iterm-tab blue')
+# end
+
+# Pry::DEFAULT_HOOKS.add_hook(:after_session, :gem_auto_require) do |out, target, _pry_|
+#   system('iterm-tab reset')
+# end

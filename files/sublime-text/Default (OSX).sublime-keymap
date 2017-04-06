@@ -1,0 +1,20 @@
+[
+  { "keys": ["super+shift+."], "command": "erb", "context":
+    [
+      { "key": "selector", "operator": "equal", "operand": "text.html.ruby, text.haml, source.yaml, source.css, source.scss, source.js, source.coffee" }
+    ]
+  },
+  { "keys": ["super+alt+n"], "command": "advanced_new_file_new"},
+  { "keys": ["super+shift+'"], "command": "ruby_toggle_string" },
+  { "keys": ["super+shift+;"], "command": "ruby_toggle_string_and_symbol" },
+  { "keys": ["super+v"], "command": "paste_and_indent" },
+  { "keys": ["super+shift+v"], "command": "paste" },
+  { "keys": ["f12"], "command": "reindent"},
+  { "keys": ["super+shift+r"], "command": "side_bar_rename" },
+  { "keys": ["super+shift+m"], "command": "side_bar_move" },
+  { "keys": ["ctrl+shift+s"], "command": "reveal_in_side_bar" },
+  { "keys": ["super+alt+down"], "command": "goto_definition" },
+  { "keys": ["ctrl+super+c"], "command": "find_description" },
+  { "keys": ["super+g", "super+c"], "command": "git_checkout_branch" },
+  { "keys": ["super+g", "super+d"], "command": "git_diff" }
+]
