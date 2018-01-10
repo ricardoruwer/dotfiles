@@ -33,6 +33,7 @@ brew 'bash'
 brew 'bash-completion'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
+brew 'fzf'
 
 brew 'libyaml'
 brew 'openssl'

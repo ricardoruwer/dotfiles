@@ -22,6 +22,9 @@ ln -sf ${DOTFILES_FILES_CONFIGS}/inputrc ~/.inputrc
 ln -sf ${DOTFILES_FILES_CONFIGS}/agignore ~/.agignore
 ln -sf ${DOTFILES_FILES_CONFIGS}/ackrc ~/.ackrc
 
+# Install shell extesions for fzf
+/usr/local/opt/fzf/install
+
 if [ -n "`$SHELL -c 'echo $ZSH_VERSION'`" ]; then
   print_success 'Oh-My-Zsh already installed.\n'
 else

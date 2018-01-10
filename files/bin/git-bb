@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+git for-each-ref --sort='-authordate:iso8601' --format='%(color:yellow)%(authordate:relative)%09%(color:blue)%(authorname)%09%(color:green)%(refname:short)' refs/heads | awk -F "\t" '{ printf "%-20s %-27s %s\n", $1, $2, $3 }'

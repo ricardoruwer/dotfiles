@@ -12,8 +12,11 @@
   s = status -sb
   ci = commit
   wip = !git add . && git commit -am 'WIP :construction:'
+  stash-all = stash save --include-untracked
+  lol = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\"\")\""
   b = branch
   d = diff
+  wd = diff --color-words
   pf = push --force-with-lease
   ap = add --patch
   ds = diff --staged
@@ -24,12 +27,9 @@
   sp = stash pop
   rc = rebase --continue
   rim = rebase -i master
+  prune = fetch --prune
   r = reset
-  r1 = reset HEAD^
-  r2 = reset HEAD^^
-  rh = reset --hard
-  rh1 = reset HEAD^ --hard
-  rh2 = reset HEAD^^ --hard
+  undo = reset --soft HEAD^
   fup = log --since '1 day ago' --oneline --author ricardo.ruwer@plataformatec.com.br
   rank = shortlog -sn --no-merges
   cl = "!git log $1..${2:-master} --oneline --no-merges --pretty=format:'- %s (%h)'"
@@ -37,8 +37,7 @@
   ls = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short
   lf = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short --numstat
   co = checkout
-  fix = commit --amend
-  fixx = !git add . && git commit --amend --no-edit
+  fix = commit --amend --no-edit
   pom = push origin master
 	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
 
@@ -50,6 +49,7 @@
 
 [push]
   default = current
+  followTags = true
 
 [user]
   email = ricardoruwer@gmail.com
@@ -57,9 +57,23 @@
 
 [merge]
   ff = false
+  conflictstyle = diff3
 
 [pull]
   rebase = true
 
 [commit]
   template = ~/.gitmessage
+
+[status]
+  showUntrackedFiles = all
+
+[diff]
+  tool = icdiff
+[difftool]
+  prompt = false
+[difftool "icdiff"]
+  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

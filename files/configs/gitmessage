@@ -1,9 +1,10 @@
 
-# Explain why this change is being made
+# |<---- ⬆ Use a maximum of 50 characters ⬆ ---->|
 
 
-# Provide links to any relevant tickets, articles or other resources
+# |<---- ⬆ Limit each line to a maximum of 72 characters ⬆ ----------->|
 
+# ===== Emojis =====
 # 🎨  - :art: - Improving structure / format of the code.
 # ⚡  - :zap: - Improving performance.
 # 🔥  - :fire: - Removing code or files.

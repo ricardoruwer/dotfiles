@@ -46,7 +46,7 @@ vendor/ruby
 gin-bin
 
 TODO.todo
-INFOS
+INFOS/*
 vendor/bundle
 node_modules
 .env.*.local
