@@ -1,3 +1,4 @@
+# Brew
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/dupes'
@@ -62,3 +63,33 @@ brew 'coreutils'
 
 brew 'homebrew/dupes/libiconv'
 brew 'homebrew/dupes/zlib'
+
+# MAS
+brew 'mas'
+
+mas 'Amphetamine', id: 937984704
+mas 'Shush', id: 496437906
+mas 'Slack', id: 803453959
+mas 'TheUnarchiver', id: 425424353
+mas 'TranslateTab', id: 458887729
+
+# CASK
+tap 'caskroom/cask'
+brew 'brew-cask-completion'
+
+cask 'alfred'
+cask 'cloudapp'
+cask 'dash'
+cask 'docker'
+cask 'fantastical'
+cask 'google-backup-and-sync'
+cask 'google-chrome'
+cask 'imageoptim'
+cask 'iterm2'
+cask 'monodraw'
+cask 'muzzle'
+cask 'postman'
+cask 'spotify'
+cask 'psequel'
+cask 'skype'
+cask 'spectacle'
