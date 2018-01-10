@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Load utils
+source ${DOTFILES_INSTALLER}/utils
+
+###############################################################################
+# NPM
+###############################################################################
+
+packages="tldr"
+
+# Install from $packages variable
+ask_for_confirmation 'Would you like to install all global apps from NPM?'
+
+if answer_is_yes; then
+  npm install $packages --global --quiet
+  print_success 'All NPM apps installed.\n'
+fi

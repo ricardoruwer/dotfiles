@@ -3,7 +3,6 @@ export DOTFILES="${HOME}/.dotfiles"
 export DOTFILES_INSTALLER="${DOTFILES}/installers"
 export DOTFILES_FILES="${DOTFILES}/files"
 export DOTFILES_FILES_CONFIGS="${DOTFILES}/files/configs"
-export DOTFILES_FILES_THEMES="${DOTFILES}/files/themes"
 
 source ${DOTFILES_INSTALLER}/utils
 source ${DOTFILES_INSTALLER}/variables
@@ -18,6 +17,7 @@ ${DOTFILES_INSTALLER}/osx_update
 ${DOTFILES_INSTALLER}/osx_customization
 
 ${DOTFILES_INSTALLER}/brew
+${DOTFILES_INSTALLER}/npm
 ${DOTFILES_INSTALLER}/git
 ${DOTFILES_INSTALLER}/shell
 ${DOTFILES_INSTALLER}/ruby
