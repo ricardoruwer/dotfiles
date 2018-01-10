@@ -1,6 +1,0 @@
-{
-  "shell": ["/bin/zsh"],
-  "env": {
-    "GOPATH":"/Users/ricardoruwer/code/go"
-  }
-}
