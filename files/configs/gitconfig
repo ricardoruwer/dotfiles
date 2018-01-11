@@ -30,7 +30,7 @@
   prune = fetch --prune
   r = reset
   undo = reset --soft HEAD^
-  fup = log --since '1 day ago' --oneline --author ricardo.ruwer@plataformatec.com.br
+  fup = log --since '1 day ago' --oneline --author ricardoruwer@gmail.com
   rank = shortlog -sn --no-merges
   cl = "!git log $1..${2:-master} --oneline --no-merges --pretty=format:'- %s (%h)'"
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

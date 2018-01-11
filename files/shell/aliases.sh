@@ -18,7 +18,6 @@ alias ls="ls -G"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias lip="ipconfig getifaddr en0"
 alias key="cat ~/.ssh/id_rsa.pub | pbcopy; echo 'SSH key copied to clipboard!'"
-alias chunk="curl -s -T - chunk.io | pbcopy; echo 'URL copied to clipboard!'"
 alias hex="openssl rand -hex"
 alias fd='find . -type d -name'
 alias ff='find . -type f -name'
@@ -49,10 +48,7 @@ alias rof="bin/rspec --only-failures"
 
 # Others
 # ======
-alias t="tree -I '.git|node_modules|bower_components|.DS_Store' --dirsfirst --filelimit 15 -L ${1:-3} -aC $2"
-alias marked="open -a Marked"
 alias dotfiles="subl ~/.dotfiles"
-# alias t="ruby -I'lib:test'"
 alias g="git"
 
 # Go
