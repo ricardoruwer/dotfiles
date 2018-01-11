@@ -12,7 +12,9 @@ git clone https://github.com/ricardoruwer/dotfiles.git .dotfiles
 cd .dotfiles && ./install.sh
 ```
 
-## Sublime Text
+## Sync Applications
+
+### Sublime Text
 
 1. Close Sublime Text
 2. Open Terminal
@@ -34,7 +36,7 @@ rm -r User
 ln -s ~/Google\ Drive/Sublime/User
 ```
 
-## Alfred
+### Alfred
 
 1. Open Alfred Preferences
 2. Click on **Set sync folder...**
