@@ -64,6 +64,9 @@ brew 'coreutils'
 brew 'homebrew/dupes/libiconv'
 brew 'homebrew/dupes/zlib'
 
+tap 'joshuaclayton/formulae'
+brew 'unused'
+
 # MAS
 brew 'mas'
 

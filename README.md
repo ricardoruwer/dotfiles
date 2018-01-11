@@ -135,4 +135,8 @@ $ <Ctrl-R>
 
 # A tool like grep, optimized for programmers
 $ ack <string>
+
+# A tool to identify unused code
+# To generate tags: `git ls-files | xargs ctags`
+$ unused
 ```
