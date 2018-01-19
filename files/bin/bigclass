@@ -1,0 +1,1 @@
+find . -name "*.rb" -not -path "*test*" -not -path "*spec*" | xargs wc -l | sort -rn | head
