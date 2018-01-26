@@ -64,7 +64,7 @@ $ git-bb
 $ imgcat <filename>
 
 # Executes a given command in a given number of times
-$ loop_this <size> <command>
+$ loop-this <size> <command>
 
 # Writes a LICENSE file with a copy of the MIT License
 $ mit

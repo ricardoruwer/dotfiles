@@ -14,11 +14,11 @@
 # Examples
 #
 #     # will execute the `ls` command 5 times.
-#     loop_this 5 ls
+#     loop-this 5 ls
 #
 #     # will execute the `rspec` 10 times, even if the command return something
 #     # different from 0.
-#     DONT_STOP=1 loop_this 10 rspec
+#     DONT_STOP=1 loop-this 10 rspec
 ###############################################################################
 
 params=($(echo "$@"))
