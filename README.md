@@ -90,11 +90,11 @@ $ update-gems
 # Show SSID and password for the currently connected network
 $ wifi
 
-# Get the process on a given port
-$ port <port>
+# Display the biggest classes on current project
+$ bigclass
 
-# Start an HTTP server from a directory, optionally specifying the port
-$ server <port>
+# Display methods with long parameter lists
+$ long-params
 ```
 
 ## Aliases
