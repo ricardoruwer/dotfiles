@@ -11,6 +11,10 @@ if [[ ! -d $target ]]; then
   exit 0
 fi
 
+print_in_yellow() {
+  printf "\e[0;33m$1\e[0m"
+}
+
 untracked_files() {
   [[ -n $(git status -s) ]]
 }
@@ -32,7 +36,7 @@ pull_at_master() {
 for repo in $(ls -d -1 $target/*/.git 2>/dev/null); do
   dir=${repo/\/.git//}
   name=${dir/$root\//}
-  echo "pulling ${name%?}..."
+  print_in_yellow "pulling ${name%?}...\n"
 
   pushd $dir > /dev/null
   pull_at_master
