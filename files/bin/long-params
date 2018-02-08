@@ -1,1 +1,0 @@
-ack "def\s.+\((.*,.*,.*,.*)\)" --ignore-dir="spec" --ignore-dir="test"

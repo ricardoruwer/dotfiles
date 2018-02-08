@@ -19,8 +19,10 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias lip="ipconfig getifaddr en0"
 alias key="cat ~/.ssh/id_rsa.pub | pbcopy; echo 'SSH key copied to clipboard!'"
 alias hex="openssl rand -hex"
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
+alias fd="find . -type d -name"
+alias ff="find . -type f -name"
+alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
+alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
 
 # Show/hide hidden files in Finder
 # ================================
@@ -50,8 +52,3 @@ alias rof="bin/rspec --only-failures"
 # ======
 alias dotfiles="subl ~/.dotfiles"
 alias g="git"
-
-# Go
-# alias gb="go build"
-# alias gg="go get"
-# alias gr="go run"

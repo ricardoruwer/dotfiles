@@ -42,7 +42,7 @@ ln -s ~/Google\ Drive/Sublime/User
 2. Click on **Set sync folder...**
 3. Choose `~/Google Drive/Alfred`
 
-## Functions
+## Bins
 
 ```bash
 # Display current status for Correios tracking code
@@ -57,23 +57,14 @@ $ extract <file>
 # Display the size of all files inside the current directory
 $ fs
 
-# Display the author for each branch on project
-$ git-bb
-
 # Like `cat` but for images
 $ imgcat <filename>
 
-# Executes a given command in a given number of times
-$ loop-this <size> <command>
-
-# Writes a LICENSE file with a copy of the MIT License
-$ mit
+# Find and replace by a given list of files
+$ replace <find> <replace> [<files>]
 
 # Performs `git pull` on several repositories under the given directory
 $ pullall <directory>
-
-# Find and replace by a given list of files
-$ replace <find> <replace> [<files>]
 
 # Remove merged branches both locally and remotely
 $ rmb
@@ -89,12 +80,6 @@ $ update-gems
 
 # Show SSID and password for the currently connected network
 $ wifi
-
-# Display the biggest classes on current project
-$ bigclass
-
-# Display methods with long parameter lists
-$ long-params
 ```
 
 ## Aliases
@@ -120,8 +105,11 @@ $ fd <directory>
 # Find the filename inside current folder
 $ ff <file>
 
-# Open the .dotfiles in the editor
-$ dotfiles
+# Display the biggest classes on current project
+$ bigclass
+
+# Display methods with long parameter lists
+$ longparams
 ```
 
 - [More aliases here](./files/shell/aliases.sh)
