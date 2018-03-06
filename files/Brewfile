@@ -12,7 +12,7 @@ brew 'sqlite'
 
 brew 'erlang'
 brew 'elixir'
-brew 'go'
+# brew 'go'
 brew 'node'
 
 brew 'ack'
