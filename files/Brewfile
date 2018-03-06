@@ -4,11 +4,11 @@ tap 'homebrew/core'
 tap 'homebrew/dupes'
 tap 'homebrew/services'
 
-brew 'postgresql', restart_service: true
+# brew 'postgresql', restart_service: true
 brew 'rabbitmq', restart_service: true
-brew 'redis', restart_service: true
+# brew 'redis', restart_service: true
 brew 'sqlite'
-brew 'mongodb'
+# brew 'mongodb'
 
 brew 'erlang'
 brew 'elixir'
