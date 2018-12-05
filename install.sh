@@ -3,6 +3,7 @@ export DOTFILES="${HOME}/.dotfiles"
 export DOTFILES_INSTALLER="${DOTFILES}/installers"
 export DOTFILES_FILES="${DOTFILES}/files"
 export DOTFILES_FILES_CONFIGS="${DOTFILES}/files/configs"
+export DOTFILES_THEMES_DIR="${DOTFILES}/files/themes"
 
 source ${DOTFILES_INSTALLER}/utils
 source ${DOTFILES_INSTALLER}/variables
@@ -21,5 +22,8 @@ ${DOTFILES_INSTALLER}/npm
 ${DOTFILES_INSTALLER}/git
 ${DOTFILES_INSTALLER}/shell
 ${DOTFILES_INSTALLER}/ruby
+
+# Install default theme.
+ln -sf ${DOTFILES_THEMES_DIR}/materialshell.zsh-theme ~/.oh-my-zsh/themes/materialshell.zsh-theme
 
 exit 0

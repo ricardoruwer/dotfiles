@@ -19,10 +19,15 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias lip="ipconfig getifaddr en0"
 alias key="cat ~/.ssh/id_rsa.pub | pbcopy; echo 'SSH key copied to clipboard!'"
 alias hex="openssl rand -hex"
+alias cat="bat"
+alias g="git"
 alias fd="find . -type d -name"
 alias ff="find . -type f -name"
 alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
 alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
+alias dotfiles="subl ~/.dotfiles"
+alias ping='prettyping --nolegend'
+
 
 # Show/hide hidden files in Finder
 # ================================
@@ -50,6 +55,6 @@ alias rof="bin/rspec --only-failures"
 
 # Others
 # ======
-alias dotfiles="subl ~/.dotfiles"
-alias g="git"
 alias gib="gem install bundler"
+alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-directories-first"
+alias killrb="ps aux | pgrep -lf 'rack|spring|rails|ruby|puma|sneakers|unicorn' | awk '{print $1}' | xargs kill -9"

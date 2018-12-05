@@ -6,8 +6,8 @@ tap 'homebrew/services'
 
 brew 'rabbitmq', restart_service: true
 brew 'sqlite'
-# brew 'redis', restart_service: true
-# brew 'postgresql', restart_service: true
+brew 'redis', restart_service: true
+brew 'postgresql', restart_service: true
 # brew 'mongodb'
 
 brew 'erlang'
@@ -17,9 +17,8 @@ brew 'node'
 
 brew 'ack'
 brew 'autojump'
-brew 'ansible'
+# brew 'ansible'
 brew 'yarn'
-brew 'phantomjs'
 brew 'ruby-build'
 brew 'rbenv'
 brew 'wget'
@@ -28,6 +27,9 @@ brew 'heroku'
 brew 'diff-so-fancy'
 brew 'tmate'
 brew 'git'
+brew 'exa'
+brew 'bat'
+brew 'prettyping'
 
 brew 'zsh'
 brew 'bash'
