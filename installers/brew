@@ -20,7 +20,7 @@ else
 fi
 
 # Copy dotfiles Brewfile to Home
-ln -sf ${DOTFILES_FILES}/Brewfile ~/.Brewfile
+ln -sf ${DOTFILES_DIR}/Brewfile ~/.Brewfile
 
 # Install from local Brewfile
 ask_for_confirmation 'Would you like to install all apps from Brewfile?'

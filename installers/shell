@@ -13,7 +13,7 @@ print_in_yellow 'Shell configurations...\n'
 chsh -s /bin/zsh
 
 # Copy binaries to ~/.bin
-ln -sf ${DOTFILES_FILES}/bin ~/.bin
+ln -sf ${DOTFILES_DIR}/bin ~/.bin
 
 # Create symbolic links
 mv ~/.zshrc ~/.zshrc-default-bkp

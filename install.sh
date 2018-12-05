@@ -1,12 +1,10 @@
 # Dotfiles vars
-export DOTFILES="${HOME}/.dotfiles"
-export DOTFILES_INSTALLER="${DOTFILES}/installers"
-export DOTFILES_FILES="${DOTFILES}/files"
-export DOTFILES_FILES_CONFIGS="${DOTFILES}/files/configs"
-export DOTFILES_THEMES_DIR="${DOTFILES}/files/themes"
+export DOTFILES_DIR="${HOME}/.dotfiles"
+export DOTFILES_INSTALLER="${DOTFILES_DIR}/installers"
+export DOTFILES_FILES_CONFIGS="${DOTFILES_DIR}/configs"
+export DOTFILES_THEMES_DIR="${DOTFILES_DIR}/themes"
 
 source ${DOTFILES_INSTALLER}/utils
-source ${DOTFILES_INSTALLER}/variables
 clear
 
 ask_for_sudo
