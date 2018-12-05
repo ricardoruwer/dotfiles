@@ -5,7 +5,8 @@ required_version_gems = %w(
   awesome_print-1.8.0
 )
 required_version_gems.each do |version_gem|
-  $LOAD_PATH << "~/.rbenv/versions/#{RUBY_VERSION}/lib/ruby/gems/#{RUBY_VERSION}/gems/#{version_gem}/lib/"
+  api_version = Gem.ruby_api_version
+  $LOAD_PATH << "~/.rbenv/versions/#{RUBY_VERSION}/lib/ruby/gems/#{api_version}/gems/#{version_gem}/lib/"
 end
 
 require "awesome_print"

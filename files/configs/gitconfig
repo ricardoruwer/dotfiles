@@ -25,6 +25,7 @@
   branches = branch -a
   remotes = remote -v
   sp = stash pop
+  mc = merge --continue
   rc = rebase --continue
   rim = rebase -i master
   prune = fetch --prune

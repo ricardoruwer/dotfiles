@@ -52,3 +52,4 @@ alias rof="bin/rspec --only-failures"
 # ======
 alias dotfiles="subl ~/.dotfiles"
 alias g="git"
+alias gib="gem install bundler"
