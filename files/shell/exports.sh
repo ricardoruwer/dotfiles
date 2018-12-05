@@ -15,9 +15,11 @@ export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:`yarn global bin`"
+export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="./bin:$PATH"
 export PATH="$PATH:/usr/local/opt/mysql@5.5/bin"
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 
 if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
