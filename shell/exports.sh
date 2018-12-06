@@ -9,13 +9,11 @@ export HISTCONTROL="ignoreboth:erasedups" # Erase duplicates in history
 export HISTSIZE=10000 # Store 10k history entries
 
 # PATH
-export GOPATH="$HOME/code/go"
 export PATH="$HOME/.bin:$PATH"
-export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="$PATH:`yarn global bin`"
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$PATH:`yarn global bin`"
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 export PATH="./bin:$PATH"
 export PATH="$PATH:/usr/local/opt/mysql@5.5/bin"

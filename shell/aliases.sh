@@ -1,12 +1,13 @@
 # Dirs
 # ====
 alias code="cd ~/code"
-alias sublconf="cd ~/Library/Application\ Support/Sublime\ Text\ 3"
 alias ptec="cd ~/ptec"
 
 # Config
 # ======
 alias reload=". ~/.zshrc && echo 'ZSH reloaded! :D'"
+alias sublconf="cd ~/Library/Application\ Support/Sublime\ Text\ 3"
+alias dotfiles="subl ~/.dotfiles"
 
 # Shell
 # =====
@@ -23,10 +24,8 @@ alias cat="bat"
 alias g="git"
 alias fd="find . -type d -name"
 alias ff="find . -type f -name"
-alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
-alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
-alias dotfiles="subl ~/.dotfiles"
 alias ping='prettyping --nolegend'
+alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-directories-first"
 
 
 # Show/hide hidden files in Finder
@@ -42,7 +41,7 @@ alias bu="b update"
 alias be="b exec"
 alias bo="b open"
 
-# Rails
+# Ruby on Rails
 # =====
 alias rc="bin/rails c"
 alias rs="bin/rails s"
@@ -52,9 +51,6 @@ alias st="bin/teaspoon"
 alias rdm="bin/rake db:migrate"
 alias rdr="bin/rake db:rollback"
 alias rof="bin/rspec --only-failures"
-
-# Others
-# ======
-alias gib="gem install bundler"
-alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-directories-first"
 alias killrb="ps aux | pgrep -lf 'rack|spring|rails|ruby|puma|sneakers|unicorn' | awk '{print $1}' | xargs kill -9"
+alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
+alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
