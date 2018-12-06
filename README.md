@@ -1,17 +1,23 @@
 # @ricardoruwer .dotfiles
 
-macOS configuration files and utilities.
+macOS and developer environment preferences
 
-## Install
+## Installation
 
-Copy this command into the terminal, and the setup will start.
+Clone this repository:
 
 ```bash
 git clone https://github.com/ricardoruwer/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && ./install.sh
+cd ~/.dotfiles
 ```
 
-## Sync Applications
+Run the command to install everything:
+
+```bash
+rake install
+```
+
+## Syncing Applications
 
 ### Sublime Text
 
