@@ -21,7 +21,4 @@ ${DOTFILES_INSTALLER}/git
 ${DOTFILES_INSTALLER}/shell
 ${DOTFILES_INSTALLER}/ruby
 
-# Install default theme.
-ln -sf ${DOTFILES_THEMES_DIR}/materialshell.zsh-theme ~/.oh-my-zsh/themes/materialshell.zsh-theme
-
 exit 0

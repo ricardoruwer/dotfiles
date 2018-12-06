@@ -15,9 +15,10 @@ task install: %w[
   install:command_lint_tools
   install:link_dotfiles
   install:link_bins
-  install:iterm_integration
   install:oh_my_zsh
   install:homebrew
+  install:npm
+  install:macos_customization
 ]
 
 desc 'Warn if git origin is newer'
@@ -28,9 +29,9 @@ task :check do
 end
 
 namespace :install do
-  ################################################################################
+  ##############################################################################
   # Symlink all dotfiles
-  ################################################################################
+  ##############################################################################
   desc 'OS X Softwares updating and installing Xcode Command Line tools'
   task :command_lint_tools do
     log(:blue, '=> Updating MacOS and installing Xcode Command Line tools')
@@ -42,9 +43,9 @@ namespace :install do
     system('sudo sudo xcodebuild -license accept')
   end
 
-  ################################################################################
+  ##############################################################################
   # Install Homebrew and apps from Brewfile
-  ################################################################################
+  ##############################################################################
   desc 'Install Homebrew'
   task :homebrew do
     log(:blue, '=> Installing Homebrew')
@@ -63,9 +64,31 @@ namespace :install do
     end
   end
 
-  ################################################################################
+  ##############################################################################
+  # Install NPM packages
+  ##############################################################################
+  desc 'Install NPM packages'
+  task :npm do
+    log(:blue, '=> Installing NPM packages')
+
+    if installed?('npm')
+      log(:green, '=> Node already installed')
+    else
+      system('brew install node')
+    end
+
+    if ask(:red, 'Would you like to install all apps from NPM?')
+      log(:blue, '=> Installing NPM packages')
+
+      npm_packages = 'tldr'
+
+      system("npm install #{npm_packages} --global --quiet")
+    end
+  end
+
+  ##############################################################################
   # Install Oh My ZSH
-  ################################################################################
+  ##############################################################################
   desc 'Install Oh My ZSH'
   task :oh_my_zsh do
     log(:blue, '=> Installing Oh my ZSH')
@@ -76,27 +99,23 @@ namespace :install do
       system('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
       system('sudo chsh -s /bin/zsh')
 
-      system('ln -sf themes/material-shell.zsh-theme ~/.oh-my-zsh/themes/materialshell.zsh-theme')
+      # Copy ZSH themes
+      system('ln -sf themes/ricardoruwer.zsh-theme ~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
     end
   end
 
-  ################################################################################
-  # Install iTerm shell integration
-  ################################################################################
-  desc 'Install iTerm shell integration'
-  task :iterm_integration do
-    log(:blue, '=> Installing iTerm shell integration')
-
-    if File.exist?(File.join(ENV['HOME'], '.iterm2_shell_integration.zsh'))
-      log(:green, '=> iTerm shell integration already installed')
-    else
-      system('curl -Ls https://iterm2.com/misc/zsh_startup.in -o ~/.iterm2_shell_integration.zsh')
-    end
+  ##############################################################################
+  # Install some other shell improvements
+  ##############################################################################
+  desc 'Install Shell improvements'
+  task :shell_improvements do
+    log(:blue, '=> Installing fzf key bindings and completion')
+    system('/usr/local/opt/fzf/install')
   end
 
-  ################################################################################
+  ##############################################################################
   # Symlink bin files
-  ################################################################################
+  ##############################################################################
   desc 'Link bin files'
   task :link_bins do
     log(:blue, '=> Linking bin files')
@@ -113,9 +132,9 @@ namespace :install do
     end
   end
 
-  ################################################################################
+  ##############################################################################
   # Symlink all dotfiles
-  ################################################################################
+  ##############################################################################
   desc 'Link dotfiles into user’s home directory'
   task :link_dotfiles do
     log(:blue, '=> Linking dotfiles into user’s home directory')
@@ -141,25 +160,15 @@ namespace :install do
     end
   end
 
-  # desc "Symlink the Sublime Packages/User directory"
-  # task :link_sublime do
-  #   dot_sublime = File.expand_path("~/.sublime")
-  #   user_packages = File.expand_path("~/Library/Application Support/Sublime Text 3/Packages/User")
-  #   if !File.exist?(user_packages)
-  #     log(:magenta, "mkdir Library/Application Support/Sublime Text 3/Packages/User")
-  #     FileUtils.mkdir_p(user_packages)
-  #   end
-  #   if File.directory?(user_packages) && ! File.symlink?(user_packages)
-  #     log(:magenta, "mkdir .sublime")
-  #     FileUtils.mkdir_p(dot_sublime)
-  #     log(:blue, "copy  Library/Application Support/Sublime Text 3/Packages/User/*")
-  #     FileUtils.cp_r(Dir.glob(user_packages.shellescape + "/*"), dot_sublime)
-  #     log(:magenta, "rm    Library/Application Support/Sublime Text 3/Packages/User")
-  #     FileUtils.rm_rf(user_packages)
-  #     log(:blue, "linking Library/Application Support/Sublime Text 3/Packages/User")
-  #     FileUtils.ln_s(dot_sublime, user_packages)
-  #   end
-  # end
+  ##############################################################################
+  # Customize macOS preferences
+  ##############################################################################
+  desc 'Customize macOS preferences'
+  task :macos_customization do
+    log(:blue, '=> Customizing macOS preferences')
+
+    system('./installers/osx_customization')
+  end
 end
 
 def log(color, message)

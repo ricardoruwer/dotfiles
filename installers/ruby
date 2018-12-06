@@ -14,18 +14,3 @@ ln -sf ${DOTFILES_FILES_CONFIGS}/gemrc ~/.gemrc
 ln -sf ${DOTFILES_FILES_CONFIGS}/irbrc ~/.irbrc
 ln -sf ${DOTFILES_FILES_CONFIGS}/pryrc ~/.pryrc
 ln -sf ${DOTFILES_FILES_CONFIGS}/railsrc ~/.railsrc
-
-# Create default file to irb history
-touch ~/.irb-history
-
-# RBenv installs
-ask_for_confirmation 'Would you like to install Ruby versions [2.5]?'
-
-if answer_is_yes; then
-  print_success 'Installing ruby versions.\n'
-  rbenv install 2.5.0
-  rbenv global 2.5.0
-  print_success 'Ruby installed with 2.5.0 default.\n'
-else
-  print_success 'Skipping ruby installation.\n'
-fi
