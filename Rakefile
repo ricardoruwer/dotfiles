@@ -18,6 +18,7 @@ task install: %w[
   install:oh_my_zsh
   install:homebrew
   install:npm
+  install:shell_improvements
   install:macos_customization
 ]
 
@@ -35,12 +36,72 @@ namespace :install do
   desc 'OS X Softwares updating and installing Xcode Command Line tools'
   task :command_lint_tools do
     log(:blue, '=> Updating MacOS and installing Xcode Command Line tools')
-    # Check and install any remaining software updates.
-    system('sudo softwareupdate --install --all')
+
+    if ask(:red, 'Would you like to install any remaining software updates?')
+      system('sudo softwareupdate --install --all')
+    end
 
     # Install the Xcode Command Line Tools.
-    system('sudo xcode-select --install')
-    system('sudo sudo xcodebuild -license accept')
+    system('sudo xcode-select --install &>/dev/null')
+    system('sudo sudo xcodebuild -license accept &>/dev/null')
+  end
+
+  ##############################################################################
+  # Symlink all dotfiles
+  ##############################################################################
+  desc 'Link dotfiles into user’s home directory'
+  task :link_dotfiles do
+    log(:blue, '=> Linking dotfiles into user’s home directory')
+
+    Dotfile.each(directory: 'configs') do |dotfile|
+      case dotfile.status
+      when :missing
+        log(:green, "Linking #{dotfile}")
+        dotfile.link!
+      when :different
+        log(:green, "Replacing #{dotfile}")
+        dotfile.replace!
+      end
+    end
+  end
+
+  ##############################################################################
+  # Symlink bin files
+  ##############################################################################
+  desc 'Link bin files'
+  task :link_bins do
+    log(:blue, '=> Linking bin files')
+
+    bins = Dotfile.new('bin')
+
+    case bins.status
+    when :identical
+      log(:green, "Identical #{bins}")
+    when :missing
+      log(:green, "Linking #{bins}")
+      bins.link!
+    when :different
+      log(:green, "Replacing #{bins}")
+      bins.replace!
+    end
+  end
+
+  ##############################################################################
+  # Install Oh My ZSH
+  ##############################################################################
+  desc 'Install Oh My ZSH'
+  task :oh_my_zsh do
+    log(:blue, '=> Installing Oh my ZSH')
+
+    if File.directory?(File.join(ENV['HOME'], '.oh-my-zsh'))
+      log(:green, 'Oh my ZSH already installed')
+    else
+      system('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
+      system('sudo chsh -s /bin/zsh')
+
+      # Copy ZSH themes
+      system('ln -sf themes/ricardoruwer.zsh-theme ~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
+    end
   end
 
   ##############################################################################
@@ -51,7 +112,7 @@ namespace :install do
     log(:blue, '=> Installing Homebrew')
 
     if installed?('brew')
-      log(:green, '=> Homebrew already installed')
+      log(:green, 'Homebrew already installed')
     else
       system('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
       Dotfile.new('Brewfile').replace!
@@ -72,7 +133,7 @@ namespace :install do
     log(:blue, '=> Installing NPM packages')
 
     if installed?('npm')
-      log(:green, '=> Node already installed')
+      log(:green, 'Node already installed')
     else
       system('brew install node')
     end
@@ -87,24 +148,6 @@ namespace :install do
   end
 
   ##############################################################################
-  # Install Oh My ZSH
-  ##############################################################################
-  desc 'Install Oh My ZSH'
-  task :oh_my_zsh do
-    log(:blue, '=> Installing Oh my ZSH')
-
-    if File.directory?(File.join(ENV['HOME'], '.oh-my-zsh'))
-      log(:green, '=> Oh my ZSH already installed')
-    else
-      system('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
-      system('sudo chsh -s /bin/zsh')
-
-      # Copy ZSH themes
-      system('ln -sf themes/ricardoruwer.zsh-theme ~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
-    end
-  end
-
-  ##############################################################################
   # Install some other shell improvements
   ##############################################################################
   desc 'Install Shell improvements'
@@ -114,60 +157,13 @@ namespace :install do
   end
 
   ##############################################################################
-  # Symlink bin files
-  ##############################################################################
-  desc 'Link bin files'
-  task :link_bins do
-    log(:blue, '=> Linking bin files')
-
-    bins = Dotfile.new('bin')
-
-    case bins.status
-    when :identical
-      log(:green, "Identical #{bins}")
-    when :missing
-      bins.link!
-    when :different
-      bins.replace!
-    end
-  end
-
-  ##############################################################################
-  # Symlink all dotfiles
-  ##############################################################################
-  desc 'Link dotfiles into user’s home directory'
-  task :link_dotfiles do
-    log(:blue, '=> Linking dotfiles into user’s home directory')
-
-    always_replace = false
-
-    Dotfile.each(directory: 'configs') do |dotfile|
-      case dotfile.status
-      when :identical
-        log(:green, "Identical #{dotfile}")
-      when :missing
-        dotfile.link!
-      when :different
-        if always_replace
-          dotfile.replace!
-        elsif (answer = ask(:red, "overwrite? #{dotfile}"))
-          always_replace = true if answer == :always
-          dotfile.replace!
-        else
-          log(:gray, "Skipping #{dotfile}")
-        end
-      end
-    end
-  end
-
-  ##############################################################################
   # Customize macOS preferences
   ##############################################################################
   desc 'Customize macOS preferences'
   task :macos_customization do
     log(:blue, '=> Customizing macOS preferences')
 
-    system('./installers/osx_customization')
+    system('./bin/customize_osx')
   end
 end
 
