@@ -29,7 +29,7 @@ alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-dir
 alias update="sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; gem update --system; gem update"
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-
+alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
 
 # Show/hide hidden files in Finder
 # ================================
