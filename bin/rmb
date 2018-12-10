@@ -15,21 +15,25 @@ local_branches=$(git branch --merged | grep -v 'master$' | grep -v "$current_bra
 if [ -z "$remote_branches" ] && [ -z "$local_branches" ]; then
   echo "No existing branches have been merged into $current_branch."
 else
-  echo "This will remove the following branches:"
-  if [ -n "$remote_branches" ]; then
-    echo "$remote_branches"
-  fi
   if [ -n "$local_branches" ]; then
+    echo
+    echo "This will remove the following local branches:"
     echo "$local_branches"
+    read -p "Continue? (y/n): " -n 1 choice
+    echo
+    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+      git branch -d `git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n'`
+    fi
   fi
-  read -p "Continue? (y/n): " -n 1 choice
-  echo
-  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
-    # Remove remote branches
-    git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n'`
-    # Remove local branches
-    git branch -d `git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n'`
-  else
-    echo "No branches removed."
+
+  if [ -n "$remote_branches" ]; then
+    echo
+    echo "This will remove the following remote branches:"
+    echo "$remote_branches"
+    read -p "Continue? (y/n): " -n 1 choice
+    echo
+    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+      git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n'`
+    fi
   fi
 fi
