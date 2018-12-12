@@ -1,26 +1,26 @@
 # Open a project in my own GitHub
-function ghopen() {
+ghopen() {
   open "https://github.com/ricardoruwer/${1}";
 }
 
 # Get the process on a given port
-function port() {
+port() {
   lsof -i ":${1:-80}"
 }
 
 # Start an HTTP server from a directory, optionally specifying the port
-function server() {
+server() {
   local port="${1:-8000}"
   python -m SimpleHTTPServer "$port"
 }
 
 # Create a directory and cd to it
-function mkcd {
+mkcd {
   mkdir -p "$1" && cd "$1"
 }
 
 # Determine size of a file or total size of a directory
-function fs() {
+fs() {
   if du -b /dev/null > /dev/null 2>&1; then
     local arg=-sbh;
   else
