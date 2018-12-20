@@ -5,35 +5,45 @@
 
 current_branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 if [ "$current_branch" != "master" ]; then
-  echo "WARNING: You are on branch $current_branch, NOT master."
+  printf "\e[33mYou are on branch $current_branch, NOT master.\e[39m\n"
+  git checkout master
 fi
 
 echo "Fetching merged branches..."
 git remote prune origin
-remote_branches=$(git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$")
-local_branches=$(git branch --merged | grep -v 'master$' | grep -v "$current_branch$")
-if [ -z "$remote_branches" ] && [ -z "$local_branches" ]; then
-  echo "No existing branches have been merged into $current_branch."
-else
-  if [ -n "$local_branches" ]; then
-    echo
-    echo "This will remove the following local branches:"
-    echo "$local_branches"
-    read -p "Continue? (y/n): " -n 1 choice
-    echo
-    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
-      git branch -d `git branch --merged | grep -v 'master$' | grep -v "$current_branch$" | sed 's/origin\///g' | tr -d '\n'`
-    fi
-  fi
 
-  if [ -n "$remote_branches" ]; then
-    echo
-    echo "This will remove the following remote branches:"
-    echo "$remote_branches"
-    read -p "Continue? (y/n): " -n 1 choice
-    echo
-    if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
-      git push origin `git branch -r --merged | grep -v '/master$' | grep -v "/$current_branch$" | sed 's/origin\//:/g' | tr -d '\n'`
-    fi
+local_branches=$(git branch --merged | grep -v 'master$')
+if [ -n "$local_branches" ]; then
+  echo
+  printf "\e[31mRemoving the following LOCAL branches:\e[39m\n"
+  echo "$local_branches"
+  read -p "Continue? (y/n): " -n 1 choice
+  echo
+  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+    git branch -d `git branch --merged | grep -v 'master$' | sed 's/origin\///g' | tr -d '\n'`
+  fi
+fi
+
+squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
+if [ -n "$squashed_branches" ]; then
+  echo
+  printf "\e[31mRemoving the following LOCAL branches (Squashed and Merged on remote):\e[39m\n"
+  echo "$squashed_branches"
+  read -p "Continue? (y/n): " -n 1 choice
+  echo
+  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+    echo $squashed_branches | xargs git branch -D
+  fi
+fi
+
+remote_branches=$(git branch -r --merged | grep -v '/master$')
+if [ -n "$remote_branches" ]; then
+  echo
+  printf "\e[31mRemoving the following REMOTE branches:\e[39m\n"
+  echo "$remote_branches"
+  read -p "Continue? (y/n): " -n 1 choice
+  echo
+  if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
+    git push origin `git branch -r --merged | grep -v '/master$' | sed 's/origin\//:/g' | tr -d '\n'`
   fi
 fi
