@@ -15,7 +15,7 @@ server() {
 }
 
 # Create a directory and cd to it
-mkcd {
+mkcd() {
   mkdir -p "$1" && cd "$1"
 }
 
