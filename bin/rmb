@@ -14,8 +14,7 @@ git remote prune origin
 
 local_branches=$(git branch --merged | grep -v 'master$')
 if [ -n "$local_branches" ]; then
-  echo
-  printf "\e[31mRemoving the following LOCAL branches:\e[39m\n"
+  printf "\n\e[31mRemoving the following LOCAL branches:\e[39m\n"
   echo "$local_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -26,8 +25,7 @@ fi
 
 squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
 if [ -n "$squashed_branches" ]; then
-  echo
-  printf "\e[31mRemoving the following LOCAL branches (Squashed and Merged on remote):\e[39m\n"
+  printf "\n\e[31mRemoving the following LOCAL branches (Squashed and Merged on remote):\e[39m\n"
   echo "$squashed_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -38,8 +36,7 @@ fi
 
 remote_branches=$(git branch -r --merged | grep -v '/master$')
 if [ -n "$remote_branches" ]; then
-  echo
-  printf "\e[31mRemoving the following REMOTE branches:\e[39m\n"
+  printf "\n\e[31mRemoving the following REMOTE branches:\e[39m\n"
   echo "$remote_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -47,3 +44,6 @@ if [ -n "$remote_branches" ]; then
     git push origin `git branch -r --merged | grep -v '/master$' | sed 's/origin\//:/g' | tr -d '\n'`
   fi
 fi
+
+printf "\n\e[32mYour current LOCAL branches are:\e[39m\n"
+git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(color:yellow)%(committerdate:relative)%(color:reset)'
