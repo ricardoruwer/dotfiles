@@ -11,11 +11,10 @@ alias dotfiles="subl ~/.dotfiles"
 
 # Shell
 # =====
-alias ll="ls -FGlahs"
 alias ..="cd .."
 alias ...="cd ../.."
 alias grep="grep --color=auto"
-alias ls="ls -G"
+alias ls="exa"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias lip="ipconfig getifaddr en0"
 alias key="cat ~/.ssh/id_rsa.pub | pbcopy; echo 'SSH key copied to clipboard!'"
