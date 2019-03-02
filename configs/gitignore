@@ -36,14 +36,14 @@
 ehthumbs.db
 Thumbs.db
 
-# Rails
+# Rails #
+#########
 b/
 vendor/ruby
 .bundle
 
-# Go
-gin-bin
-
+# General #
+###########
 TODO.todo
 INFOS/*
 vendor/bundle

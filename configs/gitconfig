@@ -39,6 +39,7 @@
   lf = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short --numstat
   co = checkout
   fix = commit --amend --no-edit
+  td = commit -m 'Trigger deploy' --allow-empty
   pom = push origin master
 	latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
 
