@@ -1,8 +1,3 @@
-# Dirs
-# ====
-alias code="cd ~/code"
-alias ptec="cd ~/ptec"
-
 # Config
 # ======
 alias reload=". ~/.zshrc && echo 'ZSH reloaded! :D'"

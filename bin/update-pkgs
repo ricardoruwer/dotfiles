@@ -1,7 +1,7 @@
 #!/bin/bash
 # Usage: update-pkgs
 
-mix hex.outdated | egrep "Yes" | while read line
+mix hex.outdated --all | egrep "Yes" | while read line
 do
   pkg=$(echo "$line" | awk '{print($1)}')
 

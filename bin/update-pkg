@@ -23,13 +23,13 @@ __update_dependency__() {
 
 __fail__() {
   echo -e "💣  \033[00mthe test suite fails after 'mix deps.update $1' \033[0;31m"
-  git checkout mix.lock
+  git checkout mix*
   mix hex.outdated
   exit 1
 }
 
 __commit__() {
-  git add mix.lock
+  git add mix*
   git commit -m "Update \`$1\` dependency :package:"
   mix hex.outdated
 }
