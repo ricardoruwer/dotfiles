@@ -1,5 +1,6 @@
 #!/bin/bash
 # Usage: update-pkg $PACKAGE
+
 set -e
 if [ $# -lt 1 ]
 then
