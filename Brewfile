@@ -8,16 +8,13 @@ brew 'rabbitmq', restart_service: true
 brew 'sqlite'
 brew 'redis', restart_service: true
 brew 'postgresql', restart_service: true
-# brew 'mongodb'
 
 brew 'erlang'
 brew 'elixir'
-# brew 'go'
 brew 'node'
 
 brew 'ack'
 brew 'autojump'
-# brew 'ansible'
 brew 'yarn'
 brew 'ruby-build'
 brew 'rbenv'
@@ -34,8 +31,6 @@ brew 'fzf'
 brew 'shpotify'
 
 brew 'zsh'
-brew 'bash'
-brew 'bash-completion'
 brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 

@@ -6,7 +6,7 @@ required_version_gems = %w(
 )
 required_version_gems.each do |version_gem|
   api_version = Gem.ruby_api_version
-  $LOAD_PATH << "~/.rbenv/versions/#{RUBY_VERSION}/lib/ruby/gems/#{api_version}/gems/#{version_gem}/lib/"
+  $LOAD_PATH << "~/.rbenv/versions/#{RUBY_VERSION}/lib/ruby/gems/#{api_version}/gems/#{version_gem}/lib"
 end
 
 require "awesome_print"
