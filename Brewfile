@@ -9,15 +9,10 @@ brew 'sqlite'
 brew 'redis', restart_service: true
 brew 'postgresql', restart_service: true
 
-brew 'erlang'
-brew 'elixir'
-brew 'node'
-
 brew 'ack'
 brew 'autojump'
-brew 'yarn'
 brew 'ruby-build'
-brew 'rbenv'
+brew 'asdf'
 brew 'wget'
 brew 'curl'
 brew 'heroku'
@@ -56,12 +51,11 @@ brew 'openjpeg'
 brew 'webkit2png'
 brew 'cmake'
 brew 'coreutils'
+brew 'unzip'
+brew 'gpg'
 
 brew 'homebrew/dupes/libiconv'
 brew 'homebrew/dupes/zlib'
-
-tap 'joshuaclayton/formulae'
-brew 'unused'
 
 # MAS
 brew 'mas'

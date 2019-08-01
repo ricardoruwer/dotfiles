@@ -17,7 +17,6 @@ task install: %w[
   install:link_bins
   install:oh_my_zsh
   install:homebrew
-  install:npm
   install:shell_improvements
   install:macos_customization
 ]
@@ -122,28 +121,6 @@ namespace :install do
       log(:blue, '=> Installing Homebrew apps from Brewfile')
       system('brew bundle --global')
       system('brew cleanup')
-    end
-  end
-
-  ##############################################################################
-  # Install NPM packages
-  ##############################################################################
-  desc 'Install NPM packages'
-  task :npm do
-    log(:blue, '=> Installing NPM packages')
-
-    if installed?('npm')
-      log(:green, 'Node already installed')
-    else
-      system('brew install node')
-    end
-
-    if ask(:red, 'Would you like to install all apps from NPM?')
-      log(:blue, '=> Installing NPM packages')
-
-      npm_packages = 'tldr'
-
-      system("npm install #{npm_packages} --global --quiet")
     end
   end
 

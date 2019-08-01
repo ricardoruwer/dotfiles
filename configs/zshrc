@@ -20,9 +20,6 @@ HIST_STAMPS='dd/mm/yyyy'
 # User configuration
 source $ZSH/oh-my-zsh.sh
 
-# RubyENV loading
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Loading our .dotfiles (aliases, functions, exports, extras)
 # ~/.extra can be used for settings you don't want to commit.
 for file in ~/.dotfiles/shell/*; do
@@ -35,3 +32,7 @@ unset file;
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# asdf
+. /usr/local/opt/asdf/asdf.sh
+. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash

@@ -1,34 +1,5 @@
 Pry.config.editor = 'subl -n -w'
 
-# Awesome console
-required_version_gems = %w(
-  awesome_print-1.8.0
-)
-required_version_gems.each do |version_gem|
-  api_version = Gem.ruby_api_version
-  $LOAD_PATH << "~/.rbenv/versions/#{RUBY_VERSION}/lib/ruby/gems/#{api_version}/gems/#{version_gem}/lib"
-end
-
-require "awesome_print"
-
-begin
-  AwesomePrint.pry!
-rescue
-  puts "[~/.pryrc] Load AwesomePrint failed: #{e.message}"
-end
-
-if defined?(PryByebug)
-  Pry.commands.alias_command 'c', 'continue'
-  Pry.commands.alias_command 's', 'step'
-  Pry.commands.alias_command 'n', 'next'
-  Pry.commands.alias_command 'f', 'finish'
-end
-
-# Hit Enter to repeat last command
-Pry::Commands.command /^$/, "repeat last command" do
-  _pry_.run_command Pry.history.to_a.last
-end
-
 # Custom prompt
 if defined? Rails
   Pry.config.prompt_name = Rails.application.class.parent_name.underscore.dasherize
