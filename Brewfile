@@ -7,7 +7,6 @@ tap 'homebrew/services'
 brew 'rabbitmq', restart_service: true
 brew 'sqlite'
 brew 'redis', restart_service: true
-brew 'postgresql', restart_service: true
 
 brew 'ack'
 brew 'autojump'
