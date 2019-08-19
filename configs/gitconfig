@@ -1,47 +1,45 @@
 [color]
+  branch = auto
   diff = auto
   grep = auto
   interactive = auto
   status = auto
-  branch = auto
   status = auto
   ui = auto
 
 [alias]
-  st = status -sb
-  s = status -sb
-  ci = commit
-  wip = !git add . && git commit -am 'WIP :construction:'
-  stash-all = stash save --include-untracked
-  lol = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\"\")\""
-  b = branch
-  d = diff
-  wd = diff --color-words
-  pf = push --force-with-lease
   ap = add --patch
-  ds = diff --staged
-  tags = tag -l
-  com = checkout master
+  b = branch
   branches = branch -a
-  remotes = remote -v
-  sp = stash pop
+  ci = commit
+  cie = commit --allow-empty
+  co = checkout
+  com = checkout master
+  d = diff
+  ds = diff --staged
+  fix = commit --amend --no-edit
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  lf = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short --numstat
+  lol = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\"\")\""
   mc = merge --continue
-  rc = rebase --continue
-  rim = rebase -i master
+  pf = push --force-with-lease
+  pom = push origin master
   prune = fetch --prune
   r = reset
-  undo = reset --soft HEAD^
-  fup = log --since '1 day ago' --oneline --author ricardoruwer@gmail.com
   rank = shortlog -sn --no-merges
-  cl = "!git log $1..${2:-master} --oneline --no-merges --pretty=format:'- %s (%h)'"
-  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  ls = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short
-  lf = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short --numstat
-  co = checkout
-  fix = commit --amend --no-edit
-  td = commit -m 'Trigger deploy' --allow-empty
-  pom = push origin master
-  latest = for-each-ref --count=10 --sort=-committerdate --format='%(committerdate:short) %(refname:short)'
+  rc = rebase --continue
+  remotes = remote -v
+  rim = rebase -i master
+  rr = restore
+  s = status -sb
+  sp = stash pop
+  stash-all = stash save --include-untracked
+  sw = switch
+  swm = switch master
+  tags = tag -l
+  undo = reset --soft HEAD^
+  wd = diff --color-words
+  wip = !git add . && git commit -am 'WIP :construction:'
 
 [core]
   editor = subl -w -n
@@ -58,8 +56,8 @@
   name = Ricardo Ruwer
 
 [merge]
-  ff = false
   conflictstyle = diff3
+  ff = false
 
 [pull]
   rebase = true
@@ -72,8 +70,10 @@
 
 [diff]
   tool = icdiff
+
 [difftool]
   prompt = false
+
 [difftool "icdiff"]
   cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
