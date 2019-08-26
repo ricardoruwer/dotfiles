@@ -21,13 +21,16 @@
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   lf = log --pretty=format:'%C(yellow)%h %C(blue)%ad%C(red)%d %C(reset)%s%C(green) [%cn]' --decorate --date=short --numstat
   lol = !"git add -A; git commit -am \"$(echo $(curl -s http://whatthecommit.com/index.txt)\"\")\""
+  ma = merge --abort
   mc = merge --continue
   pf = push --force-with-lease
   pom = push origin master
   prune = fetch --prune
   r = reset
   rank = shortlog -sn --no-merges
+  ra = rebase --abort
   rc = rebase --continue
+  rrm = rebase master
   remotes = remote -v
   rim = rebase -i master
   rr = restore
