@@ -17,6 +17,7 @@ task install: %w[
   install:link_bins
   install:oh_my_zsh
   install:homebrew
+  install:asdf_plugins
   install:shell_improvements
   install:macos_customization
 ]
@@ -122,6 +123,26 @@ namespace :install do
       system('brew bundle --global')
       system('brew cleanup')
     end
+  end
+
+  ##############################################################################
+  # Install asdf plugins
+  ##############################################################################
+  desc 'Install asdf plugins'
+  task :asdf_plugins do
+    log(:blue, '=> Installing asdf plugins')
+
+    system('asdf plugin-add elasticsearch')
+    system('asdf plugin-add elixir')
+    system('asdf plugin-add erlang')
+    system('asdf plugin-add golang')
+    system('asdf plugin-add nodejs')
+    system('asdf plugin-add postgres')
+    system('asdf plugin-add redis')
+    system('asdf plugin-add ruby')
+    system('asdf plugin-add yarn')
+
+    system('asdf install')
   end
 
   ##############################################################################
