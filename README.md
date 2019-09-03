@@ -40,3 +40,7 @@ ln -s ~/Google\ Drive/Sublime/User
 2. Browse `Google Drive/iTerm` folder
 3. Go to Profiles -> Colors -> Color Presets -> Import
 4. Choose the `itermcolor` file in `Google Drive/iTerm` folder
+
+### Typora
+
+1. Open articles folder at `Google Drive/Notes`
