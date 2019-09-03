@@ -19,6 +19,8 @@ task install: %w[
   install:homebrew
   install:asdf_plugins
   install:shell_improvements
+  install:configure_itermocil
+  install:configure_sublime
   install:macos_customization
 ]
 
@@ -152,6 +154,29 @@ namespace :install do
   task :shell_improvements do
     log(:blue, '=> Installing fzf key bindings and completion')
     system('/usr/local/opt/fzf/install')
+  end
+
+  ##############################################################################
+  # Configure itermocil
+  ##############################################################################
+  desc 'Configure itermocil'
+  task :configure_itermocil do
+    log(:blue, '=> Configuring itermocil')
+
+    system('ln -s ~/Google\ Drive/.itermocil ~/.itermocil')
+  end
+
+  ##############################################################################
+  # Configure Sublime Text
+  ##############################################################################
+  desc 'Configure SublimeText'
+  task :configure_sublime do
+    log(:blue, '=> Configuring Sublime Text')
+
+    sublime_user_path = '~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
+
+    system("rm -r #{sublime_user_path}")
+    system("ln -s ~/Google\ Drive/Sublime/User #{sublime_user_path}")
   end
 
   ##############################################################################

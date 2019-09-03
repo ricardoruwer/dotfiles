@@ -19,15 +19,6 @@ rake install
 
 ## Syncing Applications
 
-### Sublime Text
-
-```bash
-# When your User folder is synced in Google Drive...
-cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/
-rm -r User
-ln -s ~/Google\ Drive/Sublime/User
-```
-
 ### Alfred
 
 1. Open Alfred Preferences
