@@ -13,10 +13,10 @@ task default: 'install'
 desc 'Install packages and dotfiles'
 task install: %w[
   install:command_lint_tools
+  install:homebrew
   install:link_dotfiles
   install:link_bins
   install:oh_my_zsh
-  install:homebrew
   install:asdf_plugins
   install:shell_improvements
   install:configure_itermocil
@@ -24,16 +24,9 @@ task install: %w[
   install:macos_customization
 ]
 
-desc 'Warn if git origin is newer'
-task :check do
-  next unless system('git fetch origin')
-  next if `git diff HEAD origin/master`.strip.empty?
-  log(:yellow, 'Working copy is out of date; consider `git pull`')
-end
-
 namespace :install do
   ##############################################################################
-  # Symlink all dotfiles
+  # Update macOS and install Xcode
   ##############################################################################
   desc 'OS X Softwares updating and installing Xcode Command Line tools'
   task :command_lint_tools do
@@ -51,9 +44,9 @@ namespace :install do
   ##############################################################################
   # Symlink all dotfiles
   ##############################################################################
-  desc 'Link dotfiles into user’s home directory'
+  desc 'Link dotfiles into home directory'
   task :link_dotfiles do
-    log(:blue, '=> Linking dotfiles into user’s home directory')
+    log(:blue, '=> Linking dotfiles into home directory')
 
     Dotfile.each(directory: 'configs') do |dotfile|
       case dotfile.status
@@ -99,11 +92,15 @@ namespace :install do
       log(:green, 'Oh my ZSH already installed')
     else
       system('git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh')
-      system('sudo chsh -s /bin/zsh')
-
-      # Copy ZSH themes
-      system('ln -sf themes/ricardoruwer.zsh-theme ~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
+      system('sudo sh -c "echo $(which zsh) >> /etc/shells"')
+      system('chsh -s $(which zsh)')
     end
+
+    # Copy ZSH theme
+    theme_from = File.expand_path('themes/ricardoruwer.zsh-theme')
+    theme_to = File.expand_path('~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
+
+    FileUtils.ln_s(theme_from, theme_to)
   end
 
   ##############################################################################
@@ -119,6 +116,8 @@ namespace :install do
       system('/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
       Dotfile.new('Brewfile').replace!
     end
+
+    confirm(:yellow, 'Please log in to Mac App Store manually before continuing')
 
     if ask(:red, 'Would you like to install all apps from Brewfile?')
       log(:blue, '=> Installing Homebrew apps from Brewfile')
@@ -144,6 +143,8 @@ namespace :install do
     system('asdf plugin-add ruby')
     system('asdf plugin-add yarn')
 
+    system('bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring')
+
     system('asdf install')
   end
 
@@ -163,7 +164,10 @@ namespace :install do
   task :configure_itermocil do
     log(:blue, '=> Configuring itermocil')
 
-    system('ln -s ~/Google\ Drive/.itermocil ~/.itermocil')
+    itermocil_from = File.expand_path('~/Google Drive/.itermocil')
+    itermocil_to = File.expand_path('~/.itermocil')
+
+    FileUtils.ln_s(itermocil_from, itermocil_to)
   end
 
   ##############################################################################
@@ -173,10 +177,15 @@ namespace :install do
   task :configure_sublime do
     log(:blue, '=> Configuring Sublime Text')
 
-    sublime_user_path = '~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User'
+    confirm(:yellow, 'Please open and log in to Google Backup & Sync before continuing')
 
-    system("rm -r #{sublime_user_path}")
-    system("ln -s ~/Google\ Drive/Sublime/User #{sublime_user_path}")
+    log(:cyan, '* Install the PackageControl @ https://packagecontrol.io/installation')
+
+    sublime_from = File.expand_path('~/Google Drive/Sublime/User')
+    sublime_to = File.expand_path('~/Library/Application Support/Sublime Text 3/Packages/User')
+
+    FileUtils.rm_r(sublime_to)
+    FileUtils.ln_s(sublime_from, sublime_to)
   end
 
   ##############################################################################
@@ -187,6 +196,8 @@ namespace :install do
     log(:blue, '=> Customizing macOS preferences')
 
     system('./bin/customize_osx')
+
+    log(:cyan, '* Please restart your computer for these changes to take effect')
   end
 end
 
@@ -222,6 +233,12 @@ def ask(color, question)
   else
     false
   end
+end
+
+def confirm(color, message)
+  log(color, "#{message} [press RETURN to continue] ")
+
+  $stdin.gets
 end
 
 def installed?(name)

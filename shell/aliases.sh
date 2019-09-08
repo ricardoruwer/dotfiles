@@ -1,6 +1,6 @@
 # Config
 # ======
-alias reload=". ~/.zshrc && echo 'ZSH reloaded! :D'"
+alias reload=". ~/.zshrc && echo 'ZSH reloaded!'"
 alias sublconf="cd ~/Library/Application\ Support/Sublime\ Text\ 3"
 alias dotfiles="subl ~/.dotfiles"
 

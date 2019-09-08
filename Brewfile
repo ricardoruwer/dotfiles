@@ -1,8 +1,8 @@
 # Brew
 tap 'homebrew/bundle'
 tap 'homebrew/core'
-tap 'homebrew/dupes'
 tap 'homebrew/services'
+tap 'heroku/brew'
 
 brew 'ack'
 brew 'asdf'
@@ -35,9 +35,10 @@ brew 'gcc'
 brew 'gettext'
 brew 'glib'
 brew 'gpg'
-brew 'imagemagick', args: ['with-webp']
+brew 'imagemagick'
 brew 'jpeg'
 brew 'libffi'
+brew 'libiconv'
 brew 'libpng'
 brew 'libssh'
 brew 'libtool'
@@ -46,13 +47,12 @@ brew 'libxslt'
 brew 'libyaml'
 brew 'openjpeg'
 brew 'openssl'
+brew 'pkg-config'
 brew 'readline'
 brew 'unzip'
 brew 'webkit2png'
 brew 'webp'
-
-brew 'homebrew/dupes/libiconv'
-brew 'homebrew/dupes/zlib'
+brew 'zlib'
 
 # MAS
 brew 'mas'
@@ -64,6 +64,7 @@ mas 'TranslateTab', id: 458887729
 
 # CASK
 tap 'caskroom/cask'
+tap 'homebrew/cask-versions'
 brew 'brew-cask-completion'
 
 cask 'alfred3'
@@ -83,7 +84,7 @@ cask 'monodraw'
 cask 'muzzle'
 cask 'psequel'
 cask 'sequel-pro'
-cask 'slack-beta'
+cask 'slack'
 cask 'spectacle'
 cask 'spotify'
 cask 'sublime-text'

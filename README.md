@@ -22,16 +22,19 @@ rake install
 ### Alfred
 
 1. Open Alfred Preferences
-2. Click on **Set sync folder...**
-3. Choose `~/Google Drive/Alfred`
+2. Go to Advanced
+3. Click on **Set preferences folder...**
+4. Choose `~/Google Drive/Alfred`
 
 ### iTerm2
 
 1. Open iTerm2 Preferences
-2. Browse `Google Drive/iTerm` folder
-3. Go to Profiles -> Colors -> Color Presets -> Import
-4. Choose the `itermcolor` file in `Google Drive/iTerm` folder
+2. Go to Preferences
+3. Browse `Google Drive/iTerm` folder
+4. Go to Profiles |> Colors |> Color Presets |> Import
+5. Choose the `.itermcolor` file in `Google Drive/iTerm` folder
 
 ### Typora
 
-1. Open articles folder at `Google Drive/Notes`
+1. Go to View |> Articles
+2. Open the folder at `Google Drive/Notes`
