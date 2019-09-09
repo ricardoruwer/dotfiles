@@ -179,13 +179,15 @@ namespace :install do
   task :configure_sublime do
     log(:blue, '=> Configuring Sublime Text')
 
+    confirm(:yellow, 'Please open and log in to Google Backup & Sync before continuing')
+
     sublime_from = File.expand_path('~/Google Drive/Sublime/User')
     sublime_to = File.expand_path('~/Library/Application Support/Sublime Text 3/Packages/User')
 
     FileUtils.rm_r(sublime_to)
     FileUtils.ln_s(sublime_from, sublime_to)
 
-    log(:cyan, '* Install the PackageControl @ https://packagecontrol.io/installation')
+    log(:cyan, '* Install the PackageControl: https://packagecontrol.io/installation')
   end
 
   ##############################################################################
