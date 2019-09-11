@@ -149,7 +149,7 @@ namespace :install do
   end
 
   ##############################################################################
-  # Install some other shell improvements
+  # Install some shell improvements
   ##############################################################################
   desc 'Install Shell improvements'
   task :shell_improvements do

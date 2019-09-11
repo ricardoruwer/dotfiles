@@ -20,7 +20,7 @@ alias fd="find . -type d -name"
 alias ff="find . -type f -name"
 alias ping="prettyping --nolegend"
 alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-directories-first"
-alias update="sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup"
+alias update="sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; brew upgrade; brew cask upgrade"
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
