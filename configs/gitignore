@@ -48,4 +48,5 @@ TODO.todo
 INFOS/*
 vendor/bundle
 node_modules
+.env.local
 .env.*.local

@@ -12,6 +12,9 @@ ZSH_THEME='ricardoruwer'
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(autojump gitfast docker mix heroku dotenv cloudapp)
 
+# Dotenv plugin config
+ZSH_DOTENV_FILE=.env.local
+
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: 'mm/dd/yyyy'|'dd.mm.yyyy'|'yyyy-mm-dd'
