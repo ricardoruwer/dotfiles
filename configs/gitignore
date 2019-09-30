@@ -42,6 +42,9 @@ b/
 vendor/ruby
 .bundle
 
+# Elixir #
+.elixir_ls
+
 # General #
 ###########
 TODO.todo

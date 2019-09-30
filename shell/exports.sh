@@ -1,7 +1,7 @@
-# Sublime as default editor.
-export BUNDLER_EDITOR="subl"
-export GEM_EDITOR="subl"
-export EDITOR="subl -w"
+# Define the default editor
+export BUNDLER_EDITOR="code"
+export GEM_EDITOR="code"
+export EDITOR="code"
 export VISUAL="$EDITOR"
 
 export HISTFILE="$HOME/.zsh_history"
