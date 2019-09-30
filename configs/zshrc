@@ -39,3 +39,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # asdf
 . /usr/local/opt/asdf/asdf.sh
 . /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
+
+# itermocil
+compctl -g '~/.itermocil/*(:t:r)' itermocil

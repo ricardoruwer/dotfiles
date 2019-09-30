@@ -1,9 +1,9 @@
 AllCops:
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'script/**/*'
+    - "bin/**/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "script/**/*"
 
 Rails:
   Enabled: true
@@ -14,7 +14,7 @@ Layout/AlignParameters:
 Layout/CaseIndentation:
   EnforcedStyle: end
 
-Layout/IndentHash:
+Layout/IndentFirstHashElement:
   Enabled: false
 
 Layout/MultilineMethodCallIndentation:
@@ -30,7 +30,7 @@ Layout/AlignHash:
   Enabled: true
   EnforcedLastArgumentHashStyle: always_ignore
 
-Lint/EndAlignment:
+Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
 Style/AsciiComments:
@@ -39,7 +39,7 @@ Style/AsciiComments:
 Style/CollectionMethods:
   Enabled: true
   PreferredMethods:
-      inject: 'inject'
+    inject: "inject"
 
 Style/Documentation:
   Enabled: false
