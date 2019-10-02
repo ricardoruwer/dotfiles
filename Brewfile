@@ -60,7 +60,6 @@ brew 'mas'
 
 mas 'Amphetamine', id: 937984704
 mas 'Clocker', id: 1056643111
-mas 'Shush', id: 496437906
 mas 'TranslateTab', id: 458887729
 
 # CASK
