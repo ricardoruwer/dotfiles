@@ -6,7 +6,7 @@
 current_branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 if [ "$current_branch" != "master" ]; then
   printf "\e[33mYou are on branch $current_branch, NOT master.\e[39m\n"
-  git checkout master
+  git switch master
 fi
 
 echo "Fetching merged branches..."
