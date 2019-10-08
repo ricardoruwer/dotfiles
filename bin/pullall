@@ -20,15 +20,18 @@ untracked_files() {
 }
 
 pull_at_master() {
+  stashed_files=false
+
   if untracked_files; then
-    git stash -q
+    git stash save --include-untracked -q
+    stashed_files=true
   fi
 
-  git checkout master -q
+  git switch master -q
   git pull -q
-  git checkout - -q
+  git switch - -q
 
-  if untracked_files; then
+  if $stashed_files; then
     git stash pop -q
   fi
 }
