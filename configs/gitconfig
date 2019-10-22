@@ -40,7 +40,9 @@
   sw = switch
   swm = switch master
   tags = tag -l
+  td = commit -m 'Trigger deploy' --allow-empty
   undo = reset --soft HEAD^
+  upd = !git switch master -q && git pull -q && git switch - -q && git rebase master
   wd = diff --color-words
   wip = !git add . && git commit -am 'WIP :construction:'
 
