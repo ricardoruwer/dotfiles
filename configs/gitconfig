@@ -15,7 +15,9 @@
   cie = commit --allow-empty
   co = checkout
   com = checkout master
+  cp = cherry-pick
   d = diff
+  done = !git switch master && git pull
   ds = diff --staged
   fix = commit --amend --no-edit
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -39,6 +41,7 @@
   stash-all = stash save --include-untracked
   sw = switch
   swm = switch master
+  sw-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git switch pr/$1' -
   tags = tag -l
   td = commit -m 'Trigger deploy' --allow-empty
   undo = reset --soft HEAD^
