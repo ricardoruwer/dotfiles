@@ -138,7 +138,6 @@ namespace :install do
     system('asdf plugin-add nodejs')
     system('asdf plugin-add postgres')
     system('asdf plugin-add ruby')
-    system('asdf plugin-add yarn')
 
     system('bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring')
 
