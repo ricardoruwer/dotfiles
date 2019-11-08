@@ -17,7 +17,7 @@
   com = checkout master
   cp = cherry-pick
   d = diff
-  done = !git switch master && git pull
+  done = !git switch master && git pull && git branch -D @{-1}
   ds = diff --staged
   fix = commit --amend --no-edit
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
