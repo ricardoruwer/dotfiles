@@ -38,12 +38,12 @@ alias be="b exec"
 alias bo="b open"
 
 # Ruby on Rails
-# =====
+# =============
 alias rc="bin/rails c"
 alias rs="bin/rails s"
 alias s="bin/spring"
 alias sr="bin/rspec"
-alias st="bin/teaspoon"
+alias rt="bin/rspec"
 alias rdm="bin/rake db:migrate"
 alias rdr="bin/rake db:rollback"
 alias rof="bin/rspec --only-failures"
@@ -51,3 +51,9 @@ alias rcp="DISABLE_SPRING=true dotenv -f .env.production.local bin/rails c"
 alias killrb="ps aux | pgrep -lf 'rack|spring|rails|ruby|puma|sneakers|unicorn' | awk '{print $1}' | xargs kill -9"
 alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
 alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
+
+# Elixir
+# ======
+alias ms="mix phx.server"
+alias mc="iex -S mix"
+alias mt="mix test"
