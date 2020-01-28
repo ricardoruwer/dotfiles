@@ -14,6 +14,7 @@ export GOPATH=~/go
 
 # PATH
 export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/.bin-private:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="./bin:$PATH"
 export PATH=$PATH:$GOPATH/bin

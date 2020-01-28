@@ -81,6 +81,34 @@ namespace :install do
   end
 
   ##############################################################################
+  # Symlink private bin files
+  ##############################################################################
+  desc 'Link private bin files'
+  task :link_private_bins do
+    log(:blue, '=> Linking private bin files')
+
+    # Link from Google Drive
+    bins_from = File.expand_path('~/Google Drive/bin')
+    bins_to = File.expand_path('~/.dotfiles/bin-private')
+
+    FileUtils.ln_s(bins_from, bins_to)
+
+    # Link bins (doing this just to keep the folder inside dotfiles as well)
+    bins = Dotfile.new('bin-private')
+
+    case bins.status
+    when :identical
+      log(:green, "Identical #{bins}")
+    when :missing
+      log(:green, "Linking #{bins}")
+      bins.link!
+    when :different
+      log(:green, "Replacing #{bins}")
+      bins.replace!
+    end
+  end
+
+  ##############################################################################
   # Install Oh My ZSH
   ##############################################################################
   desc 'Install Oh My ZSH'
