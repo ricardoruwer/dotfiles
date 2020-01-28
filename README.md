@@ -38,3 +38,9 @@ rake install
 
 1. Go to View |> Articles
 2. Open the folder at `Google Drive/Notes`
+
+### VSCode
+
+1. Install the Settings Sync extension
+2. Login via Github
+3. Press `CMD + Option + D` to sync

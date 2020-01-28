@@ -63,7 +63,7 @@ mas 'Clocker', id: 1056643111
 mas 'TranslateTab', id: 458887729
 
 # CASK
-tap 'caskroom/cask'
+tap 'caskroom/cask-cask'
 tap 'homebrew/cask-versions'
 brew 'brew-cask-completion'
 
@@ -73,6 +73,7 @@ cask 'dash'
 cask 'docker'
 cask 'dropshare'
 cask 'fantastical'
+cask 'gitify'
 cask 'google-backup-and-sync'
 cask 'google-chrome-beta'
 cask 'grammarly'
