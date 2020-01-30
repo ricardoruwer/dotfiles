@@ -10,10 +10,7 @@ ZSH_THEME='ricardoruwer'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(autojump gitfast docker mix heroku dotenv cloudapp)
-
-# Dotenv plugin config
-ZSH_DOTENV_FILE=.env.local
+plugins=(autojump gitfast docker mix heroku cloudapp)
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -50,3 +47,5 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=/Users/ricardoruwer/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
+
+eval "$(direnv hook zsh)"
