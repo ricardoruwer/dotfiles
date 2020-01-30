@@ -12,6 +12,8 @@ export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
 
 export GOPATH=~/go
 
+export DIRENV_LOG_FORMAT=
+
 # PATH
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.bin-private:$PATH"
