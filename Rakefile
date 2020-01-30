@@ -164,7 +164,6 @@ namespace :install do
     system('asdf plugin-add erlang')
     system('asdf plugin-add golang')
     system('asdf plugin-add nodejs')
-    system('asdf plugin-add postgres')
     system('asdf plugin-add ruby')
 
     system('bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring')
