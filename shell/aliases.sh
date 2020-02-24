@@ -24,8 +24,8 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
 
-# Show/hide hidden files in Finder
-# ================================
+# Finder
+# ======
 alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
@@ -37,8 +37,8 @@ alias bu="b update"
 alias be="b exec"
 alias bo="b open"
 
-# Ruby on Rails
-# =============
+# Ruby/Rails
+# ==========
 alias rc="bin/rails c"
 alias rs="bin/rails s"
 alias s="bin/spring"
@@ -52,8 +52,12 @@ alias killrb="ps aux | pgrep -lf 'rack|spring|rails|ruby|puma|sneakers|unicorn' 
 alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
 alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
 
-# Elixir
-# ======
+# Elixir/Phoenix
+# ==============
 alias ms="mix phx.server"
 alias mc="iex -S mix"
 alias mt="mix test"
+
+# Brew
+# ====
+alias bs="brew services"
