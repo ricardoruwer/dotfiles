@@ -60,7 +60,6 @@ brew 'zlib'
 # MAS
 brew 'mas'
 
-mas 'Amphetamine', id: 937984704
 mas 'Clocker', id: 1056643111
 mas 'TranslateTab', id: 458887729
 
