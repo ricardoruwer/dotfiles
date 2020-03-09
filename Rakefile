@@ -172,6 +172,15 @@ namespace :install do
   end
 
   ##############################################################################
+  # Install NPM global packages
+  ##############################################################################
+  task :npm_packages do
+    log(:blue, '=> Installing asdf plugins')
+
+    system('cat npm.txt | xargs npm i -g')
+  end
+
+  ##############################################################################
   # Install some shell improvements
   ##############################################################################
   desc 'Install Shell improvements'
