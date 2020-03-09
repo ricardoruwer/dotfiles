@@ -48,3 +48,13 @@ weather() {
   fi
   curl -s "$LOCALE.wttr.in/$LOCATION"
 }
+
+# Find file
+ff() {
+  find . -type f -name "$1" 2>/dev/null
+}
+
+# Find dir
+fd() {
+  find . -type d -name "$1" 2>/dev/null
+}
