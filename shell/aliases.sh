@@ -45,10 +45,6 @@ alias rt="bin/rspec"
 alias rdm="bin/rake db:migrate"
 alias rdr="bin/rake db:rollback"
 alias rof="bin/rspec --only-failures"
-alias rcp="DISABLE_SPRING=true dotenv -f .env.production.local bin/rails c"
-alias killrb="ps aux | pgrep -lf 'rack|spring|rails|ruby|puma|sneakers|unicorn' | awk '{print $1}' | xargs kill -9"
-alias bigclass="find . -name '*.rb' -not -path '*test*' -not -path '*spec*' | xargs wc -l | sort -rn | head"
-alias longparams="ack 'def\s.+\((.*,.*,.*,.*)\)' --ignore-dir='spec' --ignore-dir='test'"
 
 # Elixir/Phoenix
 # ==============
@@ -59,3 +55,7 @@ alias mt="mix test"
 # Brew
 # ====
 alias bs="brew services"
+
+# Jest
+# ====
+alias yt="yarn test"
