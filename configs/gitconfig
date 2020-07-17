@@ -14,10 +14,9 @@
   ci = commit
   cie = commit --allow-empty
   co = checkout
-  com = checkout master
   cp = cherry-pick
   d = diff
-  done = !git switch master && git pull && git branch -D @{-1}
+  done = !git switch main && git pull && git branch -D @{-1}
   ds = diff --staged
   fix = commit --amend --no-edit
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -26,26 +25,26 @@
   ma = merge --abort
   mc = merge --continue
   pf = push --force-with-lease
-  pom = push origin master
+  pom = push origin main
   prune = fetch --prune
   r = reset
   rank = shortlog -sn --no-merges
   ra = rebase --abort
   rc = rebase --continue
-  rrm = rebase master
+  rrm = rebase main
   remotes = remote -v
-  rim = rebase -i master
+  rim = rebase -i main
   rr = restore
   s = status -sb
   sp = stash pop
   stash-all = stash save --include-untracked
   sw = switch
-  swm = switch master
+  swm = switch main
   sw-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git switch pr/$1' -
   tags = tag -l
   td = commit -m 'Trigger deploy' --allow-empty
   undo = reset --soft HEAD^
-  upd = !git switch master -q && git pull -q && git switch - -q && git rebase master
+  upd = !git switch main -q && git pull -q && git switch - -q && git rebase main
   wd = diff --color-words
   wip = !git add . && git commit -am 'WIP :construction:'
 
