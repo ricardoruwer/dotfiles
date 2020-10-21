@@ -21,7 +21,3 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="./bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH=$PATH:$GOPATH/bin
-
-if [ $ITERM_SESSION_ID ]; then
-  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
-fi
