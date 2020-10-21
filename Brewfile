@@ -28,6 +28,7 @@ brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 
 brew 'autoconf'
+brew 'wxmac'
 brew 'cmake'
 brew 'coreutils'
 brew 'ffmpeg'
