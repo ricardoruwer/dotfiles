@@ -14,7 +14,7 @@ brew 'direnv'
 brew 'exa'
 brew 'fzf'
 brew 'git'
-brew 'github/gh/gh'
+brew 'gh'
 brew 'heroku'
 brew 'nginx'
 brew 'prettyping'
@@ -63,7 +63,7 @@ mas 'Clocker', id: 1056643111
 mas 'TranslateTab', id: 458887729
 
 # CASK
-tap 'caskroom/cask-cask'
+tap 'homebrew/cask'
 tap 'homebrew/cask-versions'
 brew 'brew-cask-completion'
 
