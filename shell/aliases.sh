@@ -39,7 +39,6 @@ alias bo="b open"
 # ==========
 alias rc="bin/rails c"
 alias rs="bin/rails s"
-alias s="bin/spring"
 alias sr="bin/rspec"
 alias rt="bin/rspec"
 alias rdm="bin/rake db:migrate"
