@@ -3,3 +3,4 @@ stylelint
 stylelint-config-standard
 stylelint-scss
 stylelint-config-idiomatic-order
+stylelint-config-recommended-scss

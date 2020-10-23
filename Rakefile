@@ -21,6 +21,7 @@ task install: %w[
   install:shell_improvements
   install:configure_itermocil
   install:link_private_bins
+  install:npm_packages
   install:macos_customization
 ]
 
@@ -176,7 +177,7 @@ namespace :install do
   # Install NPM global packages
   ##############################################################################
   task :npm_packages do
-    log(:blue, '=> Installing asdf plugins')
+    log(:blue, '=> Installing global npm packages')
 
     system('cat npm.txt | xargs npm i -g')
   end
