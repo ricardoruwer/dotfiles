@@ -10,6 +10,28 @@ chpwd() { title "%c" }
 # Set name of the theme to load @ ~/.oh-my-zsh/themes/ or ~/.oh-my-zsh/custom/themes/
 ZSH_THEME='ricardoruwer'
 
+# Auto-cd when issuing a command that is a directory name
+setopt auto_cd
+
+# Enable autocorrection on commands
+setopt correct
+setopt correct_all
+
+# Auto-completion
+autoload -Uz compinit && compinit
+
+# partial completion suggestions
+zstyle ':completion:*' list-suffixes
+zstyle ':completion:*' expand prefix suffix
+
+# Search history with up/down arrow keys
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^[[A" up-line-or-beginning-search # Up
+bindkey "^[[B" down-line-or-beginning-search # Down
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
