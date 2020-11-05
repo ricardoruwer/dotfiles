@@ -1,4 +1,5 @@
 prettier
+eslint
 stylelint
 stylelint-config-standard
 stylelint-scss
