@@ -58,3 +58,9 @@ ff() {
 fd() {
   find . -type d -name "$1" 2>/dev/null
 }
+
+# Some default functions
+onload_function() {
+  title "%c"
+  branch=$(git symbolic-ref --short HEAD)
+}

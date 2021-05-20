@@ -1,5 +1,6 @@
 prettier
 eslint
+spaceship-prompt
 stylelint
 stylelint-config-standard
 stylelint-scss

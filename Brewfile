@@ -68,6 +68,7 @@ mas 'TranslateTab', id: 458887729
 # CASK
 tap 'homebrew/cask'
 tap 'homebrew/cask-versions'
+tap 'homebrew/cask-fonts'
 brew 'brew-cask-completion'
 
 cask 'alfred3'
@@ -77,6 +78,7 @@ cask 'dash'
 cask 'discord'
 cask 'docker'
 cask 'dropshare'
+cask 'font-fira-code'
 cask 'gitify'
 cask 'google-backup-and-sync'
 cask 'google-chrome-beta'
