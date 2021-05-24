@@ -62,5 +62,10 @@ fd() {
 # Some default functions
 onload_function() {
   title "%c"
-  branch=$(git symbolic-ref --short HEAD)
+
+  if [ -d .git ]; then
+    branch=$(git symbolic-ref --short HEAD)
+  else
+    unset branch
+  fi;
 }
