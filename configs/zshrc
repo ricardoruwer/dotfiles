@@ -61,6 +61,11 @@ compctl -g '~/.itermocil/*(:t:r)' itermocil
 # heroku autocomplete setup
 HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
+# Autocomplete for private bins
+if [ -f ~/.dotfiles/bin-private/autocomplete.sh ]; then
+  source ~/.dotfiles/bin-private/autocomplete.sh
+fi;
+
 # Set Spaceship ZSH as a prompt
 autoload -U promptinit; promptinit
 prompt spaceship
