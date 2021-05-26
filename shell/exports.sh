@@ -8,16 +8,20 @@ export HISTFILE="$HOME/.zsh_history"
 export HISTCONTROL="ignoreboth:erasedups" # Erase duplicates in history
 export HISTSIZE=10000 # Store 10k history entries
 
+# TRR
 export ERL_AFLAGS="-kernel shell_history enabled"
 export KERL_CONFIGURE_OPTIONS="--disable-debug --without-javac"
-export GOPATH=~/go
+export GOPATH="$HOME/go"
 
+export TRR_DIR="$HOME/Code/trr"
+export TRR_BIN_DIR="$HOME/.dotfiles/bin-private"
+
+# DIRENV
 export DIRENV_LOG_FORMAT=
 
 # PATH
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.bin-private:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="./bin:$PATH"
+export PATH="$HOME/.bin-private/commands:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH=$PATH:$GOPATH/bin
+export PATH="$GOPATH/bin:$PATH"
