@@ -42,6 +42,7 @@ done;
 unset file;
 
 chpwd() { onload_function }
+precmd() { onload_function }
 onload_function
 
 # Load the ZSH syntax highlight.

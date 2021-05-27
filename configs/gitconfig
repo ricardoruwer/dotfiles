@@ -45,6 +45,7 @@
   td = commit -m 'Trigger deploy' --allow-empty
   undo = reset --soft HEAD^
   upd = !git switch main -q && git pull -q && git switch - -q && git rebase main
+  updm = !git switch main -q && git pull -q && git switch - -q && git merge main
   wd = diff --color-words
   wip = !git add . && git commit -am 'WIP :construction:'
 
