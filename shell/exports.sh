@@ -22,6 +22,5 @@ export DIRENV_LOG_FORMAT=
 # PATH
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.bin-private:$PATH"
-export PATH="$HOME/.bin-private/commands:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
