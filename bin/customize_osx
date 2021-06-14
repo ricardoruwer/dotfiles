@@ -117,6 +117,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Trackpad, mouse, keyboard, Bluetooth accessories and input
 ################################################################################
 
+# Disable mouse acceleration
+defaults write .GlobalPreferences com.apple.mouse.scaling -1
+
 # Trackpad: enable tap to click for this user and for the login screen
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 # defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -437,8 +440,8 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # defaults write com.google.Chrome.canary AppleEnableSwipeNavigateWithScrolls -bool false
 
 # Disable the all too sensitive backswipe on Magic Mouse
-# defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
-# defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false
+defaults write com.google.Chrome.canary AppleEnableMouseSwipeNavigateWithScrolls -bool false
 
 # Use the system-native print preview dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true

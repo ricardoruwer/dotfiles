@@ -198,7 +198,7 @@ namespace :install do
   task :configure_itermocil do
     log(:blue, '=> Configuring itermocil')
 
-    confirm(:yellow, 'Please open and log in to Google Backup & Sync before continuing')
+    confirm(:yellow, 'Please open and log in to Backup and Sync from Google before continuing')
 
     itermocil_from = File.expand_path('~/Google Drive/.itermocil')
     itermocil_to = File.expand_path('~/.itermocil')
