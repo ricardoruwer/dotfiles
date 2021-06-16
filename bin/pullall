@@ -2,21 +2,16 @@
 # Usage: pullall [DIRECTORY]
 #
 # Performs 'git pull' on several repositories under the given DIRECTORY.
-set -e
-
-target=${1:-.}
-
-if [[ ! -d $target ]]; then
-  echo "'$target' is not a directory."
-  exit 0
-fi
-
 print_in_yellow() {
   printf "\e[0;33m$1\e[0m"
 }
 
 untracked_files() {
   [[ -n $(git status -s) ]]
+}
+
+branch_exists() {
+  [ $(git rev-parse --verify -q $1) ]
 }
 
 pull_at_master() {
@@ -27,7 +22,12 @@ pull_at_master() {
     stashed_files=true
   fi
 
-  git switch master -q
+  if branch_exists main; then
+    git switch main -q
+  else
+    git switch master -q
+  fi
+
   git pull -q
   git switch - -q
 
@@ -35,6 +35,8 @@ pull_at_master() {
     git stash pop -q
   fi
 }
+
+target=${1:-.}
 
 for repo in $(ls -d -1 $target/*/.git 2>/dev/null); do
   dir=${repo/\/.git//}
