@@ -1,21 +1,23 @@
-#!/bin/bash
+#!/bin/sh
 # USAGE: rmb
 #
 # rmb = Remove Merged Branches
 # Nukes stale branches both locally and remotely.
+source ~/.dotfiles/shell/colors.sh
 
 current_branch=$(git symbolic-ref --short HEAD)
 if [ "$current_branch" != "master" ] && [ "$current_branch" != "main" ]; then
-  printf "\e[33mFirst, switch to your main branch, then run the command again.\e[39m\n"
+  echo "${Red}First, switch to your main branch, then run the command again.${ColorOff}"
   exit 1
 fi
 
-echo "Fetching merged branches..."
+echo "${Yellow}Fetching merged branches...${ColorOff}"
 git remote prune origin
+echo
 
 local_branches=$(git branch --merged | egrep -v "(^\*|master|main|staging)" | sed 's/origin\///g')
 if [ -n "$local_branches" ]; then
-  printf "\n\e[31mRemoving the following LOCAL branches:\e[39m\n"
+  echo "${Yellow}Removing the following LOCAL branches:${ColorOff}"
   echo "$local_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -26,7 +28,7 @@ fi
 
 squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $current_branch $branch) && [[ $(git cherry $current_branch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
 if [ -n "$squashed_branches" ]; then
-  printf "\n\e[31mRemoving the following LOCAL branches (Squashed and Merged on remote):\e[39m\n"
+  echo "${Yellow}Removing the following LOCAL branches (Squashed and Merged on remote):${ColorOff}"
   echo "$squashed_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -37,7 +39,7 @@ fi
 
 remote_branches=$(git branch -r --merged | egrep -v "(^\*|master|main|staging)" | sed 's/origin\///')
 if [ -n "$remote_branches" ]; then
-  printf "\n\e[31mRemoving the following REMOTE branches:\e[39m\n"
+  echo "${Yellow}Removing the following REMOTE branches:${ColorOff}"
   echo "$remote_branches"
   read -p "Continue? (y/n): " -n 1 choice
   echo
@@ -46,5 +48,5 @@ if [ -n "$remote_branches" ]; then
   fi
 fi
 
-printf "\n\e[32mYour current LOCAL branches are:\e[39m\n"
+echo "${Yellow}Your current LOCAL branches are:${ColorOff}"
 git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(color:yellow)%(committerdate:relative)%(color:reset)'
