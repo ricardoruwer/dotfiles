@@ -3,6 +3,7 @@
 #
 # Performs 'git pull' on several repositories under the given DIRECTORY.
 source ~/.dotfiles/shell/colors.sh
+source ~/.dotfiles/shell/functions.sh
 
 untracked_files() {
   [[ -n $(git status -s) ]]
@@ -12,7 +13,7 @@ branch_exists() {
   [ $(git rev-parse --verify -q $1) ]
 }
 
-pull_at_master() {
+pull_at_main_branch() {
   stashed_files=false
 
   if untracked_files; then
@@ -34,14 +35,11 @@ pull_at_master() {
   fi
 }
 
-target=${1:-.}
-
-for repo in $(ls -d -1 $target/*/.git 2>/dev/null); do
+for repo in $(ls -d -1 ./*/.git 2>/dev/null); do
   dir=${repo/\/.git//}
-  name=${dir/$root\//}
-  echo "${Yellow}pulling ${name%?}...\n${ColorOff}"
+  printf "${Yellow}pulling at ${UYellow}${dir%?}${Yellow} ${ColorOff}"
 
   pushd $dir > /dev/null
-  pull_at_master
+  pull_at_main_branch & spinner
   popd > /dev/null
 done

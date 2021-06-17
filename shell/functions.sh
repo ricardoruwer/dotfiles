@@ -1,3 +1,5 @@
+source ~/.dotfiles/shell/colors.sh
+
 # Open a project in my own GitHub
 ghopen() {
   open "https://github.com/ricardoruwer/${1}";
@@ -57,6 +59,22 @@ ff() {
 # Find dir
 fd() {
   find . -type d -name "$1" 2>/dev/null
+}
+
+# A spinner. Usage: `slow_command & spinner`
+spinner() {
+  local pid=$!
+  local i=0
+  local spin="/-\|"
+  local n=${#spin}
+
+  printf "  "
+  while kill -0 $pid 2>/dev/null; do
+    printf "\b\b%s " "${spin:i++%n:1}"
+    sleep 0.1
+  done
+  printf "${Green}\b\b✓${ColorOff}"
+  echo
 }
 
 # Some default functions
