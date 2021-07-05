@@ -1,68 +1,18 @@
 source ~/.dotfiles/shell/colors.sh
 
-# Open a project in my own GitHub
-ghopen() {
-  open "https://github.com/ricardoruwer/${1}";
-}
+# Some default functions
+function onload_function() {
+  title "%c"
 
-# Get the process on a given port
-port() {
-  lsof -i ":${1:-80}"
-}
-
-# Start an HTTP server from a directory, optionally specifying the port
-server() {
-  local port="${1:-8000}"
-  python -m SimpleHTTPServer "$port"
-}
-
-# Create a directory and cd to it
-mkcd() {
-  mkdir -p "$1" && cd "$1"
-}
-
-# Determine size of a file or total size of a directory
-fs() {
-  if du -b /dev/null > /dev/null 2>&1; then
-    local arg=-sbh;
+  if [ -d .git ]; then
+    branch=$(git symbolic-ref --short HEAD)
   else
-    local arg=-sh;
-  fi
-  if [[ -n "$@" ]]; then
-    du $arg -- "$@";
-  else
-    du $arg .[^.]* ./*;
+    unset branch
   fi;
 }
 
-# Calculator
-calc() {
-  echo "$*" | bc -l;
-}
-
-# Weather
-weather() {
-  local LOCALE=$(echo ${LANG:-en} | cut -c1-2)
-  if [ $# -eq 0 ]; then
-    local LOCATION=$(curl -s ipinfo.io/loc)
-  else
-    local LOCATION=$1
-  fi
-  curl -s "$LOCALE.wttr.in/$LOCATION"
-}
-
-# Find file
-ff() {
-  find . -type f -name "$1" 2>/dev/null
-}
-
-# Find dir
-fd() {
-  find . -type d -name "$1" 2>/dev/null
-}
-
 # A spinner. Usage: `slow_command & spinner`
-spinner() {
+function spinner() {
   local pid=$!
   local i=0
   local spin="/-\|"
@@ -77,13 +27,28 @@ spinner() {
   echo
 }
 
-# Some default functions
-onload_function() {
-  title "%c"
+function question() {
+  printf "%b%s [y/n] %b" "$2" "$1" "$ColorOff"
+  read -n 1 choice
+  echo
 
-  if [ -d .git ]; then
-    branch=$(git symbolic-ref --short HEAD)
-  else
-    unset branch
-  fi;
+  case $choice in
+    y*|Y*) true ;;
+    n*|N*) false ;;
+    *) question "$1" "$2" ;;
+  esac
+}
+
+function confirm() {
+  printf "%b%s [press RETURN to continue] %b" "$2" "$1" "$ColorOff"
+  read -s -n 1 key
+  echo
+
+  if [ "$key" != "" ]; then
+    confirm "$1" "$2"
+  fi
+}
+
+function command_exists() {
+  command -v "$@" >/dev/null 2>&1
 }

@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+source ~/.dotfiles/shell/colors.sh
 
-# Adapted from: https://mths.be/macos
+echo "${Blue}=> Customizing macOS preferences${ColorOff}"
 
 # Close any open System Preferences panes, to prevent them from overriding
 # settings we’re about to change
@@ -95,8 +95,8 @@ launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.
 defaults write com.apple.siri "StatusMenuVisible" 0
 defaults write com.apple.systemuiserver "NSStatusItem Visible Siri" 0
 
-# Use analog clock
-defaults write com.apple.menuextra.clock IsAnalog -bool true
+# Use digital clock
+defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # Show all processess under energy consumption
 defaults write com.apple.menuextra.battery "ShowAllTopProcesses" -bool true
@@ -458,3 +458,5 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 
 # Activate audible chime when power cable is plugged in.
 # defaults write com.apple.PowerChime ChimeOnAllHardware -bool true; open /System/Library/CoreServices/PowerChime.app
+
+echo "${Red}* Please restart your computer for these changes to take effect${ColorOff}"

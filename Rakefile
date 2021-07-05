@@ -124,12 +124,6 @@ namespace :install do
       system('sudo sh -c "echo $(which zsh) >> /etc/shells"')
       system('chsh -s $(which zsh)')
     end
-
-    # Copy ZSH theme
-    theme_from = File.expand_path('themes/ricardoruwer.zsh-theme')
-    theme_to = File.expand_path('~/.oh-my-zsh/themes/ricardoruwer.zsh-theme')
-
-    FileUtils.ln_s(theme_from, theme_to)
   end
 
   ##############################################################################
@@ -213,7 +207,7 @@ namespace :install do
   task :macos_customization do
     log(:blue, '=> Customizing macOS preferences')
 
-    system('./bin/customize_osx')
+    system('sh ~/.dotfiles/install/customize-osx.sh')
 
     log(:cyan, '* Please restart your computer for these changes to take effect')
   end
