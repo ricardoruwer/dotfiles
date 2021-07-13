@@ -14,7 +14,7 @@ cd ~/.dotfiles
 Run the command to install everything:
 
 ```bash
-rake install
+./dotfiles install
 ```
 
 ## Syncing Applications

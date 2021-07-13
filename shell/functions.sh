@@ -27,28 +27,32 @@ function spinner() {
   echo
 }
 
-function question() {
-  printf "%b%s [y/n] %b" "$2" "$1" "$ColorOff"
+function ask() {
+  printf "$1 [y/n] "
   read -n 1 choice
   echo
 
   case $choice in
     y*|Y*) true ;;
     n*|N*) false ;;
-    *) question "$1" "$2" ;;
+    *) ask "$1" ;;
   esac
 }
 
 function confirm() {
-  printf "%b%s [press RETURN to continue] %b" "$2" "$1" "$ColorOff"
+  printf "$1 [press RETURN to continue] "
   read -s -n 1 key
   echo
 
   if [ "$key" != "" ]; then
-    confirm "$1" "$2"
+    confirm "$1"
   fi
 }
 
 function command_exists() {
   command -v "$@" >/dev/null 2>&1
+}
+
+function function_exists() {
+  declare -f "$1" > /dev/null
 }

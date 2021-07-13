@@ -27,20 +27,18 @@
   pf = push --force-with-lease
   pom = push origin main
   prune = fetch --prune
-  r = reset
-  rank = shortlog -sn --no-merges
   ra = rebase --abort
+  rank = shortlog -sn --no-merges
   rc = rebase --continue
-  rrm = rebase main
   remotes = remote -v
   rim = rebase -i main
   rr = restore
+  rrm = rebase main
   s = status -sb
   sp = stash pop
   stash-all = stash save --include-untracked
   sw = switch
   swm = switch main
-  sw-pr = !sh -c 'git fetch origin pull/$1/head:pr/$1 && git switch pr/$1' -
   tags = tag -l
   td = commit -m 'Trigger deploy' --allow-empty
   undo = reset --soft HEAD^
@@ -62,6 +60,7 @@
 [user]
   email = ricardoruwer@gmail.com
   name = Ricardo Ruwer
+	signingkey = 1636C78F4BD437CE
 
 [merge]
   conflictstyle = diff3
@@ -72,6 +71,7 @@
 
 [commit]
   template = ~/.gitmessage
+	gpgsign = true
 
 [status]
   showUntrackedFiles = all
@@ -90,3 +90,5 @@
 
 [init]
 	defaultBranch = main
+[gpg]
+	program = gpg

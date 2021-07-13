@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# Take a screenshot of a webpage and upload it to Dropshare.
+#
+# USAGE:
+#
+#   $ webss https://google.com
+#   # => uploads a Google page image to Dropshare.
+if [ "$1" == "" ]; then
+  puts "Usage: webss http://example.com"
+  exit 1
+fi
+
+name=`openssl rand -hex 8`
+
+webkit2png --fullsize -o screenshot -W 1280 -D /tmp/ -o $name $1
+ds /tmp/$name-full.png

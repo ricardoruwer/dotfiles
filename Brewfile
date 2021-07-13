@@ -23,10 +23,7 @@ brew 'sqlite'
 brew 'tmate'
 brew 'TomAnthony/brews/itermocil'
 brew 'wget'
-
 brew 'zsh'
-brew 'zsh-completions'
-brew 'zsh-syntax-highlighting'
 
 brew 'autoconf'
 brew 'cmake'

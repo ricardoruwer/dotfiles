@@ -1,0 +1,48 @@
+#!/bin/sh
+source ~/.dotfiles/shell/colors.sh
+source ~/.dotfiles/shell/functions.sh
+
+case "$1" in
+  install|run)
+    ln -sf ~/.dotfiles/dotfiles /usr/local/bin/dotfiles
+
+    sh ~/.dotfiles/install/configs.sh
+    sh ~/.dotfiles/install/bins.sh
+    sh ~/.dotfiles/install/apps.sh
+    sh ~/.dotfiles/install/macos-preferences.sh
+
+    echo "${Blue}=> Manual steps${ColorOff}"
+    cat README.md | sed -n "/Syncing Applications/,\$p"
+    ;;
+
+  open|edit|-e|--edit)
+    ~/.dotfiles/bin/e ~/.dotfiles
+    ;;
+
+  _cmds)
+    files=$(ls ~/.dotfiles/install | sed 's/\.sh$//' | xargs)
+    echo "install edit $files"
+    ;;
+
+  ""|help|-h|--help)
+    echo "Usage: dotfiles <command> <args>"
+    echo
+    echo "* Available commands:"
+    for cmd in `$BASH_SOURCE _cmds`; do
+      printf "${UYellow}${cmd}${ColorOff} "
+    done
+    echo
+    ;;
+
+  *)
+    file=~/.dotfiles/install/${1}.sh
+
+    if [ -f $file ]; then
+      sh $file "$2"
+    else
+      echo "${Red}Unknown command.${ColorOff}"
+      echo
+      $BASH_SOURCE --help
+    fi
+    ;;
+esac

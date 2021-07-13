@@ -20,7 +20,7 @@ local_branches=$(git branch --merged | egrep -v "(^\*|master|main|staging)" | se
 if [ -n "$local_branches" ]; then
   echo "${Yellow}Removing the following LOCAL branches:${ColorOff}"
   echo "$local_branches"
-  if question "Continue?"; then
+  if ask "Continue?"; then
     echo $local_branches | xargs git branch -D
   fi
 fi
@@ -29,7 +29,7 @@ squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | w
 if [ -n "$squashed_branches" ]; then
   echo "${Yellow}Removing the following LOCAL branches (Squashed and Merged on remote):${ColorOff}"
   echo "$squashed_branches"
-  if question "Continue?"; then
+  if ask "Continue?"; then
     echo $squashed_branches | xargs git branch -D
   fi
 fi
@@ -38,7 +38,7 @@ remote_branches=$(git branch -r --merged | egrep -v "(^\*|master|main|staging)" 
 if [ -n "$remote_branches" ]; then
   echo "${Yellow}Removing the following REMOTE branches:${ColorOff}"
   echo "$remote_branches"
-  if question "Continue?"; then
+  if ask "Continue?"; then
     echo $remote_branches | xargs -n 1 git push --delete origin
   fi
 fi

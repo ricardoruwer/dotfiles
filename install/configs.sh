@@ -1,10 +1,6 @@
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
-# Link Config files
-###################
-echo "${Blue}=> Linking config files into home directory${ColorOff}"
-
 for file in ~/.dotfiles/configs/*; do
   if [ -r "$file" ] && [ -f "$file" ]; then
     target="${HOME}/.${file##*/}"
@@ -13,14 +9,11 @@ for file in ~/.dotfiles/configs/*; do
     ln -sf $file $target
   fi
 done
-unset file target;
 
-# Link Itermocil
-################
+# Itermocil is not on /configs because it has some private things
 echo "${Blue}=> Configuring itermocil${ColorOff}"
-
 while [ ! -d ~/Google\ Drive ]; do
-  confirm "Please open and log in to Backup and Sync from Google before continuing"
+  confirm "${Yellow}Please open and log in to Backup and Sync from Google before continuing${ColorOff}"
 done
-
-ln -sf ${HOME}/Google\ Drive/.itermocil ${HOME}/.itermocil
+echo "${Green}Linking ${HOME}/.itermocil${ColorOff}"
+ln -sf ~/Google\ Drive/.itermocil ~/.itermocil
