@@ -1,7 +1,7 @@
 source ~/.dotfiles/shell/colors.sh
 
 # Some default functions
-function onload_function() {
+onload_function() {
   title "%c"
 
   if [ -d .git ]; then
@@ -12,7 +12,7 @@ function onload_function() {
 }
 
 # A spinner. Usage: `slow_command & spinner`
-function spinner() {
+spinner() {
   local pid=$!
   local i=0
   local spin="/-\|"
@@ -27,7 +27,7 @@ function spinner() {
   echo
 }
 
-function ask() {
+ask() {
   printf "$1 [y/n] "
   read -n 1 choice
   echo
@@ -39,7 +39,7 @@ function ask() {
   esac
 }
 
-function confirm() {
+confirm() {
   printf "$1 [press RETURN to continue] "
   read -s -n 1 key
   echo
@@ -49,10 +49,10 @@ function confirm() {
   fi
 }
 
-function command_exists() {
+command_exists() {
   command -v "$@" >/dev/null 2>&1
 }
 
-function function_exists() {
+function_exists() {
   declare -f "$1" > /dev/null
 }

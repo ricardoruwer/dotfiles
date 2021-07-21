@@ -1,18 +1,15 @@
-function _dotfiles() {
-  local _current="${COMP_WORDS[COMP_CWORD]}"
-  local _previous="${COMP_WORDS[COMP_CWORD-1]}"
+_dotfiles() {
+  completions() {
+    case "$1" in
+      dotfiles) sh ~/.dotfiles/dotfiles _cmds ;;
+      apps) sh ~/.dotfiles/install/apps.sh _args ;;
+    esac
+  }
 
-  COMPREPLY=()
+  previous_word="${COMP_WORDS[COMP_CWORD-1]}"
+  completions=`completions $previous_word`
 
-  if [[ "$_previous" = "dotfiles" ]]; then
-    local _dotfiles_commands=`~/.dotfiles/dotfiles _cmds`
-    COMPREPLY=($(compgen -W "${_dotfiles_commands}" -- ${_current}))
-  else
-    if [ "$_previous" == "apps" ]; then
-      local _dotfiles_args="$(sh ~/.dotfiles/install/apps.sh _args)"
-      COMPREPLY=($(compgen -W "${_dotfiles_args}" -- ${_current}))
-    fi
-  fi
+  COMPREPLY=($(compgen -W "${completions}"))
 
   return 0
 }
