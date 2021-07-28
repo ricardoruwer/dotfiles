@@ -70,7 +70,6 @@
   rebase = true
 
 [commit]
-  template = ~/.gitmessage
 	gpgsign = true
 
 [status]
