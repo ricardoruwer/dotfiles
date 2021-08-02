@@ -68,12 +68,12 @@ mas 'TranslateTab', id: 458887729
 tap 'homebrew/cask'
 tap 'homebrew/cask-versions'
 tap 'homebrew/cask-fonts'
+tap 'buo/cask-upgrade'
 brew 'brew-cask-completion'
 
 cask 'alfred3'
 cask 'authy'
 cask 'bitwarden'
-cask 'dash'
 cask 'discord'
 cask 'docker'
 cask 'dropshare'

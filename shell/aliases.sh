@@ -18,7 +18,7 @@ alias tree="exa -T -I '.git|node_modules|bower_components|.DS_Store' --group-dir
 alias port="lsof -i"
 alias ff="find . -type f -name"
 alias fd="find . -type d -name"
-alias update="sudo softwareupdate -i -a; brew update; brew upgrade; brew upgrade --cask; brew cleanup"
+alias update="sudo softwareupdate -i -a; brew update; brew upgrade; brew upgrade --cask; brew cu --all; brew cleanup"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
 
