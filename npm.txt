@@ -3,6 +3,7 @@ eslint
 spaceship-prompt
 stylelint
 stylelint-config-standard
+stylelint-config-standard-scss
 stylelint-scss
 stylelint-config-idiomatic-order
 stylelint-config-recommended-scss
