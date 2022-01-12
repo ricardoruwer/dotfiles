@@ -34,10 +34,9 @@ Run the command to install everything:
 4. Go to Profiles |> Colors |> Color Presets |> Import
 5. Choose the `.itermcolor` file in `GOOGLE_DRIVE_DIR/iTerm` folder
 
-### Typora
+### Markdown Editor
 
-1. Go to View |> Articles
-2. Open the folder at `GOOGLE_DRIVE_DIR/Notes`
+1. Open the folder at `GOOGLE_DRIVE_DIR/Notes`
 
 ### VSCode
 
