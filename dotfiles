@@ -6,9 +6,9 @@ case "$1" in
   install|run)
     ln -sf ~/.dotfiles/dotfiles /usr/local/bin/dotfiles
 
+    sh ~/.dotfiles/install/apps.sh
     sh ~/.dotfiles/install/configs.sh
     sh ~/.dotfiles/install/bins.sh
-    sh ~/.dotfiles/install/apps.sh
     sh ~/.dotfiles/install/macos-preferences.sh
 
     echo "${Blue}=> Manual steps${ColorOff}"

@@ -28,6 +28,7 @@ case "$1" in
 
     echo "${Blue}=> Installing Homebrew apps from Brewfile${ColorOff}"
     confirm "${Yellow}Please log in to Mac App Store manually before continuing${ColorOff}"
+    brew upgrade
     brew bundle --global
     brew cleanup
     ;;
@@ -48,21 +49,16 @@ case "$1" in
       echo "${Green}Oh my ZSH already installed${ColorOff}"
     else
       sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-      echo "${Green}Installing zInit for Oh my ZSH${ColorOff}"
-      sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
     fi
     ;;
 
   asdf)
     echo "${Blue}=> Installing asdf plugins${ColorOff}"
-    asdf plugin-add elixir
-    asdf plugin-add erlang
-    asdf plugin-add golang
-    asdf plugin-add ruby
-    asdf plugin-add nodejs
-
-    bash ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
+    asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
+    asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+    asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
+    asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+    asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
     echo "${Blue}=> Installing asdf default package versions${ColorOff}"
     asdf install
@@ -75,14 +71,11 @@ case "$1" in
       for arg in $args; do
         sh $BASH_SOURCE $arg
       done
-    else
-      echo
-      sh $BASH_SOURCE --help
     fi
     ;;
 
   _args)
-    echo "macos xcode brew zsh fzf npm asdf"
+    echo "macos xcode brew asdf zsh fzf npm"
     ;;
 
   help|-h|--help)

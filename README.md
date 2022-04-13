@@ -34,12 +34,8 @@ Run the command to install everything:
 4. Go to Profiles |> Colors |> Color Presets |> Import
 5. Choose the `.itermcolor` file in `GOOGLE_DRIVE_DIR/iTerm` folder
 
-### Markdown Editor
-
-1. Open the folder at `GOOGLE_DRIVE_DIR/Notes`
-
 ### VSCode
 
 1. Install the Settings Sync extension
 2. Login via Github
-3. Press `CMD + Option + D` to sync
+3. Press `Option + Shift + D` to sync
