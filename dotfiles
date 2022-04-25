@@ -40,7 +40,7 @@ case "$1" in
     if [ -f $file ]; then
       sh $file "$2"
     else
-      echo "${Red}Unknown command.${ColorOff}"
+      echo "${URed}Unknown command.${ColorOff}"
       echo
       $BASH_SOURCE --help
     fi
