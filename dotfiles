@@ -11,7 +11,10 @@ case "$1" in
     sh ~/.dotfiles/install/bins.sh
     sh ~/.dotfiles/install/macos-preferences.sh
 
-    echo "${Blue}=> Manual steps${ColorOff}"
+    echo "${BGBlue}=> Manual steps${ColorOff}"
+    echo
+    echo "You may need to copy the SSH key to Github with: ${Green}ssh-keygen && key${ColorOff}"
+    echo
     cat README.md | sed -n "/Syncing Applications/,\$p"
     ;;
 
