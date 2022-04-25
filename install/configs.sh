@@ -11,16 +11,16 @@ done
 
 # Log in to Google Drive to import private things from there
 echo "${Blue}=> Setting up Google Drive${ColorOff}"
-while [ ! -d /Volumes/GoogleDrive/My\ Drive ]; do
+while [ ! -d ~/Google\ Drive/My\ Drive ]; do
   confirm "${Yellow}Please open and log in to Google Drive before continuing${ColorOff}"
 done
 
 # Set up Itermocil
 echo "${Green}Linking ${HOME}/.itermocil${ColorOff}"
-ln -sf /Volumes/GoogleDrive/My\ Drive/.itermocil ~/.itermocil
+ln -sf ~/Google\ Drive/My\ Drive/.itermocil ~/.itermocil
 
 # Import GPG key
 echo "${Green}Importing GPG key${ColorOff}"
-pushd /Volumes/GoogleDrive/My\ Drive/Dev
+pushd ~/Google\ Drive/My\ Drive/Dev
 gpg --import gpg.key
 popd
