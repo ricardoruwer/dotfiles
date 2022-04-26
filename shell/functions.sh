@@ -1,6 +1,6 @@
 source ~/.dotfiles/shell/colors.sh
 
-# Some default functions
+# Some default commands when opening a new shell
 onload_function() {
   title "%c"
 
