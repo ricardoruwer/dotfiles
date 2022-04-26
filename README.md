@@ -8,6 +8,8 @@ Clone this repository:
 
 ```bash
 git clone https://github.com/ricardoruwer/dotfiles.git ~/.dotfiles
+```
+```bash
 cd ~/.dotfiles
 ```
 

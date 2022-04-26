@@ -1,5 +1,5 @@
-elixir 1.11.2
-erlang 23.1.4
-golang 1.12.9
+elixir 1.13.2-otp-24
+erlang 24.2
+golang 1.18
 nodejs 16.13.0
 ruby 2.7.4

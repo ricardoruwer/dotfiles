@@ -24,3 +24,7 @@ echo "${Green}Importing GPG key${ColorOff}"
 pushd ~/Google\ Drive/My\ Drive/Dev
 gpg --import gpg.key
 popd
+
+# Install fonts
+echo "${Green}Installing fonts${ColorOff}"
+find ~/Google\ Drive/My\ Drive/Dev/Fonts -type f -exec cp {} ~/Library/Fonts \;
