@@ -66,7 +66,6 @@ brew 'zsh'
 brew 'mas'
 
 mas 'Clocker', id: 1056643111
-mas 'Paste - Clipboard Manager', id: 967805235
 mas 'TranslateTab', id: 458887729
 
 # CASK
