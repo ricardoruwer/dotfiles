@@ -16,7 +16,7 @@ export GOPATH="$HOME/go"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
 export TRR_DIR="$HOME/Code/trr"
-export TRR_BIN_DIR="$HOME/.dotfiles/bin-private"
+export TRR_BIN_DIR="$HOME/.dotfiles/privy"
 
 # DIRENV
 export DIRENV_LOG_FORMAT=
@@ -25,7 +25,7 @@ export DIRENV_LOG_FORMAT=
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.bin:$PATH"
-export PATH="$HOME/.bin-private:$PATH"
+export PATH="$HOME/.privy:$PATH"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"

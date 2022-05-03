@@ -37,8 +37,8 @@ unset file;
 if [ -f ~/.dotfiles/autocomplete.sh ]; then
   source ~/.dotfiles/autocomplete.sh
 fi;
-if [ -f ~/.dotfiles/bin-private/autocomplete.sh ]; then
-  source ~/.dotfiles/bin-private/autocomplete.sh
+if [ -f ~/.dotfiles/privy/autocomplete.sh ]; then
+  source ~/.dotfiles/privy/autocomplete.sh
 fi;
 
 # Functions to be executed after every command
