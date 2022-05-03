@@ -5,7 +5,7 @@ onload_function() {
   title "%c"
 
   if [ -d .git ]; then
-    branch=$(git symbolic-ref --short HEAD)
+    branch=$(git symbolic-ref --quiet --short HEAD)
   else
     unset branch
   fi;
