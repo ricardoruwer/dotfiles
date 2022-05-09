@@ -1,9 +1,10 @@
-prettier
 eslint
+prettier
 spaceship-prompt
 stylelint
+stylelint-config-idiomatic-order
+stylelint-config-recommended-scss
 stylelint-config-standard
 stylelint-config-standard-scss
 stylelint-scss
-stylelint-config-idiomatic-order
-stylelint-config-recommended-scss
+vsce
