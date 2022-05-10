@@ -16,10 +16,12 @@ export GOPATH="$HOME/go"
 export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 
 export TRR_DIR="$HOME/Code/trr"
-export PRIVY_BIN_DIR="$HOME/.dotfiles/privy"
 
 # DIRENV
 export DIRENV_LOG_FORMAT=
+
+# PERSONAL
+export PRIVY_DIR="$HOME/.dotfiles/privy"
 
 # PATH
 export PATH="/usr/local/bin:$PATH"
