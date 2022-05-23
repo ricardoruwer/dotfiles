@@ -15,7 +15,7 @@ case "$1" in
     echo
     echo "You may need to copy the SSH key to Github with: ${Green}ssh-keygen && key${ColorOff}"
     echo
-    cat README.md | sed -n "/Syncing Applications/,\$p"
+    cat README.md | sed -n "/Syncing Applications/,\$p" | bat -p -l markdown
     ;;
 
   open|edit|-e|--edit)

@@ -1,17 +1,8 @@
 source ~/.dotfiles/shell/colors.sh
 
-# Some default commands when opening a new shell
-onload_function() {
-  title "%c"
-
-  if [ -d .git ]; then
-    branch=$(git symbolic-ref --quiet --short HEAD)
-  else
-    unset branch
-  fi;
-}
-
-# A spinner. Usage: `slow_command & spinner`
+# A spinner. To say that a command is still loading...
+#
+# Usage: `slow_command & spinner`
 spinner() {
   local pid=$!
   local i=0
@@ -27,6 +18,9 @@ spinner() {
   echo
 }
 
+# Asks the user to enter "yes" or "no".
+#
+# Usage: `ask "Do you wanna proceed?"`
 ask() {
   printf "$1 [y/n] "
   read -n 1 choice
@@ -39,6 +33,9 @@ ask() {
   esac
 }
 
+# Asks the user to do something, and they have to press RETURN to continue.
+#
+# Usage: `confirm "Do something before continuing"`
 confirm() {
   printf "$1 [press RETURN to continue] "
   read -s -n 1 key
@@ -49,10 +46,9 @@ confirm() {
   fi
 }
 
+# Check if the given command exists.
+#
+# Usage: `if command_exists git; then...`
 command_exists() {
   command -v "$@" >/dev/null 2>&1
-}
-
-function_exists() {
-  declare -f "$1" > /dev/null
 }
