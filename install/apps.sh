@@ -52,6 +52,12 @@ case "$1" in
     fi
     ;;
 
+  zsh-plugins)
+    pushd ~/.oh-my-zsh/custom/plugins
+    git clone https://github.com/bernardop/iterm-tab-color-oh-my-zsh.git iterm-tab-color
+    popd
+    ;;
+
   asdf)
     echo "${Blue}=> Installing asdf plugins${ColorOff}"
     asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
@@ -75,7 +81,7 @@ case "$1" in
     ;;
 
   _args)
-    echo "macos xcode brew asdf zsh fzf npm"
+    echo "macos xcode brew asdf zsh zsh-plugins fzf npm"
     ;;
 
   help|-h|--help)

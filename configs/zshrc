@@ -19,7 +19,7 @@ SPACESHIP_GIT_STATUS_PREFIX=""
 SPACESHIP_GIT_STATUS_SUFFIX=""
 
 # ZSH Plugins
-plugins=(autojump gitfast docker mix heroku)
+plugins=(autojump gitfast docker mix heroku iterm-tab-color)
 
 # Stamp shown in the history command output.
 HIST_STAMPS='dd/mm/yyyy'
