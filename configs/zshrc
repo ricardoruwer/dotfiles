@@ -8,10 +8,8 @@ export ZSH="$HOME/.oh-my-zsh"
 DISABLE_AUTO_TITLE="true"
 
 # Spaceship configs
-SPACESHIP_PROMPT_ORDER=(char user host dir git jobs exit_code)
-
+SPACESHIP_PROMPT_ORDER=(char user host dir git jobs exit_code async)
 SPACESHIP_DIR_PREFIX=""
-
 SPACESHIP_GIT_PREFIX="("
 SPACESHIP_GIT_SUFFIX=") "
 SPACESHIP_GIT_BRANCH_PREFIX=""
@@ -81,7 +79,6 @@ source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
+source $(brew --prefix)/opt/spaceship/spaceship.zsh
 
 eval "$(direnv hook zsh)"
