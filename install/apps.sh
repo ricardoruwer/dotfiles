@@ -58,6 +58,11 @@ case "$1" in
     popd
     ;;
 
+  spaceship)
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+    ;;
+
   asdf)
     echo "${Blue}=> Installing asdf plugins${ColorOff}"
     asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
@@ -81,7 +86,7 @@ case "$1" in
     ;;
 
   _args)
-    echo "macos xcode brew asdf zsh zsh-plugins fzf npm"
+    echo "macos xcode brew asdf zsh zsh-plugins spaceship fzf npm"
     ;;
 
   help|-h|--help)
