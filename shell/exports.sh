@@ -10,6 +10,9 @@ export HISTSIZE=10000 # Store 10k history entries
 
 export GPG_TTY=$(tty)
 
+# ASDF
+export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl@1.1)"
+
 # WORK
 export RUBY_CONFIGURE_OPTS="--with-jemalloc"
 export GOPATH="$HOME/go"
