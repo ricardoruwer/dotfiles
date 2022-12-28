@@ -18,7 +18,7 @@ SPACESHIP_GIT_STATUS_SUFFIX=""
 SPACESHIP_ASYNC_SYMBOL=""
 
 # ZSH Plugins
-plugins=(autojump gitfast docker mix heroku iterm-tab-color)
+plugins=(asdf autojump gitfast docker mix heroku iterm-tab-color)
 
 # Stamp shown in the history command output.
 HIST_STAMPS='dd/mm/yyyy'
@@ -58,10 +58,6 @@ onload_function
 # Fuzzy finder
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# ASDF
-. /usr/local/opt/asdf/asdf.sh
-. /usr/local/opt/asdf/etc/bash_completion.d/asdf.bash
-
 # Itermocil
 compctl -g '~/.itermocil/*(:t:r)' itermocil
 
@@ -69,7 +65,7 @@ compctl -g '~/.itermocil/*(:t:r)' itermocil
 HEROKU_AC_ZSH_SETUP_PATH=$HOME/Library/Caches/heroku/autocomplete/zsh_setup && test -f $HEROKU_AC_ZSH_SETUP_PATH && source $HEROKU_AC_ZSH_SETUP_PATH;
 
 # zsh-completions
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
 autoload -Uz compinit
 compinit
 
