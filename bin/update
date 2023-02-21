@@ -1,0 +1,23 @@
+#!/bin/sh
+source ~/.dotfiles/shell/colors.sh
+source ~/.dotfiles/shell/functions.sh
+
+if ask "${Yellow}Update OS?${ColorOff}"; then
+  sudo softwareupdate -i -a
+fi
+
+echo "${Yellow}Upgrading brew & brew packages...${ColorOff}"
+brew update
+brew upgrade
+
+echo "${Yellow}Upgrading brew casks...${ColorOff}"
+brew upgrade --cask
+brew cu --all
+
+echo "${Yellow}Upgrading npm global packages...${ColorOff}"
+npm update -g
+
+echo "${Yellow}Cleaning up...${ColorOff}"
+brew cleanup
+
+echo "✅"
