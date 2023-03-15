@@ -40,7 +40,7 @@
   sw = switch
   swm = switch main
   tags = tag -l
-  td = commit -m 'Trigger deploy' --allow-empty
+  ec = commit -m 'Empty commit' --allow-empty
   undo = reset --soft HEAD^
   upd = !git switch main -q && git pull -q && git switch - -q && git rebase main
   updm = !git switch main -q && git pull -q && git switch - -q && git merge main
