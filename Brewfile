@@ -1,4 +1,5 @@
 # Brew
+tap 'aws/tap'
 tap 'homebrew/bundle'
 tap 'homebrew/core'
 tap 'homebrew/services'
@@ -8,6 +9,7 @@ brew 'ack'
 brew 'asdf'
 brew 'autoconf'
 brew 'autojump'
+brew 'aws-sam-cli'
 brew 'bash'
 brew 'bat'
 brew 'bitwarden-cli'
