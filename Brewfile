@@ -1,7 +1,6 @@
 # Brew
 tap 'aws/tap'
 tap 'homebrew/bundle'
-tap 'homebrew/core'
 tap 'homebrew/services'
 tap 'heroku/brew'
 
@@ -72,7 +71,6 @@ mas 'Clocker', id: 1056643111
 mas 'TranslateTab', id: 458887729
 
 # CASK
-tap 'homebrew/cask'
 tap 'homebrew/cask-versions'
 tap 'homebrew/cask-fonts'
 tap 'buo/cask-upgrade'
