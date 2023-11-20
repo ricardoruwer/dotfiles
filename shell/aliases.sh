@@ -37,13 +37,13 @@ alias bo="b open"
 
 # Ruby/Rails
 # ==========
-alias rc="bin/rails c"
-alias rs="bin/rails s"
-alias sr="bin/rspec"
-alias rt="bin/rspec"
-alias rdm="bin/rake db:migrate"
-alias rdr="bin/rake db:rollback"
-alias rof="bin/rspec --only-failures"
+alias rc="bundle exec rails c"
+alias rs="bundle exec rails s"
+alias sr="bundle exec rspec"
+alias rt="bundle exec rspec"
+alias rdm="bundle exec rake db:migrate"
+alias rdr="bundle exec rake db:rollback"
+alias rof="bundle exec rspec --only-failures"
 
 # Elixir/Phoenix
 # ==============
