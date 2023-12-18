@@ -43,6 +43,7 @@ alias rt="bundle exec rspec"
 alias rdd="bundle exec rake db:drop"
 alias rds="bundle exec rake db:setup"
 alias rdm="bundle exec rake db:migrate"
+alias rddm="bundle exec rake dynamodb:run_all_migrations"
 alias rdr="bundle exec rake db:rollback"
 alias rof="bundle exec rspec --only-failures"
 
