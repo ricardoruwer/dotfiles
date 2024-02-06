@@ -13,7 +13,7 @@ case "$1" in
 
     echo "${BGBlue}=> Manual steps${ColorOff}"
     echo
-    echo "You may need to copy the SSH key to Github with: ${Green}ssh-keygen && key${ColorOff}"
+    echo "You may need to copy the SSH key to Github (${Green}https://github.com/settings/keys${ColorOff}) with: ${Green}ssh-keygen && key${ColorOff}"
     echo
     cat README.md | sed -n "/Syncing Applications/,\$p" | bat -p -l markdown
     ;;

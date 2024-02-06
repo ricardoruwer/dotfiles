@@ -11,21 +11,21 @@ done
 
 # Log in to Google Drive to import private things from there
 echo "${Blue}=> Setting up Google Drive${ColorOff}"
-while [ ! -d ~/Google\ Drive/My\ Drive ]; do
-  confirm "${Yellow}Please open and log in to Google Drive before continuing${ColorOff}"
+while [ ! -d ~/Google\ Drive ]; do
+  confirm "${Yellow}Please open and log in to Google Drive before continuing - You must have your files in ${Green}~/Google \Drive${ColorOff}"
 done
 
 # Set up Itermocil
 echo "${Green}Linking ${HOME}/.itermocil${ColorOff}"
-ln -sf ~/Google\ Drive/My\ Drive/.itermocil ~/.itermocil
+ln -sf ~/Google\ Drive/.itermocil ~/.itermocil
 
 # Import GPG key
 echo "${Green}Importing GPG key${ColorOff}"
-pushd ~/Google\ Drive/My\ Drive/Dev
+pushd ~/Google\ Drive/Dev
 gpg --import gpg.key
 popd
 echo "pinentry-program /usr/local/bin/pinentry-mac" > ~/.gnupg/gpg-agent.conf
 
 # Install fonts
 echo "${Green}Installing fonts${ColorOff}"
-find ~/Google\ Drive/My\ Drive/Dev/Fonts -type f -exec cp {} ~/Library/Fonts \;
+find ~/Google\ Drive/Dev/Fonts -type f -exec cp {} ~/Library/Fonts \;
