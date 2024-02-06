@@ -17,6 +17,9 @@ brew cu --all
 echo "${Yellow}Upgrading npm global packages...${ColorOff}"
 npm update -g
 
+echo "${Yellow}Upgrading asdf plugins...${ColorOff}"
+asdf plugin update --all
+
 echo "${Yellow}Cleaning up...${ColorOff}"
 brew cleanup
 
