@@ -77,7 +77,6 @@ tap 'buo/cask-upgrade'
 brew 'brew-cask-completion'
 
 cask 'alfred'
-cask 'authy'
 cask 'bitwarden'
 cask 'discord'
 cask 'docker'
