@@ -64,12 +64,6 @@ brew 'zsh-completions'
 brew 'zsh-syntax-highlighting'
 brew 'zsh'
 
-# MAS
-brew 'mas'
-
-mas 'Clocker', id: 1056643111
-mas 'TranslateTab', id: 458887729
-
 # CASK
 tap 'homebrew/cask-versions'
 tap 'homebrew/cask-fonts'
@@ -78,6 +72,7 @@ brew 'brew-cask-completion'
 
 cask 'alfred'
 cask 'bitwarden'
+cask 'clocker'
 cask 'discord'
 cask 'docker'
 cask 'dropshare'
@@ -89,6 +84,7 @@ cask 'imageoptim'
 cask 'insomnia'
 cask 'iterm2'
 cask 'itsycal'
+cask 'mate-translate'
 cask 'monodraw'
 cask 'muzzle'
 cask 'ngrok'

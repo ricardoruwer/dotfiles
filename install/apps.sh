@@ -29,7 +29,6 @@ case "$1" in
     ln -sf ~/.dotfiles/Brewfile ~/.Brewfile
 
     echo "${Blue}=> Installing Homebrew apps from Brewfile${ColorOff}"
-    confirm "${Yellow}Please log in to Mac App Store manually before continuing${ColorOff}"
     brew upgrade
     brew bundle --global
     brew cleanup
