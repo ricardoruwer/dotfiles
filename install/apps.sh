@@ -21,6 +21,8 @@ case "$1" in
       echo "${Green}Homebrew already installed${ColorOff}"
     else
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ${HOME}/.zprofile
+      eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
     echo "${Green}Linking ~/.Brewfile${ColorOff}"
