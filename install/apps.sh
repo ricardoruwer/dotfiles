@@ -73,6 +73,7 @@ case "$1" in
     asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 
     echo "${Blue}=> Installing asdf default package versions${ColorOff}"
+    asdf plugin update --all
     asdf install
     ;;
 
