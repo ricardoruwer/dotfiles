@@ -36,8 +36,14 @@ Run the command to install everything:
 4. Go to Profiles |> Colors |> Color Presets |> Import
 5. Choose the `.itermcolor` file in `GOOGLE_DRIVE_DIR/iTerm` folder
 
-### VSCode
+### Other applications
 
-1. Install the Settings Sync extension
-2. Login via Github
-3. Press `Option + Shift + D` to sync
+Now you can open and set up other applications:
+- `Clocker`: Add San Francisco time
+- `Docker`
+- `Dropshare`: Select "Amazon S3" and add the credentials
+- `Insomnia`
+- `Itsycal`
+- `Rectangle`: Config the shortcuts
+- `Slack`
+- `VSCode`: Login via Github
