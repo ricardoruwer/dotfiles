@@ -6,14 +6,20 @@ case "$1" in
   install|run)
     ln -sf ~/.dotfiles/dotfiles /usr/local/bin/dotfiles
 
+    echo "${BGBlue}=> Setting up GitHub${ColorOff}"
+    echo
+    if [ ! -f ~/.ssh/id_rsa.pub ]; then
+      echo "Generate a new SSH key: ${Green}ssh-keygen${ColorOff}"
+    fi
+    echo "Copy the SSH key: ${Green}cat ~/.ssh/id_rsa.pub | pbcopy${ColorOff}"
+    echo "Add it to Github: ${Blue}https://github.com/settings/keys${ColorOff}"
+
     sh ~/.dotfiles/install/apps.sh
     sh ~/.dotfiles/install/configs.sh
     sh ~/.dotfiles/install/bins.sh
     sh ~/.dotfiles/install/macos-preferences.sh
 
     echo "${BGBlue}=> Manual steps${ColorOff}"
-    echo
-    echo "You may need to copy the SSH key to Github (${Green}https://github.com/settings/keys${ColorOff}) with: ${Green}ssh-keygen && key${ColorOff}"
     echo
     cat README.md | sed -n "/Syncing Applications/,\$p" | bat -p -l markdown
     ;;
