@@ -1,6 +1,5 @@
 eslint
 prettier
-spaceship-prompt
 stylelint
 stylelint-config-idiomatic-order
 stylelint-config-recommended-scss

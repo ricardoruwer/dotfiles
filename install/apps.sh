@@ -55,19 +55,11 @@ case "$1" in
 
   zsh-plugins)
     echo "${Blue}=> Installing ZSH plugins${ColorOff}"
-    pushd ${ZSH_CUSTOM}/plugins
-    if [ ! -d ${ZSH_CUSTOM}/plugins/iterm-tab-color ]; then
+    pushd ~/.oh-my-zsh/custom/plugins
+    if [ ! -d ~/.oh-my-zsh/custom/plugins/iterm-tab-color ]; then
       git clone https://github.com/bernardop/iterm-tab-color-oh-my-zsh.git iterm-tab-color
     fi
     popd
-    ;;
-
-  spaceship)
-    echo "${Blue}=> Installing spaceship theme${ColorOff}"
-    if [ ! -d ${ZSH_CUSTOM}/themes/spaceship-prompt ]; then
-      git clone https://github.com/spaceship-prompt/spaceship-prompt.git "${ZSH_CUSTOM}/themes/spaceship-prompt" --depth=1
-    fi
-    ln -s "${ZSH_CUSTOM}/themes/spaceship-prompt/spaceship.zsh-theme" "${ZSH_CUSTOM}/themes/spaceship.zsh-theme"
     ;;
 
   asdf)
@@ -94,7 +86,7 @@ case "$1" in
     ;;
 
   _args)
-    echo "macos xcode brew asdf zsh zsh-plugins spaceship fzf npm"
+    echo "macos xcode brew asdf zsh zsh-plugins fzf npm"
     ;;
 
   help|-h|--help)
