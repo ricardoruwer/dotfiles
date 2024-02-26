@@ -13,10 +13,10 @@ export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openss
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # WORK
-export RUBY_CONFIGURE_OPTS="--with-jemalloc"
-export GOPATH="$HOME/go"
-export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
+# export RUBY_CONFIGURE_OPTS="--with-jemalloc"
+# export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
 export RUBYOPT='-W0'
+export GOPATH="$HOME/go"
 export TRR_DIR="$HOME/Code/trr"
 
 # DIRENV
