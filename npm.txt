@@ -6,4 +6,4 @@ stylelint-config-recommended-scss
 stylelint-config-standard
 stylelint-config-standard-scss
 stylelint-scss
-vsce
+@vscode/vsce
