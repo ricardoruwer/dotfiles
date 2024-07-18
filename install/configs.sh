@@ -24,7 +24,7 @@ echo "${Green}Importing GPG key${ColorOff}"
 pushd ~/Google\ Drive/My\ Drive/Dev
 gpg --import gpg.key
 popd
-echo "pinentry-program /usr/local/bin/pinentry-mac" > ~/.gnupg/gpg-agent.conf
+echo "pinentry-program `which pinentry-mac`" > ~/.gnupg/gpg-agent.conf
 
 # Install fonts
 echo "${Green}Installing fonts${ColorOff}"
