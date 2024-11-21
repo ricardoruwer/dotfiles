@@ -117,8 +117,8 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Trackpad, mouse, keyboard, Bluetooth accessories and input
 ################################################################################
 
-# Disable mouse acceleration
-defaults write .GlobalPreferences com.apple.mouse.scaling -1
+# Mouse sensitivity
+defaults write .GlobalPreferences com.apple.mouse.scaling 1
 
 # Trackpad: enable tap to click for this user and for the login screen
 # defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
