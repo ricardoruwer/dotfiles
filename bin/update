@@ -2,10 +2,6 @@
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
-if ask "${Yellow}Update OS?${ColorOff}"; then
-  sudo softwareupdate -i -a
-fi
-
 echo "${Yellow}Upgrading brew & brew packages...${ColorOff}"
 brew update
 brew upgrade
@@ -22,5 +18,9 @@ asdf plugin update --all
 
 echo "${Yellow}Cleaning up...${ColorOff}"
 brew cleanup
+
+if ask "${Yellow}Update OS?${ColorOff}"; then
+  sudo softwareupdate -i -a
+fi
 
 echo "✅"
