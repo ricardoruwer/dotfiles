@@ -9,7 +9,7 @@ export HISTSIZE=10000 # Store 10k history entries
 export GPG_TTY=$(tty)
 
 # ASDF
-export KERL_CONFIGURE_OPTIONS="--without-javac --with-ssl=$(brew --prefix openssl@1.1)"
+export KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --disable-jit --without-javac --without-odbc --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --with-wx-config=$(which wx-config) --enable-darwin-64bit --with-ssl=$(brew --prefix openssl)"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 
 # WORK
