@@ -11,6 +11,7 @@ export GPG_TTY=$(tty)
 # ASDF
 export KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --disable-jit --without-javac --without-odbc --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --with-wx-config=$(which wx-config) --enable-darwin-64bit --with-ssl=$(brew --prefix openssl)"
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export ASDF_DATA_DIR=${HOME}/.asdf
 
 # WORK
 # export RUBY_CONFIGURE_OPTS="--with-jemalloc"
@@ -30,6 +31,7 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.privy:$PATH"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
