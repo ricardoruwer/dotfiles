@@ -1,5 +1,5 @@
 # EDITOR
-export EDITOR="code"
+export EDITOR="cursor"
 export BUNDLER_EDITOR="$EDITOR"
 export GEM_EDITOR="$EDITOR"
 export VISUAL="$EDITOR"
