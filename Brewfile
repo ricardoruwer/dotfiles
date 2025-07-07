@@ -64,8 +64,6 @@ brew "zsh-syntax-highlighting"
 brew "zsh"
 
 # CASK
-tap "homebrew/cask-versions"
-tap "homebrew/cask-fonts"
 tap "buo/cask-upgrade"
 brew "brew-cask-completion"
 

@@ -46,6 +46,7 @@ alias rdm="bundle exec rake db:migrate"
 alias rddm="bundle exec rake dynamodb:run_all_migrations"
 alias rdr="bundle exec rake db:rollback"
 alias rof="bundle exec rspec --only-failures"
+alias killrs="lsof -ti:3000 | xargs kill -9"
 
 # Elixir/Phoenix
 # ==============
