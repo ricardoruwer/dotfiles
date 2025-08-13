@@ -29,6 +29,7 @@ export PRIVY_DIR="$HOME/.dotfiles/privy"
 # PATH
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="$HOME/.privy:$PATH"
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
