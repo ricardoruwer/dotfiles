@@ -9,6 +9,9 @@ for file in ~/.dotfiles/configs/*; do
   fi
 done
 
+echo "${Green}Linking ~/.claude/skills${ColorOff}"
+ln -sf ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
+
 # Log in to Google Drive to import private things from there
 echo "${Blue}=> Setting up Google Drive${ColorOff}"
 while [ ! -d ~/Google\ Drive/My\ Drive ]; do
