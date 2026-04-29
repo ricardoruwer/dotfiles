@@ -1,3 +1,4 @@
+###################
 # Compiled source #
 ###################
 *.class
@@ -6,6 +7,7 @@
 *.o
 *.so
 
+############
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -19,12 +21,14 @@
 *.tar
 *.zip
 
+######################
 # Logs and databases #
 ######################
 *.log
 *.sqlite
 *.rdb
 
+######################
 # OS generated files #
 ######################
 .DS_Store
@@ -35,21 +39,34 @@
 ehthumbs.db
 Thumbs.db
 
+#########
 # Rails #
 #########
 b/
 vendor/ruby
 .bundle
 
+##########
 # Elixir #
+##########
 .elixir_ls
 
+##########
+# VSCode #
+##########
+.vscode/settings.json
+
+########
+# Envs #
+########
+.env.local
+.env.*.local
+.envrc
+
+###########
 # General #
 ###########
 TODO.todo
 INFOS/*
 vendor/bundle
 node_modules
-.env.local
-.env.*.local
-.envrc
