@@ -9,8 +9,20 @@ for file in ~/.dotfiles/configs/*; do
   fi
 done
 
+# Claude Code global config
+mkdir -p ~/.claude
+
+echo "${Green}Linking ~/.claude/CLAUDE.md${ColorOff}"
+ln -sf ~/.dotfiles/privy/configs/claude/CLAUDE.md ~/.claude/CLAUDE.md
+
 echo "${Green}Linking ~/.claude/skills${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
+
+# Generate ~/.claude/RTK.md and patch the Claude Code hook (rtk is installed via Brewfile)
+if command_exists rtk; then
+  echo "${Green}Initializing RTK for Claude Code${ColorOff}"
+  rtk init --global --auto-patch
+fi
 
 # Log in to Google Drive to import private things from there
 echo "${Blue}=> Setting up Google Drive${ColorOff}"

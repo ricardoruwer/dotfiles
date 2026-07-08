@@ -56,6 +56,11 @@ vendor/ruby
 ##########
 .vscode/settings.json
 
+##########
+# Claude #
+##########
+.claude/settings.local.json
+
 ########
 # Envs #
 ########
@@ -70,5 +75,3 @@ TODO.todo
 INFOS/*
 vendor/bundle
 node_modules
-
-**/.claude/settings.local.json
