@@ -9,7 +9,6 @@ alias ls="eza"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias lip="ipconfig getifaddr en0"
 alias key="cat ~/.ssh/id_rsa.pub | pbcopy; echo 'SSH key copied to clipboard!'"
-alias chunk="curl -s -T - chunk.io | pbcopy; echo 'URL copied to clipboard!'"
 alias hex="openssl rand -hex"
 alias cat="bat"
 alias g="git"
@@ -21,11 +20,6 @@ alias ff="find . -type f -name"
 alias fd="find . -type d -name"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
-
-# Finder
-# ======
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
 # Bundler
 # =======
@@ -63,3 +57,7 @@ alias bs="brew services"
 # Jest
 # ====
 alias yt="yarn test"
+
+# Chrome
+# ======
+alias chrome-debug="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=\"$HOME/chrome-cdp-profile\""
