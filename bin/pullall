@@ -1,45 +1,238 @@
 #!/bin/sh
 # Usage: pullall [DIRECTORY]
 #
-# Performs 'git pull' on several repositories under the given DIRECTORY.
+# Updates the main branch of every git repository directly under DIRECTORY
+# (default: the current directory), then updates the dependencies and the
+# database of the ones that use Ruby, Elixir or JavaScript. Dependencies and
+# migrations only run when the files that define them changed.
+#
+# When a repository is on another branch, it asks whether to merge the main
+# branch into it, switch to the main branch, or skip the repository. It also
+# offers to delete local branches whose remote branch is gone, which is how
+# squash-merged PRs show up after 'git fetch --prune'.
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
-untracked_files() {
-  [[ -n $(git status -s) ]]
+LOG=$(mktemp)
+trap 'rm -f "$LOG"' EXIT
+
+# Usage: record <ok|skip|fail> <detail>
+record() {
+  printf "%s\t%s\t%s\n" "$1" "$REPO" "$2" >> "$LOG"
 }
 
-branch_exists() {
-  [ $(git rev-parse --verify -q $1) ]
+has_uncommitted_changes() {
+  [ -n "$(git status --porcelain --untracked-files=no)" ]
 }
 
-pull_at_main_branch() {
-  stashed_files=false
+# Blocks until the user commits or restores every tracked change.
+wait_for_clean_tree() {
+  while has_uncommitted_changes; do
+    printf "\n${Red}Uncommitted changes on ${1}:${ColorOff}\n"
+    git status --short --untracked-files=no
+    printf "Commit or restore these files, then press ${Green}enter${ColorOff} "
+    read -r _
+  done
+}
 
-  if untracked_files; then
-    git stash save --include-untracked -q
-    stashed_files=true
-  fi
+# Usage: step <label> <command...>
+step() {
+  local label=$1 status
+  printf "${Yellow}%s${ColorOff} " "$label"
+  shift
+  "$@" > /dev/null 2>&1 & spinner
+  status=$?
 
-  if branch_exists main; then
-    git switch main -q
-  else
-    git switch master -q
-  fi
+  [ $status -ne 0 ] && record fail "${label#"${label%%[! ]*}"}"
+  return $status
+}
 
-  git pull -q
-  git switch - -q
+# True when any of the given paths differ between the HEAD the repository
+# started at and the current one.
+changed() {
+  [ -n "$(git diff --name-only "$START_HEAD" HEAD -- "$@")" ]
+}
 
-  if $stashed_files; then
-    git stash pop -q
+update_ruby() {
+  changed Gemfile Gemfile.lock && step "  Installing the gems on $1" bundle install
+
+  if [ -f config/database.yml ] && changed db/migrate; then
+    step "  Running migrations on $1" bundle exec rake db:migrate
+    # The migration rewrites the schema dump; it is not part of the pull.
+    [ -f db/structure.sql ] && git restore db/structure.sql
   fi
 }
 
-for repo in $(ls -d -1 ./*/.git 2>/dev/null); do
-  dir=${repo/\/.git//}
-  printf "${Yellow}pulling at ${UYellow}${dir%?}${Yellow} ${ColorOff}"
+update_elixir() {
+  if changed mix.exs mix.lock || [ ! -d deps ]; then
+    step "  Installing the deps on $1" mix deps.get
+  fi
 
-  pushd $dir > /dev/null
-  pull_at_main_branch & spinner
-  popd > /dev/null
+  if grep -q ":ecto" mix.exs && changed 'priv/*/migrations'; then
+    step "  Running migrations on $1" mix ecto.migrate
+  fi
+}
+
+update_javascript() {
+  if ! changed package.json yarn.lock package-lock.json && [ -d node_modules ]; then
+    return
+  fi
+
+  if [ -f yarn.lock ]; then
+    step "  Installing the packages on $1" yarn install
+  elif [ -f package-lock.json ]; then
+    step "  Installing the packages on $1" npm install
+  fi
+}
+
+# The main branch: what origin's HEAD points to, else main, else master.
+default_branch() {
+  local branch
+  branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+
+  if [ -n "$branch" ]; then
+    echo "${branch#origin/}"
+  elif git rev-parse --verify -q main > /dev/null; then
+    echo main
+  elif git rev-parse --verify -q master > /dev/null; then
+    echo master
+  fi
+}
+
+# Asks what to do when the repository is not on its main branch.
+# Prints one of: merge, switch, skip.
+ask_off_main_action() {
+  local current=${1:-"(detached HEAD)"} answer
+
+  while true; do
+    printf "${Yellow}%s${ColorOff} is on ${Cyan}%s${ColorOff}, not ${Cyan}%s${ColorOff}. " "$3" "$current" "$2" >&2
+    printf "[${Green}m${ColorOff}]erge $2 into it, [${Green}s${ColorOff}]witch to $2, s[${Green}k${ColorOff}]ip? " >&2
+    read -r -n 1 answer
+    echo >&2
+
+    case $answer in
+      m|M) echo merge; return ;;
+      s|S) echo switch; return ;;
+      k|K) echo skip; return ;;
+    esac
+  done
+}
+
+# Brings the repository up to date. Returns 1 when it should be skipped.
+update_branches() {
+  local name=$1 main current
+  main=$(default_branch)
+  current=$(git branch --show-current)
+
+  if [ -z "$main" ]; then
+    printf "${Red}No main or master branch on ${name}, skipping${ColorOff}\n"
+    record skip "no main or master branch"
+    return 1
+  fi
+
+  if [ "$current" = "$main" ]; then
+    step "Pulling $name ($main)" git pull -q --ff-only
+    return 0
+  fi
+
+  case $(ask_off_main_action "$current" "$main" "$name") in
+    merge)
+      # Updates the local main without leaving the current branch.
+      step "Updating $main on $name" git fetch -q origin "$main:$main"
+      step "Merging $main into $current on $name" git merge -q --no-edit "$main" ||
+        { git merge --abort 2>/dev/null; printf "${Red}Merge aborted, resolve it manually${ColorOff}\n"; }
+      ;;
+    switch)
+      step "Switching $name to $main" git switch -q "$main"
+      step "Pulling $name ($main)" git pull -q --ff-only
+      ;;
+    skip)
+      record skip "left on $current"
+      return 1
+      ;;
+  esac
+}
+
+# Local branches with an upstream and nothing left to push. Must run before
+# the fetch prunes the remote-tracking refs, while 'ahead' can still be told.
+fully_pushed_branches() {
+  git for-each-ref --format='%(refname:short)%09%(upstream)%09%(upstream:track)' refs/heads |
+    awk -F'\t' '$2 != "" && $3 == "" { print $1 }'
+}
+
+# Fully pushed branches (other than the current and the main one) whose remote
+# branch was deleted. Branches with unpushed commits or no upstream never
+# qualify, so no unique work is lost.
+gone_branches() {
+  git for-each-ref --format='%(refname:short) %(upstream:track)' refs/heads |
+    PUSHED=$2 awk -v main="$1" -v current="$(git branch --show-current)" '
+      BEGIN { n = split(ENVIRON["PUSHED"], list, "\n"); for (i = 1; i <= n; i++) ok[list[i]] = 1 }
+      $2 == "[gone]" && ok[$1] && $1 != main && $1 != current { print $1 }'
+}
+
+offer_branch_cleanup() {
+  local main=$1 branches count answer
+  branches=$(gone_branches "$main" "$PUSHED_BRANCHES")
+  [ -z "$branches" ] && return
+
+  count=$(echo "$branches" | wc -l | tr -d ' ')
+
+  while true; do
+    printf "${Yellow}%s${ColorOff} has ${Cyan}%s${ColorOff} local branches whose remote is gone. " "$REPO" "$count"
+    printf "Delete them? [${Green}y${ColorOff}]es, [${Green}n${ColorOff}]o, [${Green}l${ColorOff}]ist "
+    read -r -n 1 answer
+    echo
+
+    case $answer in
+      y|Y) echo "$branches" | xargs git branch -D -q; return ;;
+      n|N) return ;;
+      l|L) echo "$branches" | sed 's/^/    /' ;;
+    esac
+  done
+}
+
+update_repo() {
+  local name=$1
+  REPO=$name
+
+  wait_for_clean_tree "$name"
+  START_HEAD=$(git rev-parse HEAD)
+  PUSHED_BRANCHES=$(fully_pushed_branches)
+
+  step "Fetching $name" git fetch -q --prune
+  update_branches "$name" || return 0
+
+  offer_branch_cleanup "$(default_branch)"
+
+  [ -f Gemfile ] && update_ruby "$name"
+  [ -f mix.exs ] && update_elixir "$name"
+  [ -f package.json ] && update_javascript "$name"
+
+  return 0
+}
+
+print_summary() {
+  local total=$1 problems
+
+  problems=$(cut -f2 "$LOG" | sort -u | wc -l | tr -d ' ')
+  printf "\n${BWhite}Summary${ColorOff}\n"
+  printf "  ${Green}✓${ColorOff} %s up to date\n" "$((total - problems))"
+
+  awk -F'\t' -v red="$Red" -v yellow="$Yellow" -v off="$ColorOff" '
+    $1 == "skip" { skipped = skipped sprintf("    %s (%s)\n", $2, $3) }
+    $1 == "fail" { failed = failed sprintf("    %s: %s\n", $2, $3) }
+    END {
+      if (skipped) printf "  %s↷ skipped%s\n%s", yellow, off, skipped
+      if (failed) printf "  %s✗ failed%s\n%s", red, off, failed
+    }' "$LOG"
+}
+
+total=0
+for dir in "${1:-.}"/*/; do
+  [ -e "$dir/.git" ] || continue
+
+  total=$((total + 1))
+  (cd "$dir" && update_repo "$(basename "$dir")")
 done
+
+print_summary "$total"

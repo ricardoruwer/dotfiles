@@ -14,8 +14,17 @@ spinner() {
     printf "\b\b%s " "${spin:i++%n:1}"
     sleep 0.1
   done
-  printf "${Green}\b\b✓${ColorOff}"
+  wait $pid
+  local status=$?
+
+  if [ $status -eq 0 ]; then
+    printf "${Green}\b\b✓${ColorOff}"
+  else
+    printf "${Red}\b\b✗${ColorOff}"
+  fi
   echo
+
+  return $status
 }
 
 # Asks the user to enter "yes" or "no".
