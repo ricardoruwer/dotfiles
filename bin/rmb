@@ -6,26 +6,51 @@
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
-current_branch=$(git symbolic-ref --short HEAD)
-if [ "$current_branch" != "master" ] && [ "$current_branch" != "main" ]; then
-  echo "${Red}First, switch to your main branch, then run the command again.${ColorOff}"
+# The main branch: what origin's HEAD points to, else main, else master.
+default_branch() {
+  local branch
+  branch=$(git symbolic-ref --quiet --short refs/remotes/origin/HEAD 2>/dev/null)
+
+  if [ -n "$branch" ]; then
+    echo "${branch#origin/}"
+  elif git rev-parse --verify -q main > /dev/null; then
+    echo main
+  elif git rev-parse --verify -q master > /dev/null; then
+    echo master
+  fi
+}
+
+main_branch=$(default_branch)
+current_branch=$(git branch --show-current)
+if [ -z "$main_branch" ] || [ "$current_branch" != "$main_branch" ]; then
+  echo "${Red}First, switch to your main branch (${main_branch:-not found}), then run the command again.${ColorOff}"
   exit 1
 fi
 
+# Exact branch names that are never removed: protected ones and the ones
+# checked out in a worktree.
+excluded=$(printf '%s\nmaster\nmain\nstaging\nHEAD\n' "$main_branch"; git worktree list --porcelain | sed -n 's#^branch refs/heads/##p')
+not_excluded() {
+  grep -vxF "$excluded"
+}
+
 echo "${Yellow}Fetching merged branches...${ColorOff}"
-git remote prune origin
+git fetch -q --prune
+# Merged branches are detected against the main branch, so it has to be current.
+git merge -q --ff-only "origin/$main_branch" ||
+  echo "${Red}Could not fast-forward ${main_branch}, results may be incomplete.${ColorOff}"
 echo
 
-local_branches=$(git branch --merged | egrep -v "(^\*|master|main|staging)" | sed 's/origin\///g')
+local_branches=$(git for-each-ref --merged HEAD --format='%(refname:short)' refs/heads | not_excluded)
 if [ -n "$local_branches" ]; then
   echo "${Yellow}Removing the following LOCAL branches:${ColorOff}"
   echo "$local_branches"
   if ask "Continue?"; then
-    echo $local_branches | xargs git branch -D
+    echo $local_branches | xargs git branch -d
   fi
 fi
 
-squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base $current_branch $branch) && [[ $(git cherry $current_branch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
+squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | not_excluded | while read branch; do mergeBase=$(git merge-base $current_branch $branch) && [[ $(git cherry $current_branch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
 if [ -n "$squashed_branches" ]; then
   echo "${Yellow}Removing the following LOCAL branches (Squashed and Merged on remote):${ColorOff}"
   echo "$squashed_branches"
@@ -34,7 +59,7 @@ if [ -n "$squashed_branches" ]; then
   fi
 fi
 
-remote_branches=$(git branch -r --merged | egrep -v "(^\*|master|main|staging)" | sed 's/origin\///')
+remote_branches=$(git for-each-ref --merged HEAD --format='%(refname)' refs/remotes/origin | sed 's#^refs/remotes/origin/##' | not_excluded)
 if [ -n "$remote_branches" ]; then
   echo "${Yellow}Removing the following REMOTE branches:${ColorOff}"
   echo "$remote_branches"
