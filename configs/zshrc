@@ -56,5 +56,9 @@ if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
 
+# Autosuggestions (must be sourced before syntax-highlighting)
+[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
+  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 # Must be sourced last
 source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
