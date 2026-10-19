@@ -7,18 +7,6 @@ BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 # Tab title
 DISABLE_AUTO_TITLE="true"
 
-# Spaceship configs
-source "$BREW_PREFIX/opt/spaceship/spaceship.zsh"
-
-SPACESHIP_PROMPT_ORDER=(char user host dir git jobs exit_code async)
-SPACESHIP_DIR_PREFIX=""
-SPACESHIP_GIT_PREFIX="("
-SPACESHIP_GIT_SUFFIX=") "
-SPACESHIP_GIT_BRANCH_PREFIX=""
-SPACESHIP_GIT_STATUS_PREFIX=""
-SPACESHIP_GIT_STATUS_SUFFIX=""
-SPACESHIP_ASYNC_SYMBOL=""
-
 # ZSH Plugins
 plugins=(asdf autojump mix fzf gh iterm-tab-color)
 
@@ -62,6 +50,11 @@ compctl -g '~/.itermocil/*(:t:r)' itermocil
 eval "$(direnv hook zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Prompt
+if command -v starship >/dev/null; then
+  eval "$(starship init zsh)"
+fi
 
 # Must be sourced last
 source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

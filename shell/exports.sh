@@ -18,6 +18,9 @@ export RUBYOPT='-W0'
 export GOPATH="$HOME/go"
 export TRR_DIR="$HOME/Code/trr"
 
+# STARSHIP
+export STARSHIP_CONFIG="$HOME/.starship.toml"
+
 # DIRENV
 export DIRENV_LOG_FORMAT=
 
