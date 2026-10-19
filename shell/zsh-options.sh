@@ -15,7 +15,6 @@ setopt hist_save_no_dups
 setopt inc_append_history
 setopt long_list_jobs
 setopt no_beep
-setopt no_global_rcs
 setopt no_hist_beep
 setopt no_list_beep
 setopt prompt_subst
@@ -28,5 +27,3 @@ unsetopt menu_complete
 unsetopt flow_control
 zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-autoload -U compinit
-compinit -i
