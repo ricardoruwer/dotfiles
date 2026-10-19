@@ -80,8 +80,8 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 [ -r "$BREW_PREFIX/share/fzf-tab/fzf-tab.zsh" ] &&
   _defer source "$BREW_PREFIX/share/fzf-tab/fzf-tab.zsh"
 
-[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
-  _defer source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# [ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
+#   _defer source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Atuin: Ctrl-R opens its history search; Up keeps the default behavior
 command -v atuin >/dev/null &&
