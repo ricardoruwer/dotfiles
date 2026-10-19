@@ -31,6 +31,11 @@ spinner() {
 #
 # Usage: `ask "Do you wanna proceed?"`
 ask() {
+  if has_gum; then
+    gum confirm --default=false "$(printf '%b' "$1")"
+    return
+  fi
+
   printf "$1 [y/n] "
   read -n 1 choice
   echo
@@ -62,10 +67,47 @@ command_exists() {
   command -v "$@" >/dev/null 2>&1
 }
 
-# Installs Erlang through asdf with the build options kerl needs on macOS.
+# Check if gum can be used: it is installed and we are talking to a terminal.
+# The install scripts run before gum exists, so every caller needs a fallback.
 #
-# Usage: `asdf-install-erlang 26.2.2`
-asdf-install-erlang() {
-  KERL_CONFIGURE_OPTIONS="--disable-debug --disable-silent-rules --disable-jit --without-javac --without-odbc --enable-shared-zlib --enable-dynamic-ssl-lib --enable-hipe --enable-smp-support --enable-threads --enable-kernel-poll --enable-wx --with-wx-config=$(which wx-config) --enable-darwin-64bit --with-ssl=$(brew --prefix openssl)" \
-    asdf install erlang "$@"
+# Usage: `if has_gum; then...`
+has_gum() {
+  command_exists gum && [ -t 0 ] && [ -t 2 ]
+}
+
+# Runs a command quietly behind a spinner, then prints the label with a ✓ or ✗.
+# Returns the exit status of the command.
+#
+# Usage: `run_with_spinner "Installing gems" bundle install`
+run_with_spinner() {
+  local label=$1 status
+  shift
+
+  if has_gum; then
+    gum spin --title "$label" -- "$@" > /dev/null 2>&1
+    status=$?
+    printf "${Yellow}%s${ColorOff} " "$label"
+    if [ $status -eq 0 ]; then
+      printf "${Green}✓${ColorOff}\n"
+    else
+      printf "${Red}✗${ColorOff}\n"
+    fi
+  else
+    printf "${Yellow}%s${ColorOff} " "$label"
+    "$@" > /dev/null 2>&1 & spinner
+    status=$?
+  fi
+
+  return $status
+}
+
+# Prints a section title.
+#
+# Usage: `heading "Upgrading things..."`
+heading() {
+  if has_gum; then
+    gum style --bold --foreground 3 "▸ $1"
+  else
+    printf "${Yellow}%s${ColorOff}\n" "$1"
+  fi
 }

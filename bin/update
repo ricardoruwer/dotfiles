@@ -2,24 +2,24 @@
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
-echo "${Yellow}Upgrading brew & brew packages...${ColorOff}"
+heading "Upgrading brew & brew packages..."
 brew update
 brew upgrade
 
-echo "${Yellow}Upgrading brew casks...${ColorOff}"
+heading "Upgrading brew casks..."
 brew upgrade --cask
 brew cu --all
 
-echo "${Yellow}Upgrading npm global packages...${ColorOff}"
+heading "Upgrading npm global packages..."
 npm update -g
 
-echo "${Yellow}Upgrading asdf plugins...${ColorOff}"
+heading "Upgrading asdf plugins..."
 asdf plugin update --all
 
-echo "${Yellow}Cleaning up...${ColorOff}"
+heading "Cleaning up..."
 brew cleanup
 
-if ask "${Yellow}Update OS?${ColorOff}"; then
+if ask "Update OS?"; then
   sudo softwareupdate -i -a
 fi
 

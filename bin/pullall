@@ -38,9 +38,8 @@ wait_for_clean_tree() {
 # Usage: step <label> <command...>
 step() {
   local label=$1 status
-  printf "${Yellow}%s${ColorOff} " "$label"
   shift
-  "$@" > /dev/null 2>&1 & spinner
+  run_with_spinner "$label" "$@"
   status=$?
 
   [ $status -ne 0 ] && record fail "${label#"${label%%[! ]*}"}"
@@ -103,6 +102,16 @@ default_branch() {
 # Prints one of: merge, switch, skip.
 ask_off_main_action() {
   local current=${1:-"(detached HEAD)"} answer
+
+  if has_gum; then
+    answer=$(gum choose --header "$3 is on $current, not $2" "merge $2 into it" "switch to $2" "skip")
+    case $answer in
+      merge*) echo merge ;;
+      switch*) echo switch ;;
+      *) echo skip ;;
+    esac
+    return
+  fi
 
   while true; do
     printf "${Yellow}%s${ColorOff} is on ${Cyan}%s${ColorOff}, not ${Cyan}%s${ColorOff}. " "$3" "$current" "$2" >&2
@@ -176,6 +185,16 @@ offer_branch_cleanup() {
   [ -z "$branches" ] && return
 
   count=$(echo "$branches" | wc -l | tr -d ' ')
+
+  while has_gum; do
+    answer=$(gum choose --header "$REPO has $count local branches whose remote is gone. Delete them?" "yes" "no" "list")
+
+    case $answer in
+      yes) echo "$branches" | xargs git branch -D -q; return ;;
+      list) echo "$branches" | sed 's/^/    /' ;;
+      *) return ;;
+    esac
+  done
 
   while true; do
     printf "${Yellow}%s${ColorOff} has ${Cyan}%s${ColorOff} local branches whose remote is gone. " "$REPO" "$count"
