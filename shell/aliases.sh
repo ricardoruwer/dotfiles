@@ -3,7 +3,7 @@
 alias ..="cd .."
 alias ...="cd ../.."
 alias reload=". ~/.zshrc && echo 'ZSH reloaded!'"
-alias grep="ggrep"
+alias grep="rg" # or ggrep
 alias head="ghead"
 alias ls="eza"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
