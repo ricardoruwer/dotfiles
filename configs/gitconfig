@@ -4,7 +4,6 @@
   grep = auto
   interactive = auto
   status = auto
-  status = auto
   ui = auto
 
 [alias]
@@ -67,34 +66,42 @@
 [user]
   email = ricardoruwer@gmail.com
   name = Ricardo Ruwer
-	signingkey = 1636C78F4BD437CE
+  signingkey = 1636C78F4BD437CE
 
 [merge]
-  conflictstyle = diff3
+  conflictStyle = zdiff3
   ff = false
+
+[rerere]
+  enabled = true
+
+[rebase]
+  autoSquash = true
+  autoStash = true
+
+[fetch]
+  prune = true
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+
+[branch]
+  sort = -committerdate
 
 [pull]
   rebase = true
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [status]
   showUntrackedFiles = all
-
-[diff]
-  tool = icdiff
-
-[difftool]
-  prompt = false
-
-[difftool "icdiff"]
-  cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 
 [url "git@github.com:"]
   insteadOf = https://github.com/
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [gpg]
-	program = gpg
+  program = gpg

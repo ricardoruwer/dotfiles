@@ -1,10 +1,11 @@
 # EDITOR
-export EDITOR="cursor"
-export BUNDLER_EDITOR="$EDITOR"
-export GEM_EDITOR="$EDITOR"
+export EDITOR="cursor --wait"
+export BUNDLER_EDITOR="cursor"
+export GEM_EDITOR="cursor"
 export VISUAL="$EDITOR"
 export HISTFILE="$HOME/.zsh_history"
-export HISTSIZE=10000 # Store 10k history entries
+export HISTSIZE=100000 # Keep 100k history entries in memory
+export SAVEHIST=100000 # ...and in the history file
 export GPG_TTY=$TTY
 
 # ASDF

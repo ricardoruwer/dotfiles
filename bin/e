@@ -14,8 +14,12 @@
 #   $ e /usr/local
 #   # => opens the specified directory in your editor
 
+# $EDITOR carries --wait for tools that block on it; drop the flags here so
+# this shortcut returns immediately.
+editor="${EDITOR%% *}"
+
 if [ "$1" = "" ] ; then
-  exec $EDITOR .
+  exec $editor .
 else
-  exec $EDITOR "$1"
+  exec $editor "$1"
 fi
