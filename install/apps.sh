@@ -59,7 +59,15 @@ case "$1" in
     if [ ! -d ~/.oh-my-zsh/custom/plugins/iterm-tab-color ]; then
       git clone https://github.com/bernardop/iterm-tab-color-oh-my-zsh.git iterm-tab-color
     fi
+    if [ ! -d ~/.oh-my-zsh/custom/plugins/zsh-defer ]; then
+      git clone https://github.com/romkatv/zsh-defer.git zsh-defer
+    fi
     popd
+
+    echo "${Blue}=> Installing zsh-bench${ColorOff}"
+    if [ ! -d ~/zsh-bench ]; then
+      git clone https://github.com/romkatv/zsh-bench ~/zsh-bench
+    fi
     ;;
 
   asdf)

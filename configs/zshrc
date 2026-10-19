@@ -8,7 +8,7 @@ BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 DISABLE_AUTO_TITLE="true"
 
 # ZSH Plugins
-plugins=(asdf autojump mix fzf gh iterm-tab-color)
+plugins=(zsh-defer asdf autojump mix fzf gh iterm-tab-color)
 
 # Stamp shown in the history command output.
 HIST_STAMPS='dd/mm/yyyy'
@@ -56,9 +56,18 @@ if command -v starship >/dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# Autosuggestions (must be sourced before syntax-highlighting)
-[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
-  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# Run after the prompt is shown; falls back to running right away without zsh-defer
+_defer() {
+  if (( $+functions[zsh-defer] )); then
+    zsh-defer "$@"
+  else
+    "$@"
+  fi
+}
 
-# Must be sourced last
-source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# Deferred commands run in the order they are queued: autosuggestions first,
+# syntax-highlighting last
+[ -r "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] &&
+  _defer source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+_defer source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
