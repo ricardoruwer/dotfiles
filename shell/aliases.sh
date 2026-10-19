@@ -21,6 +21,11 @@ alias find-dir="find . -type d -name"
 alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias alert='osascript -e "display notification \"Stuff is done.\" with title \"Back to work!\""; tput bel'
 
+# TUIs
+# ====
+alias lzg="lazygit"
+alias lzd="lazydocker"
+
 # Bundler
 # =======
 alias b="bundle"
