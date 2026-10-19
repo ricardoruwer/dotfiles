@@ -26,6 +26,14 @@ export STARSHIP_CONFIG="$HOME/.starship.toml"
 export FZF_DEFAULT_COMMAND="fd --type f --hidden --follow --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d --hidden --follow --exclude .git"
+export FZF_DEFAULT_OPTS="--height 40% --layout reverse --border"
+export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-range :200 {}'"
+
+# PAGERS
+export MANPAGER="bat -plman"
+
+# RIPGREP
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # DIRENV
 export DIRENV_LOG_FORMAT=

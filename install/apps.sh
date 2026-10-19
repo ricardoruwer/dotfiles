@@ -70,6 +70,13 @@ case "$1" in
     fi
     ;;
 
+  gh-extensions)
+    echo "${Blue}=> Installing GitHub CLI extensions${ColorOff}"
+    if ! gh extension list | grep -q "dlvhdr/gh-dash"; then
+      gh extension install dlvhdr/gh-dash
+    fi
+    ;;
+
   asdf)
     echo "${Blue}=> Installing asdf plugins${ColorOff}"
     asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
@@ -94,7 +101,7 @@ case "$1" in
     ;;
 
   _args)
-    echo "macos xcode brew asdf zsh zsh-plugins fzf npm"
+    echo "macos xcode brew asdf zsh zsh-plugins gh-extensions fzf npm"
     ;;
 
   help|-h|--help)

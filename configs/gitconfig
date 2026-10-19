@@ -50,6 +50,8 @@
   editor = vim
   excludesfile = ~/.gitignore
   pager = delta
+  fsmonitor = true
+  untrackedCache = true
   whitespace = warn
 
 [interactive]
@@ -71,6 +73,9 @@
 [merge]
   conflictStyle = zdiff3
   ff = false
+
+[help]
+  autoCorrect = prompt
 
 [rerere]
   enabled = true
@@ -94,6 +99,7 @@
 
 [commit]
   gpgsign = true
+  verbose = true
 
 [status]
   showUntrackedFiles = all

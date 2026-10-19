@@ -1,0 +1,24 @@
+# File types
+--type-add=ruby:*.{erb,haml,rabl,builder,rake}
+--type-add=html:*.{erb,haml,rabl,builder}
+--type-add=xml:*.{yml,yaml}
+--type-add=js:*.{json,tmpl,jst,ejs}
+--type-add=css:*.{scss,sass,less}
+--type-clear=elixir
+--type-add=elixir:*.{ex,exs}
+--type-clear=markdown
+--type-add=markdown:*.{md,markdown}
+
+# Skip SQL files and noisy directories
+--type-not=sql
+--glob=!vendor/ruby/
+--glob=!tmp/
+--glob=!log/
+--glob=!db/
+--glob=!features/cassettes/
+--glob=!spec/cassettes/
+
+--follow
+
+# Only search with case sensitivity if there is mixed case
+--smart-case
