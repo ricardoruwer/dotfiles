@@ -35,6 +35,7 @@ Run the command to install everything:
 3. Browse `GOOGLE_DRIVE_DIR/iTerm` folder
 4. Go to Profiles |> Colors |> Color Presets |> Import
 5. Choose the `.itermcolor` file in `GOOGLE_DRIVE_DIR/iTerm` folder
+6. Go to Profiles |> Text |> Font and choose `FiraCode Nerd Font` (needed for the prompt icons)
 
 ### Other applications
 

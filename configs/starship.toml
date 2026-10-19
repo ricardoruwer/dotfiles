@@ -1,19 +1,25 @@
 add_newline = true
 
 format = """
-$character\
 $username\
 $hostname\
 $directory\
 $git_branch\
 $git_status\
+$git_metrics\
 $jobs\
-$status"""
+$status
+$character"""
 
 [character]
 success_symbol = '[➜](bold green)'
 error_symbol = '[➜](bold red)'
 
 [git_branch]
-symbol = ''
-format = '[\($branch\)]($style) '
+format = '[$symbol$branch]($style) '
+
+[git_metrics]
+disabled = false
+
+[status]
+disabled = false
