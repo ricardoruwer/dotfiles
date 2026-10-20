@@ -15,6 +15,12 @@ if [ ! -d ~/.vim/pack/vendor/start/catppuccin ]; then
   git clone --depth 1 https://github.com/catppuccin/vim.git ~/.vim/pack/vendor/start/catppuccin
 fi
 
+# Vim Elixir syntax
+if [ ! -d ~/.vim/pack/vendor/start/vim-elixir ]; then
+  echo "${Green}Installing vim-elixir${ColorOff}"
+  git clone --depth 1 https://github.com/elixir-editors/vim-elixir.git ~/.vim/pack/vendor/start/vim-elixir
+fi
+
 # Claude Code global config
 mkdir -p ~/.claude
 

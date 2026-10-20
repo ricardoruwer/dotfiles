@@ -1,6 +1,8 @@
 syntax on
 filetype plugin indent on
 
+let g:markdown_fenced_languages = ['ruby', 'elixir', 'javascript', 'js=javascript', 'json', 'bash', 'sh']
+
 set termguicolors
 set background=dark
 colorscheme catppuccin_mocha
