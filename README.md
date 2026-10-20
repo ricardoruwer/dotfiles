@@ -30,21 +30,19 @@ Run the command to install everything:
 
 ### iTerm2
 
-1. Open iTerm2 Preferences
-2. Go to Preferences
-3. Browse `GOOGLE_DRIVE_DIR/iTerm` folder
-4. Go to Profiles |> Colors |> Color Presets |> Import
-5. Choose the `.itermcolor` file in `GOOGLE_DRIVE_DIR/iTerm` folder
-6. Go to Profiles |> Text |> Font and choose `FiraCode Nerd Font` (needed for the prompt icons)
+The preferences (theme, profiles, colors, triggers) are loaded from `GOOGLE_DRIVE_DIR/iTerm` by `dotfiles install`. Just open iTerm2 and check that Profiles |> Text |> Font is `FiraCode Nerd Font` (needed for the prompt icons).
+
+### Obsidian
+
+1. Open Obsidian
+2. Click on **Open folder as vault**
+3. Choose `GOOGLE_DRIVE_DIR/Obsidian/obsidian`
 
 ### Other applications
 
 Now you can open and set up other applications:
+- `1Password`: Sign in
+- `Alfred`: Import the credentials
 - `Clocker`: Add San Francisco time
-- `Docker`
-- `Dropshare`: Select "Amazon S3" and add the credentials
-- `Insomnia`
-- `Itsycal`
+- `Dropshare`: Select "Amazon S3" and import the credentials
 - `Rectangle`: Config the shortcuts
-- `Slack`
-- `VSCode`: Login via Github

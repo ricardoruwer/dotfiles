@@ -54,6 +54,11 @@ while [ ! -d ~/Google\ Drive/My\ Drive ]; do
   confirm "${Yellow}Please open and log in to Google Drive before continuing - You must have your files in ${Green}~/Google Drive/My Drive${ColorOff}"
 done
 
+# Make iTerm2 load (and keep saving) its preferences from the Google Drive folder
+echo "${Green}Setting iTerm2 preferences folder${ColorOff}"
+defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$HOME/Google Drive/My Drive/iTerm"
+defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
 # Set up Itermocil
 echo "${Green}Linking ${HOME}/.itermocil${ColorOff}"
 ln -sf ~/Google\ Drive/My\ Drive/.itermocil ~/.itermocil
