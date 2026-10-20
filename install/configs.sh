@@ -9,6 +9,12 @@ for file in ~/.dotfiles/configs/*; do
   fi
 done
 
+# Vim Catppuccin theme (Vim 8+ native package)
+if [ ! -d ~/.vim/pack/vendor/start/catppuccin ]; then
+  echo "${Green}Installing Catppuccin for Vim${ColorOff}"
+  git clone --depth 1 https://github.com/catppuccin/vim.git ~/.vim/pack/vendor/start/catppuccin
+fi
+
 # Claude Code global config
 mkdir -p ~/.claude
 
