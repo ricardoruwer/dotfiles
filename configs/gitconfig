@@ -59,6 +59,7 @@
 
 [delta]
   navigate = true
+  paging = always
 
 [push]
   default = current
