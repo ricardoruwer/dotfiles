@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # USAGE: rmb
 #
 # rmb = Remove Merged Branches
@@ -23,7 +23,7 @@ default_branch() {
 main_branch=$(default_branch)
 current_branch=$(git branch --show-current)
 if [ -z "$main_branch" ] || [ "$current_branch" != "$main_branch" ]; then
-  echo "${Red}First, switch to your main branch (${main_branch:-not found}), then run the command again.${ColorOff}"
+  printf '%b\n' "${Red}First, switch to your main branch (${main_branch:-not found}), then run the command again.${ColorOff}"
   exit 1
 fi
 
@@ -34,16 +34,16 @@ not_excluded() {
   grep -vxF "$excluded"
 }
 
-echo "${Yellow}Fetching merged branches...${ColorOff}"
+printf '%b\n' "${Yellow}Fetching merged branches...${ColorOff}"
 git fetch -q --prune
 # Merged branches are detected against the main branch, so it has to be current.
 git merge -q --ff-only "origin/$main_branch" ||
-  echo "${Red}Could not fast-forward ${main_branch}, results may be incomplete.${ColorOff}"
+  printf '%b\n' "${Red}Could not fast-forward ${main_branch}, results may be incomplete.${ColorOff}"
 echo
 
 local_branches=$(git for-each-ref --merged HEAD --format='%(refname:short)' refs/heads | not_excluded)
 if [ -n "$local_branches" ]; then
-  echo "${Yellow}Removing the following LOCAL branches:${ColorOff}"
+  printf '%b\n' "${Yellow}Removing the following LOCAL branches:${ColorOff}"
   echo "$local_branches"
   if ask "Continue?"; then
     echo $local_branches | xargs git branch -d
@@ -52,7 +52,7 @@ fi
 
 squashed_branches=$(git for-each-ref refs/heads/ "--format=%(refname:short)" | not_excluded | while read branch; do mergeBase=$(git merge-base $current_branch $branch) && [[ $(git cherry $current_branch $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch"; done)
 if [ -n "$squashed_branches" ]; then
-  echo "${Yellow}Removing the following LOCAL branches (Squashed and Merged on remote):${ColorOff}"
+  printf '%b\n' "${Yellow}Removing the following LOCAL branches (Squashed and Merged on remote):${ColorOff}"
   echo "$squashed_branches"
   if ask "Continue?"; then
     echo $squashed_branches | xargs git branch -D
@@ -61,12 +61,12 @@ fi
 
 remote_branches=$(git for-each-ref --merged HEAD --format='%(refname)' refs/remotes/origin | sed 's#^refs/remotes/origin/##' | not_excluded)
 if [ -n "$remote_branches" ]; then
-  echo "${Yellow}Removing the following REMOTE branches:${ColorOff}"
+  printf '%b\n' "${Yellow}Removing the following REMOTE branches:${ColorOff}"
   echo "$remote_branches"
   if ask "Continue?"; then
     echo $remote_branches | xargs -n 1 git push --delete origin
   fi
 fi
 
-echo "${Yellow}Your current LOCAL branches are:${ColorOff}"
+printf '%b\n' "${Yellow}Your current LOCAL branches are:${ColorOff}"
 git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(refname:short) - %(color:yellow)%(committerdate:relative)%(color:reset)'

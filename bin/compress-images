@@ -1,15 +1,26 @@
-#!/bin/sh
+#!/bin/bash
+# USAGE: compress-images <max-width>
+#
+# Shrinks the images in the current directory to the given width and writes
+# the result to ./output/.
 source ~/.dotfiles/shell/colors.sh
 
-if [[ "$1" == "" ]]; then
-  echo "${Yellow}Usage: compress-images <max-width>${ColorOff}"
+if [ -z "$1" ]; then
+  printf '%b\n' "${Yellow}Usage: compress-images <max-width>${ColorOff}"
   echo
-  echo "${Yellow}Example:${ColorOff}"
+  printf '%b\n' "${Yellow}Example:${ColorOff}"
   echo "compress-images 800"
   exit 1
 fi
 
-echo "${Yellow}Converting images to folder: ${UYellow}$(pwd)/output/${ColorOff} ";
+shopt -s nullglob nocaseglob
+images=(*.jpg *.jpeg *.png *.gif *.webp *.tif *.tiff)
+if [ ${#images[@]} -eq 0 ]; then
+  printf '%b\n' "${Red}No images found in $(pwd)${ColorOff}"
+  exit 1
+fi
 
-mkdir output
-mogrify -path output -filter Triangle -define filter:support=2 -thumbnail $1 -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB *
+printf '%b\n' "${Yellow}Converting images to folder: ${UYellow}$(pwd)/output/${ColorOff}"
+
+mkdir -p output
+magick mogrify -path output -filter Triangle -define filter:support=2 -thumbnail "$1" -unsharp 0.25x0.08+8.3+0.045 -dither None -posterize 136 -quality 82 -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB "${images[@]}"

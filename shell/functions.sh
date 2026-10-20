@@ -111,3 +111,15 @@ heading() {
     printf "${Yellow}%s${ColorOff}\n" "$1"
   fi
 }
+
+# Opens Chrome with remote debugging on a separate profile. The iTerm tab is
+# titled "chrome" and turns blue while it runs.
+#
+# Usage: `chrome_debug [URL]`
+chrome_debug() {
+  iterm_tab_color "#6272a4"
+  printf '\033]1;chrome\a\033]2;chrome\a'
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9222 --user-data-dir="$HOME/chrome-cdp-profile" "$@"
+  iterm_tab_color
+  printf '\033]1;\a\033]2;\a'
+}

@@ -1,10 +1,28 @@
 #!/bin/bash
-# Show SSID and password for the currently connected network. Requires sudo.
-ssid="$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | sed -n "/ SSID:/s/^.\\{2,\\}: //p")"
-if [ -n "$ssid" ]; then
-  echo "$ssid"
-  security find-generic-password -ga "$ssid" 2>&1 >/dev/null | cut -d\" -f2
-else
-  echo "No current wifi network name detected" >&2
-  exit 1
+# Show the password of a saved Wi-Fi network.
+#
+# Since macOS 14 the name of the connected network is hidden from command line
+# tools, so the network is picked from the saved ones (the first one is usually
+# the one in use). The password lookup asks for confirmation to read the Keychain.
+device=$(networksetup -listallhardwareports | awk '/Wi-Fi/ { getline; print $2; exit }')
+ssid=$(networksetup -getairportnetwork "$device" 2>/dev/null | sed -n 's/^Current Wi-Fi Network: //p')
+[ -n "$1" ] && ssid=$1
+
+if [ -z "$ssid" ]; then
+  saved=$(networksetup -listpreferredwirelessnetworks "$device" 2>/dev/null | sed 1d | sed 's/^[[:space:]]*//')
+  if [ -z "$saved" ]; then
+    echo "No saved wifi networks found" >&2
+    exit 1
+  fi
+
+  if command -v fzf >/dev/null && [ -t 0 ]; then
+    ssid=$(echo "$saved" | fzf --prompt="Network> " --height=40%) || exit 1
+  else
+    echo "$saved" >&2
+    echo "Run again with the network name: $(basename "$0") <name>" >&2
+    exit 1
+  fi
 fi
+
+echo "$ssid"
+security find-generic-password -ga "$ssid" 2>&1 >/dev/null | cut -d\" -f2

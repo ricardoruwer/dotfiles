@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Usage: pullall [DIRECTORY]
 #
 # Updates the main branch of every git repository directly under DIRECTORY
