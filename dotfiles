@@ -4,7 +4,8 @@ source ~/.dotfiles/shell/functions.sh
 
 case "$1" in
   install|run)
-    ln -sf ~/.dotfiles/dotfiles /usr/local/bin/dotfiles
+    mkdir -p ~/.local/bin
+    ln -sf ~/.dotfiles/dotfiles ~/.local/bin/dotfiles
 
     echo "${BGBlue}=> Setting up GitHub${ColorOff}"
     echo

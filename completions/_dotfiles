@@ -1,0 +1,20 @@
+#compdef dotfiles
+
+_dotfiles() {
+  local -a items
+
+  case $CURRENT in
+    2)
+      items=(${=$(sh ~/.dotfiles/dotfiles _cmds)})
+      _describe -t commands 'dotfiles command' items
+      ;;
+    3)
+      if [[ $words[2] == apps ]]; then
+        items=(${=$(sh ~/.dotfiles/install/apps.sh _args)})
+        _describe -t arguments 'apps argument' items
+      fi
+      ;;
+  esac
+}
+
+_dotfiles "$@"
