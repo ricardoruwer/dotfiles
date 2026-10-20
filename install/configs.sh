@@ -27,6 +27,9 @@ ln -sf ~/.dotfiles/privy/configs/claude/settings.json ~/.claude/settings.json
 echo "${Green}Linking ~/.claude/statusline.sh${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/statusline.sh ~/.claude/statusline.sh
 
+echo "${Green}Linking ~/.claude/format-hook.sh${ColorOff}"
+ln -sf ~/.dotfiles/privy/configs/claude/format-hook.sh ~/.claude/format-hook.sh
+
 # Generate ~/.claude/RTK.md and patch the Claude Code hook (rtk is installed via Brewfile)
 if command_exists rtk; then
   echo "${Green}Initializing RTK for Claude Code${ColorOff}"
