@@ -75,6 +75,9 @@ _defer() {
   fi
 }
 
+# carapace: completions for many CLIs; the dotfiles' own `_trr`/`_dotfiles` are unaffected
+command -v carapace >/dev/null && source <(carapace _carapace zsh)
+
 # fzf-tab: replace the completion menu with fzf
 zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
