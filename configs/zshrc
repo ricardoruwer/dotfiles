@@ -8,7 +8,7 @@ BREW_PREFIX="${HOMEBREW_PREFIX:-/opt/homebrew}"
 DISABLE_AUTO_TITLE="true"
 
 # ZSH Plugins
-plugins=(zsh-defer asdf autojump mix fzf gh iterm-tab-color)
+plugins=(zsh-defer asdf mix fzf gh iterm-tab-color)
 
 # Stamp shown in the history command output.
 HIST_STAMPS='dd/mm/yyyy'
@@ -49,6 +49,22 @@ onload_function
 compctl -g '~/.itermocil/*(:t:r)' itermocil
 
 eval "$(direnv hook zsh)"
+
+# zoxide: `z` and `j` jump to frecent directories, `zi` and `ji` pick one interactively
+if command -v zoxide >/dev/null; then
+  eval "$(zoxide init zsh)"
+  alias j=z ji=zi
+fi
+
+# yazi: `y` opens the file manager and cd's to the last directory on exit
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  command yazi "$@" --cwd-file="$tmp"
+  IFS= read -r -d '' cwd < "$tmp"
+  [ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+  command rm -f -- "$tmp"
+}
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
