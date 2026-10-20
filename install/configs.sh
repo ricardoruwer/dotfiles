@@ -18,6 +18,15 @@ ln -sf ~/.dotfiles/privy/configs/claude/CLAUDE.md ~/.claude/CLAUDE.md
 echo "${Green}Linking ~/.claude/skills${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
 
+echo "${Green}Linking ~/.claude/rules${ColorOff}"
+ln -sfn ~/.dotfiles/privy/configs/claude/rules ~/.claude/rules
+
+echo "${Green}Linking ~/.claude/settings.json${ColorOff}"
+ln -sf ~/.dotfiles/privy/configs/claude/settings.json ~/.claude/settings.json
+
+echo "${Green}Linking ~/.claude/statusline.sh${ColorOff}"
+ln -sf ~/.dotfiles/privy/configs/claude/statusline.sh ~/.claude/statusline.sh
+
 # Generate ~/.claude/RTK.md and patch the Claude Code hook (rtk is installed via Brewfile)
 if command_exists rtk; then
   echo "${Green}Initializing RTK for Claude Code${ColorOff}"
