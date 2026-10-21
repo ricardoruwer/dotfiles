@@ -117,7 +117,7 @@ heading() {
 #
 # Usage: `chrome_debug [URL]`
 chrome_debug() {
-  iterm_tab_color "#6272a4"
+  iterm_tab_color "#3b82f6"
   printf '\033]1;chrome\a\033]2;chrome\a'
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --remote-debugging-port=9222 --user-data-dir="$HOME/chrome-cdp-profile" "$@"
   iterm_tab_color
