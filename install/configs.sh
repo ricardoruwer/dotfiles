@@ -28,7 +28,7 @@ echo "${Green}Linking ~/.claude/CLAUDE.md${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/CLAUDE.md ~/.claude/CLAUDE.md
 
 echo "${Green}Linking ~/.claude/skills${ColorOff}"
-ln -sf ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
+ln -sfn ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
 
 echo "${Green}Linking ~/.claude/rules${ColorOff}"
 ln -sfn ~/.dotfiles/privy/configs/claude/rules ~/.claude/rules
