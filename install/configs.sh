@@ -36,9 +36,6 @@ ln -sfn ~/.dotfiles/privy/configs/claude/rules ~/.claude/rules
 echo "${Green}Linking ~/.claude/settings.json${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/settings.json ~/.claude/settings.json
 
-echo "${Green}Linking ~/.claude/statusline.sh${ColorOff}"
-ln -sf ~/.dotfiles/privy/configs/claude/statusline.sh ~/.claude/statusline.sh
-
 echo "${Green}Linking ~/.claude/format-hook.sh${ColorOff}"
 ln -sf ~/.dotfiles/privy/configs/claude/format-hook.sh ~/.claude/format-hook.sh
 
