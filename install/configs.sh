@@ -21,6 +21,11 @@ if [ ! -d ~/.vim/pack/vendor/start/vim-elixir ]; then
   git clone --depth 1 https://github.com/elixir-editors/vim-elixir.git ~/.vim/pack/vendor/start/vim-elixir
 fi
 
+# iTerm2 AutoLaunch script
+echo "${Green}Linking iTerm2 AutoLaunch script${ColorOff}"
+mkdir -p "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch"
+ln -sf ~/.dotfiles/configs/iterm2/sync_tab_title.py "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch/sync_tab_title.py"
+
 # Claude Code global config
 mkdir -p ~/.claude
 
