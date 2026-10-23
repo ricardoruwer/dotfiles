@@ -59,6 +59,7 @@ vendor/ruby
 ##########
 .claude/settings.local.json
 .playwright-mcp/*
+.impeccable/*
 
 ########
 # Envs #
