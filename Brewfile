@@ -102,6 +102,7 @@ tap "buo/cask-upgrade"
 brew "brew-cask-completion"
 
 cask "1password"
+cask "1password-cli"
 cask "adoptopenjdk8"
 cask "alfred"
 cask "bitwarden"
