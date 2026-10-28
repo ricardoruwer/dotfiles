@@ -26,30 +26,6 @@ echo "${Green}Linking iTerm2 AutoLaunch script${ColorOff}"
 mkdir -p "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch"
 ln -sf ~/.dotfiles/configs/iterm2/sync_tab_title.py "$HOME/Library/Application Support/iTerm2/Scripts/AutoLaunch/sync_tab_title.py"
 
-# Claude Code global config
-mkdir -p ~/.claude
-
-echo "${Green}Linking ~/.claude/CLAUDE.md${ColorOff}"
-ln -sf ~/.dotfiles/privy/configs/claude/CLAUDE.md ~/.claude/CLAUDE.md
-
-echo "${Green}Linking ~/.claude/skills${ColorOff}"
-ln -sfn ~/.dotfiles/privy/configs/claude/skills ~/.claude/skills
-
-echo "${Green}Linking ~/.claude/rules${ColorOff}"
-ln -sfn ~/.dotfiles/privy/configs/claude/rules ~/.claude/rules
-
-echo "${Green}Linking ~/.claude/settings.json${ColorOff}"
-ln -sf ~/.dotfiles/privy/configs/claude/settings.json ~/.claude/settings.json
-
-echo "${Green}Linking ~/.claude/format-hook.sh${ColorOff}"
-ln -sf ~/.dotfiles/privy/configs/claude/format-hook.sh ~/.claude/format-hook.sh
-
-# Generate ~/.claude/RTK.md and patch the Claude Code hook (rtk is installed via Brewfile)
-if command_exists rtk; then
-  echo "${Green}Initializing RTK for Claude Code${ColorOff}"
-  rtk init --global --auto-patch
-fi
-
 # Log in to Google Drive to import private things from there
 echo "${Blue}=> Setting up Google Drive${ColorOff}"
 while [ ! -d ~/Google\ Drive/My\ Drive ]; do
