@@ -4,6 +4,7 @@
 # Shrinks the images in the current directory to the given width and writes
 # the result to ./output/.
 source ~/.dotfiles/shell/colors.sh
+source ~/.dotfiles/shell/functions.sh
 
 if [ -z "$1" ]; then
   printf '%b\n' "${Yellow}Usage: compress-images <max-width>${ColorOff}"
@@ -12,6 +13,8 @@ if [ -z "$1" ]; then
   echo "compress-images 800"
   exit 1
 fi
+
+status_while_running
 
 shopt -s nullglob nocaseglob
 images=(*.jpg *.jpeg *.png *.gif *.webp *.tif *.tiff)

@@ -15,7 +15,7 @@ export ASDF_DATA_DIR=${HOME}/.asdf
 # WORK
 # export RUBY_CONFIGURE_OPTS="--with-jemalloc"
 # export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/opt/openssl/lib/
-export RUBYOPT='-W0'
+# export RUBYOPT='-W0'
 export GOPATH="$HOME/go"
 export TRR_DIR="$HOME/Code/trr"
 
@@ -31,6 +31,9 @@ export FZF_CTRL_T_OPTS="--preview 'bat --style=numbers --color=always --line-ran
 
 # PAGERS
 export MANPAGER="bat -plman"
+
+# BAT
+export BAT_THEME="Catppuccin Mocha"
 
 # RIPGREP
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"

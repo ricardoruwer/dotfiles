@@ -14,7 +14,7 @@ source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
 
 LOG=$(mktemp)
-trap 'rm -f "$LOG"' EXIT
+status_while_running 'rm -f "$LOG"'
 
 # Usage: record <ok|skip|fail> <detail>
 record() {
@@ -31,7 +31,9 @@ wait_for_clean_tree() {
     printf "\n${Red}Uncommitted changes on ${1}:${ColorOff}\n"
     git status --short --untracked-files=no
     printf "Commit or restore these files, then press ${Green}enter${ColorOff} "
+    status_waiting
     read -r _
+    status_resume
   done
 }
 

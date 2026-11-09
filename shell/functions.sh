@@ -27,17 +27,98 @@ spinner() {
   return $status
 }
 
+# Shows a status in the subtitle of the iTerm tab: working, waiting, done or
+# failed (anything else clears it). It sets the session variable `user.status`,
+# which `configs/iterm2/sync_tab_title.py` shows as the subtitle.
+#
+# Usage: `iterm_status working`
+iterm_status() {
+  [ "$TERM_PROGRAM" = "iTerm.app" ] || return 0
+
+  local text
+  case "$1" in
+    working) text="🟠 working" ;;
+    waiting) text="🔵 waiting" ;;
+    done)    text="🟢 done" ;;
+    failed)  text="🔴 failed" ;;
+    *)       text="" ;;
+  esac
+
+  { printf '\033]1337;SetUserVar=status=%s\a' "$(printf '%s' "$text" | base64 | tr -d '\n')" > /dev/tty; } 2>/dev/null
+  return 0
+}
+
+# Clears the status. Kept free of subprocesses because it runs before every
+# command typed in the shell.
+#
+# Usage: `iterm_status_clear`
+iterm_status_clear() {
+  [ "$TERM_PROGRAM" = "iTerm.app" ] || return 0
+  { printf '\033]1337;SetUserVar=status=\a' > /dev/tty; } 2>/dev/null
+  return 0
+}
+
+# Shows done or failed from an exit status.
+#
+# Usage: `iterm_status_finish $?`
+iterm_status_finish() {
+  if [ "$1" -eq 0 ]; then
+    iterm_status done
+  else
+    iterm_status failed
+  fi
+}
+
+# Shows the status of a script in the iTerm subtitle: working while it runs,
+# then done or failed when it exits, including on Ctrl+C. Call it once at the
+# top of the script. Scripts started by a tracked script leave the status alone.
+# The optional argument is a cleanup command that also runs on exit; pass it
+# here because this function owns the script's EXIT trap.
+#
+# Usage: `status_while_running ['rm -f "$TMP"']`
+status_while_running() {
+  local cleanup=$1
+
+  if [ -n "$ITERM_STATUS_TRACKED" ]; then
+    [ -n "$cleanup" ] && trap "$cleanup" EXIT
+    return 0
+  fi
+
+  export ITERM_STATUS_TRACKED=1
+  iterm_status working
+  trap "code=\$?; ${cleanup:-:}; iterm_status_finish \$code" EXIT
+  trap 'exit 130' INT TERM HUP
+}
+
+# Marks the tracked script as waiting for the user. Use it right before a
+# prompt, and `status_resume` right after. Does nothing outside a tracked script.
+status_waiting() {
+  [ -n "$ITERM_STATUS_TRACKED" ] && iterm_status waiting
+  return 0
+}
+
+status_resume() {
+  [ -n "$ITERM_STATUS_TRACKED" ] && iterm_status working
+  return 0
+}
+
 # Asks the user to enter "yes" or "no".
 #
 # Usage: `ask "Do you wanna proceed?"`
 ask() {
+  local result
   if has_gum; then
+    status_waiting
     gum confirm --default=false "$(printf '%b' "$1")"
-    return
+    result=$?
+    status_resume
+    return $result
   fi
 
+  status_waiting
   printf "$1 [y/n] "
   read -n 1 choice
+  status_resume
   echo
 
   case $choice in
@@ -51,8 +132,10 @@ ask() {
 #
 # Usage: `confirm "Do something before continuing"`
 confirm() {
+  status_waiting
   printf "$1 [press RETURN to continue] "
   read -s -n 1 key
+  status_resume
   echo
 
   if [ "$key" != "" ]; then

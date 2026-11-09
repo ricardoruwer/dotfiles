@@ -1,6 +1,7 @@
 #!/bin/bash
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
+status_while_running
 
 heading "Upgrading brew & brew packages..."
 brew update

@@ -5,6 +5,7 @@
 # Nukes stale branches both locally and remotely.
 source ~/.dotfiles/shell/colors.sh
 source ~/.dotfiles/shell/functions.sh
+status_while_running
 
 # The main branch: what origin's HEAD points to, else main, else master.
 default_branch() {

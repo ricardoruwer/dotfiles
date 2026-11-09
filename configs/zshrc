@@ -34,6 +34,7 @@ onload_function() {
 autoload -Uz add-zsh-hook
 add-zsh-hook chpwd onload_function
 add-zsh-hook precmd onload_function
+add-zsh-hook preexec iterm_status_clear
 onload_function
 
 # Itermocil
