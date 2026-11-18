@@ -60,6 +60,10 @@
 [delta]
   navigate = true
   paging = always
+  plus-style = syntax "#1d4d2b"
+  plus-emph-style = syntax "#2f7a42"
+  minus-style = syntax "#5a1d24"
+  minus-emph-style = syntax "#8f2f3a"
 
 [push]
   default = current
